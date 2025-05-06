@@ -1,0 +1,28 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "sdiBackend",
+    "buildTool": "maven",
+    "cacheProvider": "ehcache",
+    "creationTimestamp": 1746520332444,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableHibernateCache": true,
+    "enableTranslation": true,
+    "entities": [],
+    "feignClient": null,
+    "jhipsterVersion": "8.9.0",
+    "jwtSecretKey": "MzA3YmQ5MTk4ODVhMGE0ZGM4ZjNmYTZlZDc1NzY3Y2Q3NTIzNzhkM2FjNzkxMWYwZGFkZWRhNjJlM2M1NzMwZDg2MWNlZWQxZmQzZGQ1NzdiYmUzMzdhNzk4YmI2MTY2YjZmMmY1M2M0NmZmOTQ2NWM1MDRhOWU1NThlYmU1OWM=",
+    "languages": ["en", "fr"],
+    "nativeLanguage": "en",
+    "packageName": "com.sdi",
+    "prodDatabaseType": "postgresql",
+    "reactive": false,
+    "serverPort": null,
+    "serviceDiscoveryType": null,
+    "skipClient": true,
+    "syncUserWithIdp": null,
+    "testFrameworks": []
+  }
+}
