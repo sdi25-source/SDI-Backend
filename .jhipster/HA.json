@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083627"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "HA",
+  "relationships": [
+    {
+      "otherEntityName": "productVersion",
+      "otherEntityRelationshipName": "ha",
+      "relationshipName": "productVersion",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

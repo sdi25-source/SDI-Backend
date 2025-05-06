@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083616"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "ModuleDeployement",
+  "relationships": [
+    {
+      "otherEntityName": "featureDeployement",
+      "otherEntityRelationshipName": "moduleDeployement",
+      "relationshipName": "featureDeployement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "version",
+      "otherEntityName": "moduleVersion",
+      "relationshipName": "moduleVersion",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "productDeployementDetail",
+      "relationshipName": "productDeployementDetail",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

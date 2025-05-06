@@ -1,0 +1,109 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083621"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "clientLogo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mainContactName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mainContactEmail",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    },
+    {
+      "fieldName": "currentCardHolderNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "currentBruncheNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "currentCustomersNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "mainContactPhoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Client",
+  "relationships": [
+    {
+      "otherEntityName": "productDeployement",
+      "otherEntityRelationshipName": "client",
+      "relationshipName": "productDeployement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "countryname",
+      "otherEntityName": "country",
+      "relationshipName": "country",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "sizeCode",
+      "otherEntityName": "clientSize",
+      "relationshipName": "size",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "type",
+      "otherEntityName": "clientType",
+      "relationshipName": "clientType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "certification",
+      "otherEntityName": "clientCertification",
+      "otherEntityRelationshipName": "client",
+      "relationshipName": "certif",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

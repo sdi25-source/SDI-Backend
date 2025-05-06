@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083605"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "DeployementType",
+  "relationships": [
+    {
+      "otherEntityName": "productDeployementDetail",
+      "otherEntityRelationshipName": "deployementType",
+      "relationshipName": "productDeployementDetail",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

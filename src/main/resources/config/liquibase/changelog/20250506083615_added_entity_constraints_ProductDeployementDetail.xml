@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ProductDeployementDetail.
+    -->
+    <changeSet id="20250506083615-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="product_deployement_id"
+                                 baseTableName="product_deployement_detail"
+                                 constraintName="fk_product_deployement_detail__product_deployement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_deployement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_deployement_detail_id"
+                                 baseTableName="rel_product_deployement_detail__infra_component_version"
+                                 constraintName="fk_rel_product_deployement_deta__product_deployement_deta_b8_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_deployement_detail"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="infra_component_version_id"
+                                 baseTableName="rel_product_deployement_detail__infra_component_version"
+                                 constraintName="fk_rel_product_deployement_deta__infra_component_version_52_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="infra_component_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_deployement_detail_id"
+                                 baseTableName="rel_product_deployement_detail__allowed_module_version"
+                                 constraintName="fk_rel_product_deployement_deta__product_deployement_deta_78_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_deployement_detail"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="allowed_module_version_id"
+                                 baseTableName="rel_product_deployement_detail__allowed_module_version"
+                                 constraintName="fk_rel_product_deployement_deta__allowed_module_version_54_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="module_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_version_id"
+                                 baseTableName="product_deployement_detail"
+                                 constraintName="fk_product_deployement_detail__product_version_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="deployement_type_id"
+                                 baseTableName="product_deployement_detail"
+                                 constraintName="fk_product_deployement_detail__deployement_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deployement_type"
+                                 />
+    </changeSet>
+</databaseChangeLog>

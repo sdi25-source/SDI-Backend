@@ -1,0 +1,308 @@
+// -----------------------------------
+// version final
+
+// ---------------------------------------
+
+entity DeployementType{
+  type String
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity CustomisationLevel{
+  level String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity ProductVersion
+{
+  version String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity Product {
+  name String required
+  logo String
+  description TextBlob
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+entity ProductLine{
+  name String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity ModuleVersion {
+  version String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity Module {
+  name String required
+  description TextBlob
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+entity Domaine {
+  name String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+//entity FeatureVersion
+//{
+  //version String required
+  //createDate LocalDate
+  //updateDate LocalDate
+  //notes TextBlob
+//}
+
+entity Feature {
+  name String required
+  apiVersion String
+  description TextBlob
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+
+entity ProductDeployement {
+  refContract String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity ProductDeployementDetail {
+  startDeployementDate LocalDate
+  endDeployementDate LocalDate
+  notes TextBlob
+}
+
+entity ModuleDeployement {
+  code String required
+  notes TextBlob
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+
+
+entity FeatureDeployement {
+  code String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+
+entity Region{
+  name String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity ClientCertification{
+  certification String required
+  certificationDate LocalDate
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity ClientSize{
+  sizeName String required
+  sizeCode String
+  sizeDescription String
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+
+entity Client
+{
+  ClientLogo String
+  name String required
+  code String
+  mainContactName String
+  mainContactEmail String pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+  currentCardHolderNumber Integer
+  currentBruncheNumber Integer
+  currentCustomersNumber Integer
+  mainContactPhoneNumber  String
+  url String
+  address String
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity ClientType {
+  type String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+entity Certification{
+  name String required
+  description String
+  createDate LocalDate
+  updateDate LocalDate
+  expireDate LocalDate
+}
+
+entity ClientEvent{
+  event String required
+  description String
+  eventDate LocalDate
+  notes TextBlob
+}
+
+
+
+entity ClientEventType{
+  type String required
+  description String
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+
+entity Country
+{
+  countryname String required
+  countryCode String
+  countryFlag String
+  notes TextBlob
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+// haute dispo
+entity HA
+{
+  name String required
+  createDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
+
+entity ComponentType {
+  type String required // ApplicationServer, OS, DB, HSM, HOST
+}
+
+entity InfraComponent {
+  name String required
+  vendor String
+  notes TextBlob
+  createDate LocalDate
+}
+
+entity InfraComponentVersion
+{
+  version String required
+  description TextBlob
+  createDate LocalDate
+  updateDate LocalDate
+}
+
+entity RequestOfChange {
+  title String required
+  keywords TextBlob
+  status RequestStatus required // PENDING, IN_PROGRESS, COMPLETED
+  createDate LocalDate
+  description TextBlob
+}
+
+enum RequestStatus {
+  PENDING, IN_PROGRESS, COMPLETED
+}
+
+
+relationship ManyToOne {
+  ClientCertification {client(code)} to Client{Certif(certification)}
+  ClientEvent{client(code)} to Client
+
+  ProductVersion{product(name)} to Product
+  ModuleVersion{module(name)} to Module
+ // FeatureVersion{feature(name)} to Feature
+
+  InfraComponentVersion{infraComponent(name)}  to InfraComponent
+
+  ProductDeployementDetail{productDeployement(refContract)} to ProductDeployement
+
+   RequestOfChange{productVersion(version)} to ProductVersion
+   RequestOfChange{client(code)} to Client
+
+}
+
+
+relationship ManyToMany {
+  Product {productLine} to ProductLine // un produitLine peut etre traité dans plusieurs produit et un produit peut traiter plusieurs productLine.
+  ProductVersion{moduleVersion} to ModuleVersion
+  ModuleVersion{feature} to Feature
+ // ModuleVersion{featureVersion} to FeatureVersion
+  ProductVersion{infraComponentVersion} to InfraComponentVersion
+  ProductDeployementDetail{infraComponentVersion} to InfraComponentVersion
+  ProductDeployementDetail{allowedModuleVersion} to ModuleVersion
+
+  RequestOfChange{moduleVersion} to ModuleVersion
+}
+
+
+relationship OneToMany{
+
+  Country to Client{country(countryname)}
+  Region to Country{region(name)}
+  Domaine to ModuleVersion{domaine(name)}
+  Certification to ClientCertification{certif(name)}
+
+  // client
+  Client to ProductDeployement{client(code)}
+  ClientSize to Client{size(sizeCode)}
+  ClientType to Client{ClientType(type)}
+  ClientEventType to ClientEvent{ClientEventType(type)}
+
+
+  ProductVersion to ProductDeployementDetail{productVersion(version)}
+  ModuleVersion  to ModuleDeployement{moduleVersion(version)}
+  //FeatureVersion to FeatureDeployement{featureVersion(version)}
+  Feature to FeatureDeployement{feature}
+
+
+  HA to ProductVersion{ha(name)}
+
+  //ProductDeployement
+  ProductDeployementDetail to ModuleDeployement{productDeployementDetail}
+  DeployementType to ProductDeployementDetail{DeployementType(type)}
+
+
+  //moduleDeployement
+  ModuleDeployement to FeatureDeployement{moduleDeployement(code)}
+
+  CustomisationLevel to RequestOfChange
+
+  ComponentType to InfraComponent{componentType(type)}
+
+  ProductVersion to ProductVersion{root}
+  ModuleVersion to ModuleVersion{root}
+
+}
+
+filter Client

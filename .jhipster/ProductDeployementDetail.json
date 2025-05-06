@@ -1,0 +1,64 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083615"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "startDeployementDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endDeployementDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "ProductDeployementDetail",
+  "relationships": [
+    {
+      "otherEntityName": "moduleDeployement",
+      "otherEntityRelationshipName": "productDeployementDetail",
+      "relationshipName": "moduleDeployement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "refContract",
+      "otherEntityName": "productDeployement",
+      "relationshipName": "productDeployement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "infraComponentVersion",
+      "relationshipName": "infraComponentVersion",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "moduleVersion",
+      "relationshipName": "allowedModuleVersion",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "version",
+      "otherEntityName": "productVersion",
+      "relationshipName": "productVersion",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "type",
+      "otherEntityName": "deployementType",
+      "relationshipName": "deployementType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

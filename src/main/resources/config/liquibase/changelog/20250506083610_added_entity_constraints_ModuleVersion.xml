@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ModuleVersion.
+    -->
+    <changeSet id="20250506083610-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="module_id"
+                                 baseTableName="module_version"
+                                 constraintName="fk_module_version__module_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="module"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="module_version_id"
+                                 baseTableName="rel_module_version__feature"
+                                 constraintName="fk_rel_module_version__feature__module_version_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="module_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="feature_id"
+                                 baseTableName="rel_module_version__feature"
+                                 constraintName="fk_rel_module_version__feature__feature_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="feature"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="domaine_id"
+                                 baseTableName="module_version"
+                                 constraintName="fk_module_version__domaine_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domaine"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="root_id"
+                                 baseTableName="module_version"
+                                 constraintName="fk_module_version__root_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="module_version"
+                                 />
+    </changeSet>
+</databaseChangeLog>

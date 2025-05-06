@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ModuleDeployement.
+    -->
+    <changeSet id="20250506083616-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="module_version_id"
+                                 baseTableName="module_deployement"
+                                 constraintName="fk_module_deployement__module_version_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="module_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_deployement_detail_id"
+                                 baseTableName="module_deployement"
+                                 constraintName="fk_module_deployement__product_deployement_detail_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_deployement_detail"
+                                 />
+    </changeSet>
+</databaseChangeLog>

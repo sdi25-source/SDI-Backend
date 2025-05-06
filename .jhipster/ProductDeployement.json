@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083614"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "refContract",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "ProductDeployement",
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "client",
+      "relationshipName": "client",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

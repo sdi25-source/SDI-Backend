@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083610"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "version",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "ModuleVersion",
+  "relationships": [
+    {
+      "otherEntityName": "moduleDeployement",
+      "otherEntityRelationshipName": "moduleVersion",
+      "relationshipName": "moduleDeployement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "moduleVersion",
+      "otherEntityRelationshipName": "root",
+      "relationshipName": "moduleVersion",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "module",
+      "relationshipName": "module",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "feature",
+      "relationshipName": "feature",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "domaine",
+      "relationshipName": "domaine",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "moduleVersion",
+      "relationshipName": "root",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

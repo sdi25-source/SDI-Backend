@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083630"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "version",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "InfraComponentVersion",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "infraComponent",
+      "relationshipName": "infraComponent",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

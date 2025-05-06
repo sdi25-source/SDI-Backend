@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083629"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "vendor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "InfraComponent",
+  "relationships": [
+    {
+      "otherEntityField": "type",
+      "otherEntityName": "componentType",
+      "relationshipName": "componentType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

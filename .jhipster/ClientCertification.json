@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083619"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "certification",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "certificationDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "ClientCertification",
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "certif",
+      "relationshipName": "client",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "certification",
+      "relationshipName": "certif",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

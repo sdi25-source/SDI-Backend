@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250506083606"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "level",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "CustomisationLevel",
+  "relationships": [
+    {
+      "otherEntityName": "requestOfChange",
+      "otherEntityRelationshipName": "customisationLevel",
+      "relationshipName": "requestOfChange",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
