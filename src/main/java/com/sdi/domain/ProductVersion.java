@@ -59,13 +59,13 @@ public class ProductVersion implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "root")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "ha", "root" },
+        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
         allowSetters = true
     )
     private Set<ProductVersion> productVersions = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productLines" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
     private Product product;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -98,16 +98,12 @@ public class ProductVersion implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "infra_component_version_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "productDeployementDetails" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "products", "productDeployementDetails" }, allowSetters = true)
     private Set<InfraComponentVersion> infraComponentVersions = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productVersions" }, allowSetters = true)
-    private HA ha;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "ha", "root" },
+        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
         allowSetters = true
     )
     private ProductVersion root;
@@ -297,19 +293,6 @@ public class ProductVersion implements Serializable {
 
     public ProductVersion removeInfraComponentVersion(InfraComponentVersion infraComponentVersion) {
         this.infraComponentVersions.remove(infraComponentVersion);
-        return this;
-    }
-
-    public HA getHa() {
-        return this.ha;
-    }
-
-    public void setHa(HA hA) {
-        this.ha = hA;
-    }
-
-    public ProductVersion ha(HA hA) {
-        this.setHa(hA);
         return this;
     }
 

@@ -1,6 +1,5 @@
 package com.sdi.domain;
 
-import static com.sdi.domain.HATestSamples.*;
 import static com.sdi.domain.InfraComponentVersionTestSamples.*;
 import static com.sdi.domain.ModuleVersionTestSamples.*;
 import static com.sdi.domain.ProductDeployementDetailTestSamples.*;
@@ -120,18 +119,6 @@ class ProductVersionTest {
 
         productVersion.setInfraComponentVersions(new HashSet<>());
         assertThat(productVersion.getInfraComponentVersions()).doesNotContain(infraComponentVersionBack);
-    }
-
-    @Test
-    void haTest() {
-        ProductVersion productVersion = getProductVersionRandomSampleGenerator();
-        HA hABack = getHARandomSampleGenerator();
-
-        productVersion.setHa(hABack);
-        assertThat(productVersion.getHa()).isEqualTo(hABack);
-
-        productVersion.ha(null);
-        assertThat(productVersion.getHa()).isNull();
     }
 
     @Test

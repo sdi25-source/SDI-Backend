@@ -48,10 +48,15 @@ public class InfraComponentVersion implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "infraComponentVersions")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "ha", "root" },
+        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
         allowSetters = true
     )
     private Set<ProductVersion> productVersions = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "infraComponentVersions")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
+    private Set<Product> products = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "infraComponentVersions")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -176,6 +181,37 @@ public class InfraComponentVersion implements Serializable {
     public InfraComponentVersion removeProductVersion(ProductVersion productVersion) {
         this.productVersions.remove(productVersion);
         productVersion.getInfraComponentVersions().remove(this);
+        return this;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        if (this.products != null) {
+            this.products.forEach(i -> i.removeInfraComponentVersion(this));
+        }
+        if (products != null) {
+            products.forEach(i -> i.addInfraComponentVersion(this));
+        }
+        this.products = products;
+    }
+
+    public InfraComponentVersion products(Set<Product> products) {
+        this.setProducts(products);
+        return this;
+    }
+
+    public InfraComponentVersion addProduct(Product product) {
+        this.products.add(product);
+        product.getInfraComponentVersions().add(this);
+        return this;
+    }
+
+    public InfraComponentVersion removeProduct(Product product) {
+        this.products.remove(product);
+        product.getInfraComponentVersions().remove(this);
         return this;
     }
 

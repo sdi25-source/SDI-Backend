@@ -58,13 +58,6 @@
       "relationshipType": "many-to-many"
     },
     {
-      "otherEntityField": "name",
-      "otherEntityName": "hA",
-      "relationshipName": "ha",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-one"
-    },
-    {
       "otherEntityName": "productVersion",
       "relationshipName": "root",
       "relationshipSide": "right",

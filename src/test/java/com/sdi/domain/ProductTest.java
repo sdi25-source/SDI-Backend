@@ -1,5 +1,7 @@
 package com.sdi.domain;
 
+import static com.sdi.domain.InfraComponentVersionTestSamples.*;
+import static com.sdi.domain.ModuleTestSamples.*;
 import static com.sdi.domain.ProductLineTestSamples.*;
 import static com.sdi.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,5 +43,41 @@ class ProductTest {
 
         product.setProductLines(new HashSet<>());
         assertThat(product.getProductLines()).doesNotContain(productLineBack);
+    }
+
+    @Test
+    void moduleTest() {
+        Product product = getProductRandomSampleGenerator();
+        Module moduleBack = getModuleRandomSampleGenerator();
+
+        product.addModule(moduleBack);
+        assertThat(product.getModules()).containsOnly(moduleBack);
+
+        product.removeModule(moduleBack);
+        assertThat(product.getModules()).doesNotContain(moduleBack);
+
+        product.modules(new HashSet<>(Set.of(moduleBack)));
+        assertThat(product.getModules()).containsOnly(moduleBack);
+
+        product.setModules(new HashSet<>());
+        assertThat(product.getModules()).doesNotContain(moduleBack);
+    }
+
+    @Test
+    void infraComponentVersionTest() {
+        Product product = getProductRandomSampleGenerator();
+        InfraComponentVersion infraComponentVersionBack = getInfraComponentVersionRandomSampleGenerator();
+
+        product.addInfraComponentVersion(infraComponentVersionBack);
+        assertThat(product.getInfraComponentVersions()).containsOnly(infraComponentVersionBack);
+
+        product.removeInfraComponentVersion(infraComponentVersionBack);
+        assertThat(product.getInfraComponentVersions()).doesNotContain(infraComponentVersionBack);
+
+        product.infraComponentVersions(new HashSet<>(Set.of(infraComponentVersionBack)));
+        assertThat(product.getInfraComponentVersions()).containsOnly(infraComponentVersionBack);
+
+        product.setInfraComponentVersions(new HashSet<>());
+        assertThat(product.getInfraComponentVersions()).doesNotContain(infraComponentVersionBack);
     }
 }

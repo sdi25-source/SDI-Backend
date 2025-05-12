@@ -63,10 +63,10 @@ entity Domaine {
 
 //entity FeatureVersion
 //{
-  //version String required
-  //createDate LocalDate
-  //updateDate LocalDate
-  //notes TextBlob
+//version String required
+//createDate LocalDate
+//updateDate LocalDate
+//notes TextBlob
 //}
 
 entity Feature {
@@ -241,14 +241,14 @@ relationship ManyToOne {
 
   ProductVersion{product(name)} to Product
   ModuleVersion{module(name)} to Module
- // FeatureVersion{feature(name)} to Feature
+  // FeatureVersion{feature(name)} to Feature
 
   InfraComponentVersion{infraComponent(name)}  to InfraComponent
 
   ProductDeployementDetail{productDeployement(refContract)} to ProductDeployement
 
-   RequestOfChange{productVersion(version)} to ProductVersion
-   RequestOfChange{client(code)} to Client
+  RequestOfChange{productVersion(version)} to ProductVersion
+  RequestOfChange{client(code)} to Client
 
 }
 
@@ -256,9 +256,12 @@ relationship ManyToOne {
 relationship ManyToMany {
   Product {productLine} to ProductLine // un produitLine peut etre traité dans plusieurs produit et un produit peut traiter plusieurs productLine.
   ProductVersion{moduleVersion} to ModuleVersion
+  Product{module} to Module
   ModuleVersion{feature} to Feature
- // ModuleVersion{featureVersion} to FeatureVersion
+  // ModuleVersion{featureVersion} to FeatureVersion
   ProductVersion{infraComponentVersion} to InfraComponentVersion
+  Product{infraComponentVersion} to InfraComponentVersion
+
   ProductDeployementDetail{infraComponentVersion} to InfraComponentVersion
   ProductDeployementDetail{allowedModuleVersion} to ModuleVersion
 
@@ -286,7 +289,7 @@ relationship OneToMany{
   Feature to FeatureDeployement{feature}
 
 
-  HA to ProductVersion{ha(name)}
+  //HA to ProductVersion{ha(name)}
 
   //ProductDeployement
   ProductDeployementDetail to ModuleDeployement{productDeployementDetail}

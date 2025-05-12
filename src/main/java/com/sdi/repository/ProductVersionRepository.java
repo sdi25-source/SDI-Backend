@@ -30,18 +30,14 @@ public interface ProductVersionRepository extends ProductVersionRepositoryWithBa
     }
 
     @Query(
-        value = "select productVersion from ProductVersion productVersion left join fetch productVersion.product left join fetch productVersion.ha",
+        value = "select productVersion from ProductVersion productVersion left join fetch productVersion.product",
         countQuery = "select count(productVersion) from ProductVersion productVersion"
     )
     Page<ProductVersion> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query(
-        "select productVersion from ProductVersion productVersion left join fetch productVersion.product left join fetch productVersion.ha"
-    )
+    @Query("select productVersion from ProductVersion productVersion left join fetch productVersion.product")
     List<ProductVersion> findAllWithToOneRelationships();
 
-    @Query(
-        "select productVersion from ProductVersion productVersion left join fetch productVersion.product left join fetch productVersion.ha where productVersion.id =:id"
-    )
+    @Query("select productVersion from ProductVersion productVersion left join fetch productVersion.product where productVersion.id =:id")
     Optional<ProductVersion> findOneWithToOneRelationships(@Param("id") Long id);
 }
