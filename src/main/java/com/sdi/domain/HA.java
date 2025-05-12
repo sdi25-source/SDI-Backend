@@ -1,12 +1,9 @@
 package com.sdi.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -40,14 +37,6 @@ public class HA implements Serializable {
     @Lob
     @Column(name = "notes")
     private String notes;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ha")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "ha", "root" },
-        allowSetters = true
-    )
-    private Set<ProductVersion> productVersions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -114,37 +103,6 @@ public class HA implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    public Set<ProductVersion> getProductVersions() {
-        return this.productVersions;
-    }
-
-    public void setProductVersions(Set<ProductVersion> productVersions) {
-        if (this.productVersions != null) {
-            this.productVersions.forEach(i -> i.setHa(null));
-        }
-        if (productVersions != null) {
-            productVersions.forEach(i -> i.setHa(this));
-        }
-        this.productVersions = productVersions;
-    }
-
-    public HA productVersions(Set<ProductVersion> productVersions) {
-        this.setProductVersions(productVersions);
-        return this;
-    }
-
-    public HA addProductVersion(ProductVersion productVersion) {
-        this.productVersions.add(productVersion);
-        productVersion.setHa(this);
-        return this;
-    }
-
-    public HA removeProductVersion(ProductVersion productVersion) {
-        this.productVersions.remove(productVersion);
-        productVersion.setHa(null);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

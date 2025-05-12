@@ -73,6 +73,7 @@ public class InfraComponentVersionAsserts {
             .as("Verify InfraComponentVersion relationships")
             .satisfies(a -> assertThat(a.getInfraComponent()).as("check infraComponent").isEqualTo(expected.getInfraComponent()))
             .satisfies(a -> assertThat(a.getProductVersions()).as("check productVersions").isEqualTo(expected.getProductVersions()))
+            .satisfies(a -> assertThat(a.getProducts()).as("check products").isEqualTo(expected.getProducts()))
             .satisfies(a ->
                 assertThat(a.getProductDeployementDetails())
                     .as("check productDeployementDetails")

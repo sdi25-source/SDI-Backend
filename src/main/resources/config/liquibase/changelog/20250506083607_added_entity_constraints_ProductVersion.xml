@@ -45,13 +45,6 @@
                                  referencedTableName="infra_component_version"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="ha_id"
-                                 baseTableName="product_version"
-                                 constraintName="fk_product_version__ha_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="ha"
-                                 />
-
         <addForeignKeyConstraint baseColumnNames="root_id"
                                  baseTableName="product_version"
                                  constraintName="fk_product_version__root_id"

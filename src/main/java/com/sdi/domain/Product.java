@@ -54,6 +54,26 @@ public class Product implements Serializable {
     @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Set<ProductLine> productLines = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_product__module",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "module_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
+    private Set<Module> modules = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_product__infra_component_version",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "infra_component_version_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "products", "productDeployementDetails" }, allowSetters = true)
+    private Set<InfraComponentVersion> infraComponentVersions = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -154,6 +174,52 @@ public class Product implements Serializable {
 
     public Product removeProductLine(ProductLine productLine) {
         this.productLines.remove(productLine);
+        return this;
+    }
+
+    public Set<Module> getModules() {
+        return this.modules;
+    }
+
+    public void setModules(Set<Module> modules) {
+        this.modules = modules;
+    }
+
+    public Product modules(Set<Module> modules) {
+        this.setModules(modules);
+        return this;
+    }
+
+    public Product addModule(Module module) {
+        this.modules.add(module);
+        return this;
+    }
+
+    public Product removeModule(Module module) {
+        this.modules.remove(module);
+        return this;
+    }
+
+    public Set<InfraComponentVersion> getInfraComponentVersions() {
+        return this.infraComponentVersions;
+    }
+
+    public void setInfraComponentVersions(Set<InfraComponentVersion> infraComponentVersions) {
+        this.infraComponentVersions = infraComponentVersions;
+    }
+
+    public Product infraComponentVersions(Set<InfraComponentVersion> infraComponentVersions) {
+        this.setInfraComponentVersions(infraComponentVersions);
+        return this;
+    }
+
+    public Product addInfraComponentVersion(InfraComponentVersion infraComponentVersion) {
+        this.infraComponentVersions.add(infraComponentVersion);
+        return this;
+    }
+
+    public Product removeInfraComponentVersion(InfraComponentVersion infraComponentVersion) {
+        this.infraComponentVersions.remove(infraComponentVersion);
         return this;
     }
 

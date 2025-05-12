@@ -24,7 +24,7 @@ public class ProductRepositoryWithBagRelationshipsImpl implements ProductReposit
 
     @Override
     public Optional<Product> fetchBagRelationships(Optional<Product> product) {
-        return product.map(this::fetchProductLines);
+        return product.map(this::fetchProductLines).map(this::fetchModules).map(this::fetchInfraComponentVersions);
     }
 
     @Override
@@ -34,7 +34,11 @@ public class ProductRepositoryWithBagRelationshipsImpl implements ProductReposit
 
     @Override
     public List<Product> fetchBagRelationships(List<Product> products) {
-        return Optional.of(products).map(this::fetchProductLines).orElse(Collections.emptyList());
+        return Optional.of(products)
+            .map(this::fetchProductLines)
+            .map(this::fetchModules)
+            .map(this::fetchInfraComponentVersions)
+            .orElse(Collections.emptyList());
     }
 
     Product fetchProductLines(Product result) {
@@ -50,6 +54,48 @@ public class ProductRepositoryWithBagRelationshipsImpl implements ProductReposit
         List<Product> result = entityManager
             .createQuery(
                 "select product from Product product left join fetch product.productLines where product in :products",
+                Product.class
+            )
+            .setParameter(PRODUCTS_PARAMETER, products)
+            .getResultList();
+        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
+        return result;
+    }
+
+    Product fetchModules(Product result) {
+        return entityManager
+            .createQuery("select product from Product product left join fetch product.modules where product.id = :id", Product.class)
+            .setParameter(ID_PARAMETER, result.getId())
+            .getSingleResult();
+    }
+
+    List<Product> fetchModules(List<Product> products) {
+        HashMap<Object, Integer> order = new HashMap<>();
+        IntStream.range(0, products.size()).forEach(index -> order.put(products.get(index).getId(), index));
+        List<Product> result = entityManager
+            .createQuery("select product from Product product left join fetch product.modules where product in :products", Product.class)
+            .setParameter(PRODUCTS_PARAMETER, products)
+            .getResultList();
+        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
+        return result;
+    }
+
+    Product fetchInfraComponentVersions(Product result) {
+        return entityManager
+            .createQuery(
+                "select product from Product product left join fetch product.infraComponentVersions where product.id = :id",
+                Product.class
+            )
+            .setParameter(ID_PARAMETER, result.getId())
+            .getSingleResult();
+    }
+
+    List<Product> fetchInfraComponentVersions(List<Product> products) {
+        HashMap<Object, Integer> order = new HashMap<>();
+        IntStream.range(0, products.size()).forEach(index -> order.put(products.get(index).getId(), index));
+        List<Product> result = entityManager
+            .createQuery(
+                "select product from Product product left join fetch product.infraComponentVersions where product in :products",
                 Product.class
             )
             .setParameter(PRODUCTS_PARAMETER, products)

@@ -43,7 +43,7 @@ public class ProductLine implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "productLines")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productLines" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
     private Set<Product> products = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

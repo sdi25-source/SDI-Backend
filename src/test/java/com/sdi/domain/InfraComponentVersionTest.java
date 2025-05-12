@@ -3,6 +3,7 @@ package com.sdi.domain;
 import static com.sdi.domain.InfraComponentTestSamples.*;
 import static com.sdi.domain.InfraComponentVersionTestSamples.*;
 import static com.sdi.domain.ProductDeployementDetailTestSamples.*;
+import static com.sdi.domain.ProductTestSamples.*;
 import static com.sdi.domain.ProductVersionTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,6 +60,28 @@ class InfraComponentVersionTest {
         infraComponentVersion.setProductVersions(new HashSet<>());
         assertThat(infraComponentVersion.getProductVersions()).doesNotContain(productVersionBack);
         assertThat(productVersionBack.getInfraComponentVersions()).doesNotContain(infraComponentVersion);
+    }
+
+    @Test
+    void productTest() {
+        InfraComponentVersion infraComponentVersion = getInfraComponentVersionRandomSampleGenerator();
+        Product productBack = getProductRandomSampleGenerator();
+
+        infraComponentVersion.addProduct(productBack);
+        assertThat(infraComponentVersion.getProducts()).containsOnly(productBack);
+        assertThat(productBack.getInfraComponentVersions()).containsOnly(infraComponentVersion);
+
+        infraComponentVersion.removeProduct(productBack);
+        assertThat(infraComponentVersion.getProducts()).doesNotContain(productBack);
+        assertThat(productBack.getInfraComponentVersions()).doesNotContain(infraComponentVersion);
+
+        infraComponentVersion.products(new HashSet<>(Set.of(productBack)));
+        assertThat(infraComponentVersion.getProducts()).containsOnly(productBack);
+        assertThat(productBack.getInfraComponentVersions()).containsOnly(infraComponentVersion);
+
+        infraComponentVersion.setProducts(new HashSet<>());
+        assertThat(infraComponentVersion.getProducts()).doesNotContain(productBack);
+        assertThat(productBack.getInfraComponentVersions()).doesNotContain(infraComponentVersion);
     }
 
     @Test

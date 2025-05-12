@@ -52,7 +52,7 @@ public class ProductDeployementDetail implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "infra_component_version_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "productDeployementDetails" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "products", "productDeployementDetails" }, allowSetters = true)
     private Set<InfraComponentVersion> infraComponentVersions = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -80,7 +80,7 @@ public class ProductDeployementDetail implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "ha", "root" },
+        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
         allowSetters = true
     )
     private ProductVersion productVersion;

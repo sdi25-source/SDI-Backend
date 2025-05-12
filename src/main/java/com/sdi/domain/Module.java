@@ -1,9 +1,12 @@
 package com.sdi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -37,6 +40,11 @@ public class Module implements Serializable {
 
     @Column(name = "update_date")
     private LocalDate updateDate;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "modules")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
+    private Set<Product> products = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -103,6 +111,37 @@ public class Module implements Serializable {
 
     public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        if (this.products != null) {
+            this.products.forEach(i -> i.removeModule(this));
+        }
+        if (products != null) {
+            products.forEach(i -> i.addModule(this));
+        }
+        this.products = products;
+    }
+
+    public Module products(Set<Product> products) {
+        this.setProducts(products);
+        return this;
+    }
+
+    public Module addProduct(Product product) {
+        this.products.add(product);
+        product.getModules().add(this);
+        return this;
+    }
+
+    public Module removeProduct(Product product) {
+        this.products.remove(product);
+        product.getModules().remove(this);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -29,9 +29,6 @@
             <column name="product_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="ha_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="root_id" type="bigint">
                 <constraints nullable="true" />
             </column>

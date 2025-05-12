@@ -65,6 +65,7 @@ public class ModuleVersion implements Serializable {
     private Set<ModuleVersion> moduleVersions = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
     private Module module;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -101,7 +102,7 @@ public class ModuleVersion implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "moduleVersions")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "ha", "root" },
+        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
         allowSetters = true
     )
     private Set<ProductVersion> productVersions = new HashSet<>();

@@ -23,14 +23,6 @@
     }
   ],
   "name": "HA",
-  "relationships": [
-    {
-      "otherEntityName": "productVersion",
-      "otherEntityRelationshipName": "ha",
-      "relationshipName": "productVersion",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no"
 }

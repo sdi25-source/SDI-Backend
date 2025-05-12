@@ -60,6 +60,8 @@ public class ModuleAsserts {
      * @param actual the actual entity
      */
     public static void assertModuleUpdatableRelationshipsEquals(Module expected, Module actual) {
-        // empty method
+        assertThat(actual)
+            .as("Verify Module relationships")
+            .satisfies(a -> assertThat(a.getProducts()).as("check products").isEqualTo(expected.getProducts()));
     }
 }

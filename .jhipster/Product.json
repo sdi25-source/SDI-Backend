@@ -33,6 +33,18 @@
       "relationshipName": "productLine",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "module",
+      "relationshipName": "module",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "infraComponentVersion",
+      "relationshipName": "infraComponentVersion",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no"
