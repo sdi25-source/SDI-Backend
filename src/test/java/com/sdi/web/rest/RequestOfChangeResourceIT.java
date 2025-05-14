@@ -50,13 +50,16 @@ class RequestOfChangeResourceIT {
     private static final String UPDATED_KEYWORDS = "BBBBBBBBBB";
 
     private static final RequestStatus DEFAULT_STATUS = RequestStatus.PENDING;
-    private static final RequestStatus UPDATED_STATUS = RequestStatus.IN_PROGRESS;
+    private static final RequestStatus UPDATED_STATUS = RequestStatus.APPROVED;
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_CREATE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATE_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_UPDATE_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_UPDATE_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/request-of-changes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -94,8 +97,9 @@ class RequestOfChangeResourceIT {
             .title(DEFAULT_TITLE)
             .keywords(DEFAULT_KEYWORDS)
             .status(DEFAULT_STATUS)
+            .description(DEFAULT_DESCRIPTION)
             .createDate(DEFAULT_CREATE_DATE)
-            .description(DEFAULT_DESCRIPTION);
+            .updateDate(DEFAULT_UPDATE_DATE);
     }
 
     /**
@@ -109,8 +113,9 @@ class RequestOfChangeResourceIT {
             .title(UPDATED_TITLE)
             .keywords(UPDATED_KEYWORDS)
             .status(UPDATED_STATUS)
+            .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
-            .description(UPDATED_DESCRIPTION);
+            .updateDate(UPDATED_UPDATE_DATE);
     }
 
     @BeforeEach
@@ -212,8 +217,9 @@ class RequestOfChangeResourceIT {
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].keywords").value(hasItem(DEFAULT_KEYWORDS)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -248,8 +254,9 @@ class RequestOfChangeResourceIT {
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.keywords").value(DEFAULT_KEYWORDS))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.createDate").value(DEFAULT_CREATE_DATE.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()));
     }
 
     @Test
@@ -275,8 +282,9 @@ class RequestOfChangeResourceIT {
             .title(UPDATED_TITLE)
             .keywords(UPDATED_KEYWORDS)
             .status(UPDATED_STATUS)
+            .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
-            .description(UPDATED_DESCRIPTION);
+            .updateDate(UPDATED_UPDATE_DATE);
 
         restRequestOfChangeMockMvc
             .perform(
@@ -356,7 +364,7 @@ class RequestOfChangeResourceIT {
         RequestOfChange partialUpdatedRequestOfChange = new RequestOfChange();
         partialUpdatedRequestOfChange.setId(requestOfChange.getId());
 
-        partialUpdatedRequestOfChange.title(UPDATED_TITLE).status(UPDATED_STATUS);
+        partialUpdatedRequestOfChange.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION).createDate(UPDATED_CREATE_DATE);
 
         restRequestOfChangeMockMvc
             .perform(
@@ -391,8 +399,9 @@ class RequestOfChangeResourceIT {
             .title(UPDATED_TITLE)
             .keywords(UPDATED_KEYWORDS)
             .status(UPDATED_STATUS)
+            .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
-            .description(UPDATED_DESCRIPTION);
+            .updateDate(UPDATED_UPDATE_DATE);
 
         restRequestOfChangeMockMvc
             .perform(

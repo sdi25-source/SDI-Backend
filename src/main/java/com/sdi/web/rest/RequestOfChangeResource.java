@@ -133,11 +133,14 @@ public class RequestOfChangeResource {
                 if (requestOfChange.getStatus() != null) {
                     existingRequestOfChange.setStatus(requestOfChange.getStatus());
                 }
+                if (requestOfChange.getDescription() != null) {
+                    existingRequestOfChange.setDescription(requestOfChange.getDescription());
+                }
                 if (requestOfChange.getCreateDate() != null) {
                     existingRequestOfChange.setCreateDate(requestOfChange.getCreateDate());
                 }
-                if (requestOfChange.getDescription() != null) {
-                    existingRequestOfChange.setDescription(requestOfChange.getDescription());
+                if (requestOfChange.getUpdateDate() != null) {
+                    existingRequestOfChange.setUpdateDate(requestOfChange.getUpdateDate());
                 }
 
                 return existingRequestOfChange;

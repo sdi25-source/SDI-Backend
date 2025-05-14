@@ -24,7 +24,9 @@ public class ClientTestSamples {
             .currentCustomersNumber(1)
             .mainContactPhoneNumber("mainContactPhoneNumber1")
             .url("url1")
-            .address("address1");
+            .address("address1")
+            .countryName("countryName1")
+            .region("region1");
     }
 
     public static Client getClientSample2() {
@@ -40,7 +42,9 @@ public class ClientTestSamples {
             .currentCustomersNumber(2)
             .mainContactPhoneNumber("mainContactPhoneNumber2")
             .url("url2")
-            .address("address2");
+            .address("address2")
+            .countryName("countryName2")
+            .region("region2");
     }
 
     public static Client getClientRandomSampleGenerator() {
@@ -56,6 +60,8 @@ public class ClientTestSamples {
             .currentCustomersNumber(intCount.incrementAndGet())
             .mainContactPhoneNumber(UUID.randomUUID().toString())
             .url(UUID.randomUUID().toString())
-            .address(UUID.randomUUID().toString());
+            .address(UUID.randomUUID().toString())
+            .countryName(UUID.randomUUID().toString())
+            .region(UUID.randomUUID().toString());
     }
 }

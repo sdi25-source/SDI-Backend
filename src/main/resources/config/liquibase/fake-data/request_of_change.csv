@@ -1,11 +1,11 @@
-id;title;keywords;status;create_date;description
-1;overreact;../fake-data/blob/hipster.txt;IN_PROGRESS;2025-05-06;../fake-data/blob/hipster.txt
-2;moisten bah;../fake-data/blob/hipster.txt;PENDING;2025-05-05;../fake-data/blob/hipster.txt
-3;overheard;../fake-data/blob/hipster.txt;COMPLETED;2025-05-05;../fake-data/blob/hipster.txt
-4;lively guard;../fake-data/blob/hipster.txt;PENDING;2025-05-06;../fake-data/blob/hipster.txt
-5;festival mostly refine;../fake-data/blob/hipster.txt;PENDING;2025-05-05;../fake-data/blob/hipster.txt
-6;taut doubter by;../fake-data/blob/hipster.txt;IN_PROGRESS;2025-05-06;../fake-data/blob/hipster.txt
-7;lecture yippee;../fake-data/blob/hipster.txt;COMPLETED;2025-05-05;../fake-data/blob/hipster.txt
-8;sudden mortally;../fake-data/blob/hipster.txt;PENDING;2025-05-06;../fake-data/blob/hipster.txt
-9;interestingly evil;../fake-data/blob/hipster.txt;COMPLETED;2025-05-05;../fake-data/blob/hipster.txt
-10;boo ravage appliance;../fake-data/blob/hipster.txt;PENDING;2025-05-05;../fake-data/blob/hipster.txt
+id;title;keywords;status;description;create_date;update_date
+1;overreact;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05
+2;aggressive;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
+3;onto yuck;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06
+4;mmm until festival;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
+5;unlike;../fake-data/blob/hipster.txt;APPROVED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06
+6;snoopy;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05
+7;rudely;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
+8;overconfidently whereas major;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
+9;repentant yahoo;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05
+10;softly;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06

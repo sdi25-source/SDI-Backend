@@ -70,7 +70,9 @@ public class ClientAsserts {
             .satisfies(a -> assertThat(a.getAddress()).as("check address").isEqualTo(expected.getAddress()))
             .satisfies(a -> assertThat(a.getCreateDate()).as("check createDate").isEqualTo(expected.getCreateDate()))
             .satisfies(a -> assertThat(a.getUpdateDate()).as("check updateDate").isEqualTo(expected.getUpdateDate()))
-            .satisfies(a -> assertThat(a.getNotes()).as("check notes").isEqualTo(expected.getNotes()));
+            .satisfies(a -> assertThat(a.getNotes()).as("check notes").isEqualTo(expected.getNotes()))
+            .satisfies(a -> assertThat(a.getCountryName()).as("check countryName").isEqualTo(expected.getCountryName()))
+            .satisfies(a -> assertThat(a.getRegion()).as("check region").isEqualTo(expected.getRegion()));
     }
 
     /**
@@ -82,8 +84,8 @@ public class ClientAsserts {
     public static void assertClientUpdatableRelationshipsEquals(Client expected, Client actual) {
         assertThat(actual)
             .as("Verify Client relationships")
-            .satisfies(a -> assertThat(a.getCountry()).as("check country").isEqualTo(expected.getCountry()))
             .satisfies(a -> assertThat(a.getSize()).as("check size").isEqualTo(expected.getSize()))
-            .satisfies(a -> assertThat(a.getClientType()).as("check clientType").isEqualTo(expected.getClientType()));
+            .satisfies(a -> assertThat(a.getClientType()).as("check clientType").isEqualTo(expected.getClientType()))
+            .satisfies(a -> assertThat(a.getCountry()).as("check country").isEqualTo(expected.getCountry()));
     }
 }

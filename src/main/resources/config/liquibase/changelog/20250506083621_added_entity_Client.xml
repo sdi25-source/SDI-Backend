@@ -56,13 +56,19 @@
             <column name="notes" type="${clobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="country_id" type="bigint">
+            <column name="country_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="region" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="size_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="client_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="country_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -100,6 +106,8 @@
             <column name="create_date" type="date"/>
             <column name="update_date" type="date"/>
             <column name="notes" type="clob"/>
+            <column name="country_name" type="string"/>
+            <column name="region" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

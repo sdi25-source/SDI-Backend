@@ -17,15 +17,19 @@
       "fieldName": "status",
       "fieldType": "RequestStatus",
       "fieldValidateRules": ["required"],
-      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED"
+      "fieldValues": "PENDING,APPROVED,REJECTED,COMPLETED"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
     },
     {
       "fieldName": "createDate",
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "description",
-      "fieldType": "TextBlob"
+      "fieldName": "updateDate",
+      "fieldType": "LocalDate"
     }
   ],
   "name": "RequestOfChange",

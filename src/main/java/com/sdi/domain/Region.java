@@ -41,7 +41,7 @@ public class Region implements Serializable {
     @Column(name = "notes")
     private String notes;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "region")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "clients", "region" }, allowSetters = true)
     private Set<Country> countries = new HashSet<>();

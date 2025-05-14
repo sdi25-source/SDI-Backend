@@ -117,16 +117,17 @@ public class ClientQueryService extends QueryService<Client> {
             if (criteria.getUpdateDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getUpdateDate(), Client_.updateDate));
             }
+            if (criteria.getCountryName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCountryName(), Client_.countryName));
+            }
+            if (criteria.getRegion() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getRegion(), Client_.region));
+            }
             if (criteria.getProductDeployementId() != null) {
                 specification = specification.and(
                     buildSpecification(criteria.getProductDeployementId(), root ->
                         root.join(Client_.productDeployements, JoinType.LEFT).get(ProductDeployement_.id)
                     )
-                );
-            }
-            if (criteria.getCountryId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getCountryId(), root -> root.join(Client_.country, JoinType.LEFT).get(Country_.id))
                 );
             }
             if (criteria.getSizeId() != null) {
@@ -144,6 +145,11 @@ public class ClientQueryService extends QueryService<Client> {
                     buildSpecification(criteria.getCertifId(), root ->
                         root.join(Client_.certifs, JoinType.LEFT).get(ClientCertification_.id)
                     )
+                );
+            }
+            if (criteria.getCountryId() != null) {
+                specification = specification.and(
+                    buildSpecification(criteria.getCountryId(), root -> root.join(Client_.country, JoinType.LEFT).get(Country_.id))
                 );
             }
         }

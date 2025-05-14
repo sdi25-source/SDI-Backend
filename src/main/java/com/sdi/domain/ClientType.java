@@ -43,7 +43,7 @@ public class ClientType implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clientType")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productDeployements", "country", "size", "clientType", "certifs" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "certifs", "country" }, allowSetters = true)
     private Set<Client> clients = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

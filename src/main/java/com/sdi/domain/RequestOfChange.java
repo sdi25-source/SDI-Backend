@@ -41,12 +41,15 @@ public class RequestOfChange implements Serializable {
     @Column(name = "status", nullable = false)
     private RequestStatus status;
 
-    @Column(name = "create_date")
-    private LocalDate createDate;
-
     @Lob
     @Column(name = "description")
     private String description;
+
+    @Column(name = "create_date")
+    private LocalDate createDate;
+
+    @Column(name = "update_date")
+    private LocalDate updateDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
@@ -56,7 +59,7 @@ public class RequestOfChange implements Serializable {
     private ProductVersion productVersion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productDeployements", "country", "size", "clientType", "certifs" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "certifs", "country" }, allowSetters = true)
     private Client client;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -140,6 +143,19 @@ public class RequestOfChange implements Serializable {
         this.status = status;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public RequestOfChange description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public LocalDate getCreateDate() {
         return this.createDate;
     }
@@ -153,17 +169,17 @@ public class RequestOfChange implements Serializable {
         this.createDate = createDate;
     }
 
-    public String getDescription() {
-        return this.description;
+    public LocalDate getUpdateDate() {
+        return this.updateDate;
     }
 
-    public RequestOfChange description(String description) {
-        this.setDescription(description);
+    public RequestOfChange updateDate(LocalDate updateDate) {
+        this.setUpdateDate(updateDate);
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 
     public ProductVersion getProductVersion() {
@@ -255,8 +271,9 @@ public class RequestOfChange implements Serializable {
             ", title='" + getTitle() + "'" +
             ", keywords='" + getKeywords() + "'" +
             ", status='" + getStatus() + "'" +
-            ", createDate='" + getCreateDate() + "'" +
             ", description='" + getDescription() + "'" +
+            ", createDate='" + getCreateDate() + "'" +
+            ", updateDate='" + getUpdateDate() + "'" +
             "}";
     }
 }

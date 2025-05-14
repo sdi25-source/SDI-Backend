@@ -5,6 +5,7 @@ package com.sdi.domain.enumeration;
  */
 public enum RequestStatus {
     PENDING,
-    IN_PROGRESS,
+    APPROVED,
+    REJECTED,
     COMPLETED,
 }

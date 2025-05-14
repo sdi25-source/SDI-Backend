@@ -52,18 +52,6 @@ class ClientTest {
     }
 
     @Test
-    void countryTest() {
-        Client client = getClientRandomSampleGenerator();
-        Country countryBack = getCountryRandomSampleGenerator();
-
-        client.setCountry(countryBack);
-        assertThat(client.getCountry()).isEqualTo(countryBack);
-
-        client.country(null);
-        assertThat(client.getCountry()).isNull();
-    }
-
-    @Test
     void sizeTest() {
         Client client = getClientRandomSampleGenerator();
         ClientSize clientSizeBack = getClientSizeRandomSampleGenerator();
@@ -107,5 +95,17 @@ class ClientTest {
         client.setCertifs(new HashSet<>());
         assertThat(client.getCertifs()).doesNotContain(clientCertificationBack);
         assertThat(clientCertificationBack.getClient()).isNull();
+    }
+
+    @Test
+    void countryTest() {
+        Client client = getClientRandomSampleGenerator();
+        Country countryBack = getCountryRandomSampleGenerator();
+
+        client.setCountry(countryBack);
+        assertThat(client.getCountry()).isEqualTo(countryBack);
+
+        client.country(null);
+        assertThat(client.getCountry()).isNull();
     }
 }

@@ -62,6 +62,14 @@
     {
       "fieldName": "notes",
       "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "countryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "region",
+      "fieldType": "String"
     }
   ],
   "jpaMetamodelFiltering": true,
@@ -73,13 +81,6 @@
       "relationshipName": "productDeployement",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityField": "countryname",
-      "otherEntityName": "country",
-      "relationshipName": "country",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-one"
     },
     {
       "otherEntityField": "sizeCode",
