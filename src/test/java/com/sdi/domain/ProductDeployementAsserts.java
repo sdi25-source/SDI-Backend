@@ -62,6 +62,7 @@ public class ProductDeployementAsserts {
     public static void assertProductDeployementUpdatableRelationshipsEquals(ProductDeployement expected, ProductDeployement actual) {
         assertThat(actual)
             .as("Verify ProductDeployement relationships")
+            .satisfies(a -> assertThat(a.getProduct()).as("check product").isEqualTo(expected.getProduct()))
             .satisfies(a -> assertThat(a.getClient()).as("check client").isEqualTo(expected.getClient()));
     }
 }

@@ -2,6 +2,7 @@ package com.sdi.domain;
 
 import static com.sdi.domain.ClientTestSamples.*;
 import static com.sdi.domain.ProductDeployementTestSamples.*;
+import static com.sdi.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sdi.web.rest.TestUtil;
@@ -21,6 +22,18 @@ class ProductDeployementTest {
 
         productDeployement2 = getProductDeployementSample2();
         assertThat(productDeployement1).isNotEqualTo(productDeployement2);
+    }
+
+    @Test
+    void productTest() {
+        ProductDeployement productDeployement = getProductDeployementRandomSampleGenerator();
+        Product productBack = getProductRandomSampleGenerator();
+
+        productDeployement.setProduct(productBack);
+        assertThat(productDeployement.getProduct()).isEqualTo(productBack);
+
+        productDeployement.product(null);
+        assertThat(productDeployement.getProduct()).isNull();
     }
 
     @Test

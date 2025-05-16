@@ -40,6 +40,10 @@ public class ProductDeployement implements Serializable {
     private String notes;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "certifs", "country" }, allowSetters = true)
     private Client client;
 
@@ -108,6 +112,19 @@ public class ProductDeployement implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public Product getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public ProductDeployement product(Product product) {
+        this.setProduct(product);
+        return this;
     }
 
     public Client getClient() {

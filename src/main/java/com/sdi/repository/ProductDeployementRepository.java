@@ -27,16 +27,18 @@ public interface ProductDeployementRepository extends JpaRepository<ProductDeplo
     }
 
     @Query(
-        value = "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.client",
+        value = "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client",
         countQuery = "select count(productDeployement) from ProductDeployement productDeployement"
     )
     Page<ProductDeployement> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.client")
+    @Query(
+        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client"
+    )
     List<ProductDeployement> findAllWithToOneRelationships();
 
     @Query(
-        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.client where productDeployement.id =:id"
+        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client where productDeployement.id =:id"
     )
     Optional<ProductDeployement> findOneWithToOneRelationships(@Param("id") Long id);
 }
