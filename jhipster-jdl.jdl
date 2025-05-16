@@ -226,6 +226,8 @@ relationship ManyToOne {
 
   RequestOfChange{productVersion(version)} to ProductVersion
   RequestOfChange{client(code)} to Client
+  // on ajoute cette relation là.
+  ProductDeployement{product(name)} to Product
 
 }
 

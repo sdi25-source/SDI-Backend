@@ -42,7 +42,7 @@ public class ProductDeployementDetail implements Serializable {
     private Set<ModuleDeployement> moduleDeployements = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "client" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "product", "client" }, allowSetters = true)
     private ProductDeployement productDeployement;
 
     @ManyToMany(fetch = FetchType.LAZY)
