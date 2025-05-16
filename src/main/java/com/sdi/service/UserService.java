@@ -93,7 +93,9 @@ public class UserService {
             });
     }
 
-    public User registerUser(AdminUserDTO userDTO, String password) {
+
+
+    public User registerUser(AdminUserDTO userDTO, String password, String authority) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .ifPresent(existingUser -> {
@@ -127,13 +129,19 @@ public class UserService {
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        LOG.debug("Created Information for User: {}", authority);
+
+        authorityRepository.findById(authority).ifPresent(authorities::add);
+        //authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         LOG.debug("Created Information for User: {}", newUser);
         return newUser;
     }
+
+
+
 
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.isActivated()) {
@@ -159,7 +167,9 @@ public class UserService {
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+
+        String password = user.getLogin() + "123";
+        String encryptedPassword = passwordEncoder.encode(password);
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
@@ -177,6 +187,8 @@ public class UserService {
         userRepository.save(user);
         this.clearUserCaches(user);
         LOG.debug("Created Information for User: {}", user);
+        LOG.debug("User login: {}", user.getLogin());
+        LOG.debug("User password: {}", password);
         return user;
     }
 

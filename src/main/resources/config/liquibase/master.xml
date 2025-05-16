@@ -25,7 +25,6 @@
     <include file="config/liquibase/changelog/20250506083615_added_entity_ProductDeployementDetail.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083616_added_entity_ModuleDeployement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083617_added_entity_FeatureDeployement.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250506083618_added_entity_Region.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083619_added_entity_ClientCertification.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083620_added_entity_ClientSize.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083621_added_entity_Client.xml" relativeToChangelogFile="false"/>
@@ -33,7 +32,6 @@
     <include file="config/liquibase/changelog/20250506083623_added_entity_Certification.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083624_added_entity_ClientEvent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083625_added_entity_ClientEventType.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250506083626_added_entity_Country.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083627_added_entity_HA.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083628_added_entity_ComponentType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083629_added_entity_InfraComponent.xml" relativeToChangelogFile="false"/>
