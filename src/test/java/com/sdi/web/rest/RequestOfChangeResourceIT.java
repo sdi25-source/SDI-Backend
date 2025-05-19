@@ -61,6 +61,9 @@ class RequestOfChangeResourceIT {
     private static final LocalDate DEFAULT_UPDATE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_UPDATE_DATE = LocalDate.now(ZoneId.systemDefault());
 
+    private static final Boolean DEFAULT_DONE = false;
+    private static final Boolean UPDATED_DONE = true;
+
     private static final String ENTITY_API_URL = "/api/request-of-changes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -99,7 +102,8 @@ class RequestOfChangeResourceIT {
             .status(DEFAULT_STATUS)
             .description(DEFAULT_DESCRIPTION)
             .createDate(DEFAULT_CREATE_DATE)
-            .updateDate(DEFAULT_UPDATE_DATE);
+            .updateDate(DEFAULT_UPDATE_DATE)
+            .done(DEFAULT_DONE);
     }
 
     /**
@@ -115,7 +119,8 @@ class RequestOfChangeResourceIT {
             .status(UPDATED_STATUS)
             .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .updateDate(UPDATED_UPDATE_DATE)
+            .done(UPDATED_DONE);
     }
 
     @BeforeEach
@@ -219,7 +224,8 @@ class RequestOfChangeResourceIT {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].done").value(hasItem(DEFAULT_DONE)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -256,7 +262,8 @@ class RequestOfChangeResourceIT {
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.createDate").value(DEFAULT_CREATE_DATE.toString()))
-            .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()));
+            .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
+            .andExpect(jsonPath("$.done").value(DEFAULT_DONE));
     }
 
     @Test
@@ -284,7 +291,8 @@ class RequestOfChangeResourceIT {
             .status(UPDATED_STATUS)
             .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .updateDate(UPDATED_UPDATE_DATE)
+            .done(UPDATED_DONE);
 
         restRequestOfChangeMockMvc
             .perform(
@@ -364,7 +372,11 @@ class RequestOfChangeResourceIT {
         RequestOfChange partialUpdatedRequestOfChange = new RequestOfChange();
         partialUpdatedRequestOfChange.setId(requestOfChange.getId());
 
-        partialUpdatedRequestOfChange.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION).createDate(UPDATED_CREATE_DATE);
+        partialUpdatedRequestOfChange
+            .title(UPDATED_TITLE)
+            .description(UPDATED_DESCRIPTION)
+            .updateDate(UPDATED_UPDATE_DATE)
+            .done(UPDATED_DONE);
 
         restRequestOfChangeMockMvc
             .perform(
@@ -401,7 +413,8 @@ class RequestOfChangeResourceIT {
             .status(UPDATED_STATUS)
             .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+            .updateDate(UPDATED_UPDATE_DATE)
+            .done(UPDATED_DONE);
 
         restRequestOfChangeMockMvc
             .perform(

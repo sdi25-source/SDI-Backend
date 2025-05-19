@@ -32,6 +32,9 @@
             <column name="update_date" type="date">
                 <constraints nullable="true" />
             </column>
+            <column name="done" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="product_version_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -82,6 +85,7 @@
             <column name="description" type="clob"/>
             <column name="create_date" type="date"/>
             <column name="update_date" type="date"/>
+            <column name="done" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

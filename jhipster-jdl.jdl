@@ -207,6 +207,7 @@ entity RequestOfChange {
   description TextBlob
   createDate LocalDate
   updateDate LocalDate
+  done Boolean
 }
 
 enum RequestStatus {

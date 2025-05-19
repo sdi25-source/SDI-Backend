@@ -51,6 +51,9 @@ public class RequestOfChange implements Serializable {
     @Column(name = "update_date")
     private LocalDate updateDate;
 
+    @Column(name = "done")
+    private Boolean done;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
@@ -182,6 +185,19 @@ public class RequestOfChange implements Serializable {
         this.updateDate = updateDate;
     }
 
+    public Boolean getDone() {
+        return this.done;
+    }
+
+    public RequestOfChange done(Boolean done) {
+        this.setDone(done);
+        return this;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+
     public ProductVersion getProductVersion() {
         return this.productVersion;
     }
@@ -274,6 +290,7 @@ public class RequestOfChange implements Serializable {
             ", description='" + getDescription() + "'" +
             ", createDate='" + getCreateDate() + "'" +
             ", updateDate='" + getUpdateDate() + "'" +
+            ", done='" + getDone() + "'" +
             "}";
     }
 }

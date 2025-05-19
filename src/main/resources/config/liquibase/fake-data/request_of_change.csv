@@ -1,11 +1,11 @@
-id;title;keywords;status;description;create_date;update_date
-1;overreact;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05
-2;aggressive;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
-3;onto yuck;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06
-4;mmm until festival;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
-5;unlike;../fake-data/blob/hipster.txt;APPROVED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06
-6;snoopy;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05
-7;rudely;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
-8;overconfidently whereas major;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05
-9;repentant yahoo;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05
-10;softly;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06
+id;title;keywords;status;description;create_date;update_date;done
+1;overreact;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
+2;unbalance lest after;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;false
+3;frankly blindly;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-06;false
+4;amidst swanling;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05;false
+5;snoopy;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
+6;or;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;true
+7;nudge sedately;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;false
+8;sudden mortally;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
+9;er atop or;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
+10;regarding wholly;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-06;false

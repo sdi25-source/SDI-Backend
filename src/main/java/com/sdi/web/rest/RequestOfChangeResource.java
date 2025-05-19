@@ -142,6 +142,9 @@ public class RequestOfChangeResource {
                 if (requestOfChange.getUpdateDate() != null) {
                     existingRequestOfChange.setUpdateDate(requestOfChange.getUpdateDate());
                 }
+                if (requestOfChange.getDone() != null) {
+                    existingRequestOfChange.setDone(requestOfChange.getDone());
+                }
 
                 return existingRequestOfChange;
             })
