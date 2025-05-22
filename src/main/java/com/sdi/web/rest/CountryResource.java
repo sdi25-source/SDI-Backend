@@ -126,21 +126,6 @@ public class CountryResource {
                 if (country.getCountryname() != null) {
                     existingCountry.setCountryname(country.getCountryname());
                 }
-                if (country.getCountryCode() != null) {
-                    existingCountry.setCountryCode(country.getCountryCode());
-                }
-                if (country.getCountryFlag() != null) {
-                    existingCountry.setCountryFlag(country.getCountryFlag());
-                }
-                if (country.getNotes() != null) {
-                    existingCountry.setNotes(country.getNotes());
-                }
-                if (country.getCreateDate() != null) {
-                    existingCountry.setCreateDate(country.getCreateDate());
-                }
-                if (country.getUpdateDate() != null) {
-                    existingCountry.setUpdateDate(country.getUpdateDate());
-                }
 
                 return existingCountry;
             })
@@ -155,17 +140,12 @@ public class CountryResource {
     /**
      * {@code GET  /countries} : get all the countries.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of countries in body.
      */
     @GetMapping("")
-    public List<Country> getAllCountries(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
+    public List<Country> getAllCountries() {
         LOG.debug("REST request to get all Countries");
-        if (eagerload) {
-            return countryRepository.findAllWithEagerRelationships();
-        } else {
-            return countryRepository.findAll();
-        }
+        return countryRepository.findAll();
     }
 
     /**
@@ -177,7 +157,7 @@ public class CountryResource {
     @GetMapping("/{id}")
     public ResponseEntity<Country> getCountry(@PathVariable("id") Long id) {
         LOG.debug("REST request to get Country : {}", id);
-        Optional<Country> country = countryRepository.findOneWithEagerRelationships(id);
+        Optional<Country> country = countryRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(country);
     }
 

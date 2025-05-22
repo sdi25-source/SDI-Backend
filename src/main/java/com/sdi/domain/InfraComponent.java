@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -42,6 +44,22 @@ public class InfraComponent implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "infraComponents" }, allowSetters = true)
     private ComponentType componentType;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "infraComponents")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "productDeployementDetails",
+            "productVersions",
+            "product",
+            "moduleVersions",
+            "infraComponentVersions",
+            "infraComponents",
+            "root",
+        },
+        allowSetters = true
+    )
+    private Set<ProductVersion> productVersions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -120,6 +138,37 @@ public class InfraComponent implements Serializable {
 
     public InfraComponent componentType(ComponentType componentType) {
         this.setComponentType(componentType);
+        return this;
+    }
+
+    public Set<ProductVersion> getProductVersions() {
+        return this.productVersions;
+    }
+
+    public void setProductVersions(Set<ProductVersion> productVersions) {
+        if (this.productVersions != null) {
+            this.productVersions.forEach(i -> i.removeInfraComponent(this));
+        }
+        if (productVersions != null) {
+            productVersions.forEach(i -> i.addInfraComponent(this));
+        }
+        this.productVersions = productVersions;
+    }
+
+    public InfraComponent productVersions(Set<ProductVersion> productVersions) {
+        this.setProductVersions(productVersions);
+        return this;
+    }
+
+    public InfraComponent addProductVersion(ProductVersion productVersion) {
+        this.productVersions.add(productVersion);
+        productVersion.getInfraComponents().add(this);
+        return this;
+    }
+
+    public InfraComponent removeProductVersion(ProductVersion productVersion) {
+        this.productVersions.remove(productVersion);
+        productVersion.getInfraComponents().remove(this);
         return this;
     }
 

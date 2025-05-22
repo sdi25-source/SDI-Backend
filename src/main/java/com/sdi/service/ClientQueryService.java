@@ -70,9 +70,6 @@ public class ClientQueryService extends QueryService<Client> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getId(), Client_.id));
             }
-            if (criteria.getClientLogo() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getClientLogo(), Client_.clientLogo));
-            }
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Client_.name));
             }
@@ -117,12 +114,6 @@ public class ClientQueryService extends QueryService<Client> {
             if (criteria.getUpdateDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getUpdateDate(), Client_.updateDate));
             }
-            if (criteria.getCountryName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCountryName(), Client_.countryName));
-            }
-            if (criteria.getRegion() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRegion(), Client_.region));
-            }
             if (criteria.getProductDeployementId() != null) {
                 specification = specification.and(
                     buildSpecification(criteria.getProductDeployementId(), root ->
@@ -140,16 +131,16 @@ public class ClientQueryService extends QueryService<Client> {
                     buildSpecification(criteria.getClientTypeId(), root -> root.join(Client_.clientType, JoinType.LEFT).get(ClientType_.id))
                 );
             }
+            if (criteria.getCountryId() != null) {
+                specification = specification.and(
+                    buildSpecification(criteria.getCountryId(), root -> root.join(Client_.country, JoinType.LEFT).get(Country_.id))
+                );
+            }
             if (criteria.getCertifId() != null) {
                 specification = specification.and(
                     buildSpecification(criteria.getCertifId(), root ->
                         root.join(Client_.certifs, JoinType.LEFT).get(ClientCertification_.id)
                     )
-                );
-            }
-            if (criteria.getCountryId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getCountryId(), root -> root.join(Client_.country, JoinType.LEFT).get(Country_.id))
                 );
             }
         }

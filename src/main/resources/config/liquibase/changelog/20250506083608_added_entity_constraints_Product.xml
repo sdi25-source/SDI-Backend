@@ -25,6 +25,20 @@
                                  />
 
         <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="rel_product__certification"
+                                 constraintName="fk_rel_product__certification__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="certification_id"
+                                 baseTableName="rel_product__certification"
+                                 constraintName="fk_rel_product__certification__certification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="certification"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
                                  baseTableName="rel_product__module"
                                  constraintName="fk_rel_product__module__product_id"
                                  referencedColumnNames="id"
@@ -36,20 +50,6 @@
                                  constraintName="fk_rel_product__module__module_id"
                                  referencedColumnNames="id"
                                  referencedTableName="module"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="product_id"
-                                 baseTableName="rel_product__infra_component_version"
-                                 constraintName="fk_rel_product__infra_component_version__product_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="product"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="infra_component_version_id"
-                                 baseTableName="rel_product__infra_component_version"
-                                 constraintName="fk_rel_product__infra_component__infra_component_version_b9_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="infra_component_version"
                                  />
     </changeSet>
 </databaseChangeLog>

@@ -34,6 +34,11 @@
     {
       "fieldName": "done",
       "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeRequest",
+      "fieldValues": "INTERNAL,EXTERNAL"
     }
   ],
   "name": "RequestOfChange",

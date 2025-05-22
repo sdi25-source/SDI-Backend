@@ -64,9 +64,7 @@ public class ProductAsserts {
         assertThat(actual)
             .as("Verify Product relationships")
             .satisfies(a -> assertThat(a.getProductLines()).as("check productLines").isEqualTo(expected.getProductLines()))
-            .satisfies(a -> assertThat(a.getModules()).as("check modules").isEqualTo(expected.getModules()))
-            .satisfies(a ->
-                assertThat(a.getInfraComponentVersions()).as("check infraComponentVersions").isEqualTo(expected.getInfraComponentVersions())
-            );
+            .satisfies(a -> assertThat(a.getCertifications()).as("check certifications").isEqualTo(expected.getCertifications()))
+            .satisfies(a -> assertThat(a.getModules()).as("check modules").isEqualTo(expected.getModules()));
     }
 }

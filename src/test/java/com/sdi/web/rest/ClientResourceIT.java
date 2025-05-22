@@ -93,12 +93,6 @@ class ClientResourceIT {
     private static final String DEFAULT_NOTES = "AAAAAAAAAA";
     private static final String UPDATED_NOTES = "BBBBBBBBBB";
 
-    private static final String DEFAULT_COUNTRY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_COUNTRY_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_REGION = "AAAAAAAAAA";
-    private static final String UPDATED_REGION = "BBBBBBBBBB";
-
     private static final String ENTITY_API_URL = "/api/clients";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -148,9 +142,7 @@ class ClientResourceIT {
             .address(DEFAULT_ADDRESS)
             .createDate(DEFAULT_CREATE_DATE)
             .updateDate(DEFAULT_UPDATE_DATE)
-            .notes(DEFAULT_NOTES)
-            .countryName(DEFAULT_COUNTRY_NAME)
-            .region(DEFAULT_REGION);
+            .notes(DEFAULT_NOTES);
     }
 
     /**
@@ -174,9 +166,7 @@ class ClientResourceIT {
             .address(UPDATED_ADDRESS)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .notes(UPDATED_NOTES)
-            .countryName(UPDATED_COUNTRY_NAME)
-            .region(UPDATED_REGION);
+            .notes(UPDATED_NOTES);
     }
 
     @BeforeEach
@@ -272,9 +262,7 @@ class ClientResourceIT {
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)))
-            .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME)))
-            .andExpect(jsonPath("$.[*].region").value(hasItem(DEFAULT_REGION)));
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -319,9 +307,7 @@ class ClientResourceIT {
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
             .andExpect(jsonPath("$.createDate").value(DEFAULT_CREATE_DATE.toString()))
             .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
-            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES))
-            .andExpect(jsonPath("$.countryName").value(DEFAULT_COUNTRY_NAME))
-            .andExpect(jsonPath("$.region").value(DEFAULT_REGION));
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
     }
 
     @Test
@@ -337,56 +323,6 @@ class ClientResourceIT {
         defaultClientFiltering("id.greaterThanOrEqual=" + id, "id.greaterThan=" + id);
 
         defaultClientFiltering("id.lessThanOrEqual=" + id, "id.lessThan=" + id);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByClientLogoIsEqualToSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where clientLogo equals to
-        defaultClientFiltering("clientLogo.equals=" + DEFAULT_CLIENT_LOGO, "clientLogo.equals=" + UPDATED_CLIENT_LOGO);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByClientLogoIsInShouldWork() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where clientLogo in
-        defaultClientFiltering("clientLogo.in=" + DEFAULT_CLIENT_LOGO + "," + UPDATED_CLIENT_LOGO, "clientLogo.in=" + UPDATED_CLIENT_LOGO);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByClientLogoIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where clientLogo is not null
-        defaultClientFiltering("clientLogo.specified=true", "clientLogo.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByClientLogoContainsSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where clientLogo contains
-        defaultClientFiltering("clientLogo.contains=" + DEFAULT_CLIENT_LOGO, "clientLogo.contains=" + UPDATED_CLIENT_LOGO);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByClientLogoNotContainsSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where clientLogo does not contain
-        defaultClientFiltering("clientLogo.doesNotContain=" + UPDATED_CLIENT_LOGO, "clientLogo.doesNotContain=" + DEFAULT_CLIENT_LOGO);
     }
 
     @Test
@@ -1187,109 +1123,6 @@ class ClientResourceIT {
 
     @Test
     @Transactional
-    void getAllClientsByCountryNameIsEqualToSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where countryName equals to
-        defaultClientFiltering("countryName.equals=" + DEFAULT_COUNTRY_NAME, "countryName.equals=" + UPDATED_COUNTRY_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByCountryNameIsInShouldWork() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where countryName in
-        defaultClientFiltering(
-            "countryName.in=" + DEFAULT_COUNTRY_NAME + "," + UPDATED_COUNTRY_NAME,
-            "countryName.in=" + UPDATED_COUNTRY_NAME
-        );
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByCountryNameIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where countryName is not null
-        defaultClientFiltering("countryName.specified=true", "countryName.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByCountryNameContainsSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where countryName contains
-        defaultClientFiltering("countryName.contains=" + DEFAULT_COUNTRY_NAME, "countryName.contains=" + UPDATED_COUNTRY_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByCountryNameNotContainsSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where countryName does not contain
-        defaultClientFiltering("countryName.doesNotContain=" + UPDATED_COUNTRY_NAME, "countryName.doesNotContain=" + DEFAULT_COUNTRY_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByRegionIsEqualToSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where region equals to
-        defaultClientFiltering("region.equals=" + DEFAULT_REGION, "region.equals=" + UPDATED_REGION);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByRegionIsInShouldWork() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where region in
-        defaultClientFiltering("region.in=" + DEFAULT_REGION + "," + UPDATED_REGION, "region.in=" + UPDATED_REGION);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByRegionIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where region is not null
-        defaultClientFiltering("region.specified=true", "region.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByRegionContainsSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where region contains
-        defaultClientFiltering("region.contains=" + DEFAULT_REGION, "region.contains=" + UPDATED_REGION);
-    }
-
-    @Test
-    @Transactional
-    void getAllClientsByRegionNotContainsSomething() throws Exception {
-        // Initialize the database
-        insertedClient = clientRepository.saveAndFlush(client);
-
-        // Get all the clientList where region does not contain
-        defaultClientFiltering("region.doesNotContain=" + UPDATED_REGION, "region.doesNotContain=" + DEFAULT_REGION);
-    }
-
-    @Test
-    @Transactional
     void getAllClientsBySizeIsEqualToSomething() throws Exception {
         ClientSize size;
         if (TestUtil.findAll(em, ClientSize.class).isEmpty()) {
@@ -1381,9 +1214,7 @@ class ClientResourceIT {
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)))
-            .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME)))
-            .andExpect(jsonPath("$.[*].region").value(hasItem(DEFAULT_REGION)));
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
 
         // Check, that the count call also returns 1
         restClientMockMvc
@@ -1445,9 +1276,7 @@ class ClientResourceIT {
             .address(UPDATED_ADDRESS)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .notes(UPDATED_NOTES)
-            .countryName(UPDATED_COUNTRY_NAME)
-            .region(UPDATED_REGION);
+            .notes(UPDATED_NOTES);
 
         restClientMockMvc
             .perform(
@@ -1573,9 +1402,7 @@ class ClientResourceIT {
             .address(UPDATED_ADDRESS)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .notes(UPDATED_NOTES)
-            .countryName(UPDATED_COUNTRY_NAME)
-            .region(UPDATED_REGION);
+            .notes(UPDATED_NOTES);
 
         restClientMockMvc
             .perform(

@@ -70,9 +70,7 @@ public class ClientAsserts {
             .satisfies(a -> assertThat(a.getAddress()).as("check address").isEqualTo(expected.getAddress()))
             .satisfies(a -> assertThat(a.getCreateDate()).as("check createDate").isEqualTo(expected.getCreateDate()))
             .satisfies(a -> assertThat(a.getUpdateDate()).as("check updateDate").isEqualTo(expected.getUpdateDate()))
-            .satisfies(a -> assertThat(a.getNotes()).as("check notes").isEqualTo(expected.getNotes()))
-            .satisfies(a -> assertThat(a.getCountryName()).as("check countryName").isEqualTo(expected.getCountryName()))
-            .satisfies(a -> assertThat(a.getRegion()).as("check region").isEqualTo(expected.getRegion()));
+            .satisfies(a -> assertThat(a.getNotes()).as("check notes").isEqualTo(expected.getNotes()));
     }
 
     /**

@@ -102,7 +102,15 @@ public class ModuleVersion implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "moduleVersions")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
+        value = {
+            "productDeployementDetails",
+            "productVersions",
+            "product",
+            "moduleVersions",
+            "infraComponentVersions",
+            "infraComponents",
+            "root",
+        },
         allowSetters = true
     )
     private Set<ProductVersion> productVersions = new HashSet<>();

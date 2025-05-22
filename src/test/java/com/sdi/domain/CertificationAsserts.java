@@ -61,6 +61,8 @@ public class CertificationAsserts {
      * @param actual the actual entity
      */
     public static void assertCertificationUpdatableRelationshipsEquals(Certification expected, Certification actual) {
-        // empty method
+        assertThat(actual)
+            .as("Verify Certification relationships")
+            .satisfies(a -> assertThat(a.getProducts()).as("check products").isEqualTo(expected.getProducts()));
     }
 }

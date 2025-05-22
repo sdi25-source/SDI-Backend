@@ -6,7 +6,7 @@
   "fields": [
     {
       "fieldName": "clientLogo",
-      "fieldType": "String"
+      "fieldType": "TextBlob"
     },
     {
       "fieldName": "name",
@@ -62,14 +62,6 @@
     {
       "fieldName": "notes",
       "fieldType": "TextBlob"
-    },
-    {
-      "fieldName": "countryName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "region",
-      "fieldType": "String"
     }
   ],
   "jpaMetamodelFiltering": true,
@@ -93,6 +85,13 @@
       "otherEntityField": "type",
       "otherEntityName": "clientType",
       "relationshipName": "clientType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "countryname",
+      "otherEntityName": "country",
+      "relationshipName": "country",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     },

@@ -27,7 +27,7 @@ entity ProductVersion
 
 entity Product {
   name String required
-  logo String
+  logo TextBlob
   description TextBlob
   createDate LocalDate
   updateDate LocalDate
@@ -92,7 +92,6 @@ entity ModuleDeployement {
 }
 
 
-
 entity FeatureDeployement {
   code String required
   createDate LocalDate
@@ -121,7 +120,7 @@ entity ClientSize{
 
 entity Client
 {
-  ClientLogo String
+  ClientLogo TextBlob
   name String required
   code String
   mainContactName String
@@ -135,8 +134,6 @@ entity Client
   createDate LocalDate
   updateDate LocalDate
   notes TextBlob
-  countryName String
-  region String
 }
 
 entity ClientType {
@@ -208,12 +205,21 @@ entity RequestOfChange {
   createDate LocalDate
   updateDate LocalDate
   done Boolean
+  type TypeRequest
+}
+
+enum TypeRequest {
+  INTERNAL, EXTERNAL
 }
 
 enum RequestStatus {
   PENDING, APPROVED, REJECTED, COMPLETED
 }
 
+entity Country
+{
+  countryname String required
+}
 
 relationship ManyToOne {
   ClientCertification {client(code)} to Client{Certif(certification)}
@@ -222,28 +228,24 @@ relationship ManyToOne {
   ProductVersion{product(name)} to Product
   ModuleVersion{module(name)} to Module
   InfraComponentVersion{infraComponent(name)}  to InfraComponent
-
   ProductDeployementDetail{productDeployement(refContract)} to ProductDeployement
-
   RequestOfChange{productVersion(version)} to ProductVersion
   RequestOfChange{client(code)} to Client
-  // on ajoute cette relation là.
   ProductDeployement{product(name)} to Product
 
 }
 
 
 relationship ManyToMany {
-  Product {productLine} to ProductLine // un produitLine peut etre traité dans plusieurs produit et un produit peut traiter plusieurs productLine.
+  Product {productLine} to ProductLine
+  Product {certification} to Certification
   ProductVersion{moduleVersion} to ModuleVersion
   Product{module} to Module
   ModuleVersion{feature} to Feature
   ProductVersion{infraComponentVersion} to InfraComponentVersion
-  Product{infraComponentVersion} to InfraComponentVersion
-
+  ProductVersion{infraComponent} to InfraComponent
   ProductDeployementDetail{infraComponentVersion} to InfraComponentVersion
   ProductDeployementDetail{allowedModuleVersion} to ModuleVersion
-
   RequestOfChange{moduleVersion} to ModuleVersion
 }
 
@@ -257,6 +259,8 @@ relationship OneToMany{
   Client to ProductDeployement{client(code)}
   ClientSize to Client{size(sizeCode)}
   ClientType to Client{ClientType(type)}
+  ClientType to Client{ClientType(type)}
+  Country to Client{Country(countryname)}
   ClientEventType to ClientEvent{ClientEventType(type)}
 
 

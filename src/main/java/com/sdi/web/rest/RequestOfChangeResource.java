@@ -145,6 +145,9 @@ public class RequestOfChangeResource {
                 if (requestOfChange.getDone() != null) {
                     existingRequestOfChange.setDone(requestOfChange.getDone());
                 }
+                if (requestOfChange.getType() != null) {
+                    existingRequestOfChange.setType(requestOfChange.getType());
+                }
 
                 return existingRequestOfChange;
             })

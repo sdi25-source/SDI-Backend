@@ -11,7 +11,7 @@
     },
     {
       "fieldName": "logo",
-      "fieldType": "String"
+      "fieldType": "TextBlob"
     },
     {
       "fieldName": "description",
@@ -35,14 +35,14 @@
       "relationshipType": "many-to-many"
     },
     {
-      "otherEntityName": "module",
-      "relationshipName": "module",
+      "otherEntityName": "certification",
+      "relationshipName": "certification",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
     },
     {
-      "otherEntityName": "infraComponentVersion",
-      "relationshipName": "infraComponentVersion",
+      "otherEntityName": "module",
+      "relationshipName": "module",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
     }

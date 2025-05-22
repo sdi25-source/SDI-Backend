@@ -1,5 +1,6 @@
 package com.sdi.domain;
 
+import static com.sdi.domain.InfraComponentTestSamples.*;
 import static com.sdi.domain.InfraComponentVersionTestSamples.*;
 import static com.sdi.domain.ModuleVersionTestSamples.*;
 import static com.sdi.domain.ProductDeployementDetailTestSamples.*;
@@ -119,6 +120,24 @@ class ProductVersionTest {
 
         productVersion.setInfraComponentVersions(new HashSet<>());
         assertThat(productVersion.getInfraComponentVersions()).doesNotContain(infraComponentVersionBack);
+    }
+
+    @Test
+    void infraComponentTest() {
+        ProductVersion productVersion = getProductVersionRandomSampleGenerator();
+        InfraComponent infraComponentBack = getInfraComponentRandomSampleGenerator();
+
+        productVersion.addInfraComponent(infraComponentBack);
+        assertThat(productVersion.getInfraComponents()).containsOnly(infraComponentBack);
+
+        productVersion.removeInfraComponent(infraComponentBack);
+        assertThat(productVersion.getInfraComponents()).doesNotContain(infraComponentBack);
+
+        productVersion.infraComponents(new HashSet<>(Set.of(infraComponentBack)));
+        assertThat(productVersion.getInfraComponents()).containsOnly(infraComponentBack);
+
+        productVersion.setInfraComponents(new HashSet<>());
+        assertThat(productVersion.getInfraComponents()).doesNotContain(infraComponentBack);
     }
 
     @Test

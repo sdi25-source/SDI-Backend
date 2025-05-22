@@ -48,6 +48,11 @@ public class Certification implements Serializable {
     @JsonIgnoreProperties(value = { "client", "certif" }, allowSetters = true)
     private Set<ClientCertification> clientCertifications = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "certifications")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "productLines", "certifications", "modules" }, allowSetters = true)
+    private Set<Product> products = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -156,6 +161,37 @@ public class Certification implements Serializable {
     public Certification removeClientCertification(ClientCertification clientCertification) {
         this.clientCertifications.remove(clientCertification);
         clientCertification.setCertif(null);
+        return this;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        if (this.products != null) {
+            this.products.forEach(i -> i.removeCertification(this));
+        }
+        if (products != null) {
+            products.forEach(i -> i.addCertification(this));
+        }
+        this.products = products;
+    }
+
+    public Certification products(Set<Product> products) {
+        this.setProducts(products);
+        return this;
+    }
+
+    public Certification addProduct(Product product) {
+        this.products.add(product);
+        product.getCertifications().add(this);
+        return this;
+    }
+
+    public Certification removeProduct(Product product) {
+        this.products.remove(product);
+        product.getCertifications().remove(this);
         return this;
     }
 

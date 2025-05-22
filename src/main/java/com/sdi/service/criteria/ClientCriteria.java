@@ -24,8 +24,6 @@ public class ClientCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter clientLogo;
-
     private StringFilter name;
 
     private StringFilter code;
@@ -50,19 +48,15 @@ public class ClientCriteria implements Serializable, Criteria {
 
     private LocalDateFilter updateDate;
 
-    private StringFilter countryName;
-
-    private StringFilter region;
-
     private LongFilter productDeployementId;
 
     private LongFilter sizeId;
 
     private LongFilter clientTypeId;
 
-    private LongFilter certifId;
-
     private LongFilter countryId;
+
+    private LongFilter certifId;
 
     private Boolean distinct;
 
@@ -70,7 +64,6 @@ public class ClientCriteria implements Serializable, Criteria {
 
     public ClientCriteria(ClientCriteria other) {
         this.id = other.optionalId().map(LongFilter::copy).orElse(null);
-        this.clientLogo = other.optionalClientLogo().map(StringFilter::copy).orElse(null);
         this.name = other.optionalName().map(StringFilter::copy).orElse(null);
         this.code = other.optionalCode().map(StringFilter::copy).orElse(null);
         this.mainContactName = other.optionalMainContactName().map(StringFilter::copy).orElse(null);
@@ -83,13 +76,11 @@ public class ClientCriteria implements Serializable, Criteria {
         this.address = other.optionalAddress().map(StringFilter::copy).orElse(null);
         this.createDate = other.optionalCreateDate().map(LocalDateFilter::copy).orElse(null);
         this.updateDate = other.optionalUpdateDate().map(LocalDateFilter::copy).orElse(null);
-        this.countryName = other.optionalCountryName().map(StringFilter::copy).orElse(null);
-        this.region = other.optionalRegion().map(StringFilter::copy).orElse(null);
         this.productDeployementId = other.optionalProductDeployementId().map(LongFilter::copy).orElse(null);
         this.sizeId = other.optionalSizeId().map(LongFilter::copy).orElse(null);
         this.clientTypeId = other.optionalClientTypeId().map(LongFilter::copy).orElse(null);
-        this.certifId = other.optionalCertifId().map(LongFilter::copy).orElse(null);
         this.countryId = other.optionalCountryId().map(LongFilter::copy).orElse(null);
+        this.certifId = other.optionalCertifId().map(LongFilter::copy).orElse(null);
         this.distinct = other.distinct;
     }
 
@@ -115,25 +106,6 @@ public class ClientCriteria implements Serializable, Criteria {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public StringFilter getClientLogo() {
-        return clientLogo;
-    }
-
-    public Optional<StringFilter> optionalClientLogo() {
-        return Optional.ofNullable(clientLogo);
-    }
-
-    public StringFilter clientLogo() {
-        if (clientLogo == null) {
-            setClientLogo(new StringFilter());
-        }
-        return clientLogo;
-    }
-
-    public void setClientLogo(StringFilter clientLogo) {
-        this.clientLogo = clientLogo;
     }
 
     public StringFilter getName() {
@@ -364,44 +336,6 @@ public class ClientCriteria implements Serializable, Criteria {
         this.updateDate = updateDate;
     }
 
-    public StringFilter getCountryName() {
-        return countryName;
-    }
-
-    public Optional<StringFilter> optionalCountryName() {
-        return Optional.ofNullable(countryName);
-    }
-
-    public StringFilter countryName() {
-        if (countryName == null) {
-            setCountryName(new StringFilter());
-        }
-        return countryName;
-    }
-
-    public void setCountryName(StringFilter countryName) {
-        this.countryName = countryName;
-    }
-
-    public StringFilter getRegion() {
-        return region;
-    }
-
-    public Optional<StringFilter> optionalRegion() {
-        return Optional.ofNullable(region);
-    }
-
-    public StringFilter region() {
-        if (region == null) {
-            setRegion(new StringFilter());
-        }
-        return region;
-    }
-
-    public void setRegion(StringFilter region) {
-        this.region = region;
-    }
-
     public LongFilter getProductDeployementId() {
         return productDeployementId;
     }
@@ -459,25 +393,6 @@ public class ClientCriteria implements Serializable, Criteria {
         this.clientTypeId = clientTypeId;
     }
 
-    public LongFilter getCertifId() {
-        return certifId;
-    }
-
-    public Optional<LongFilter> optionalCertifId() {
-        return Optional.ofNullable(certifId);
-    }
-
-    public LongFilter certifId() {
-        if (certifId == null) {
-            setCertifId(new LongFilter());
-        }
-        return certifId;
-    }
-
-    public void setCertifId(LongFilter certifId) {
-        this.certifId = certifId;
-    }
-
     public LongFilter getCountryId() {
         return countryId;
     }
@@ -495,6 +410,25 @@ public class ClientCriteria implements Serializable, Criteria {
 
     public void setCountryId(LongFilter countryId) {
         this.countryId = countryId;
+    }
+
+    public LongFilter getCertifId() {
+        return certifId;
+    }
+
+    public Optional<LongFilter> optionalCertifId() {
+        return Optional.ofNullable(certifId);
+    }
+
+    public LongFilter certifId() {
+        if (certifId == null) {
+            setCertifId(new LongFilter());
+        }
+        return certifId;
+    }
+
+    public void setCertifId(LongFilter certifId) {
+        this.certifId = certifId;
     }
 
     public Boolean getDistinct() {
@@ -527,7 +461,6 @@ public class ClientCriteria implements Serializable, Criteria {
         final ClientCriteria that = (ClientCriteria) o;
         return (
             Objects.equals(id, that.id) &&
-            Objects.equals(clientLogo, that.clientLogo) &&
             Objects.equals(name, that.name) &&
             Objects.equals(code, that.code) &&
             Objects.equals(mainContactName, that.mainContactName) &&
@@ -540,13 +473,11 @@ public class ClientCriteria implements Serializable, Criteria {
             Objects.equals(address, that.address) &&
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(updateDate, that.updateDate) &&
-            Objects.equals(countryName, that.countryName) &&
-            Objects.equals(region, that.region) &&
             Objects.equals(productDeployementId, that.productDeployementId) &&
             Objects.equals(sizeId, that.sizeId) &&
             Objects.equals(clientTypeId, that.clientTypeId) &&
-            Objects.equals(certifId, that.certifId) &&
             Objects.equals(countryId, that.countryId) &&
+            Objects.equals(certifId, that.certifId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -555,7 +486,6 @@ public class ClientCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
             id,
-            clientLogo,
             name,
             code,
             mainContactName,
@@ -568,13 +498,11 @@ public class ClientCriteria implements Serializable, Criteria {
             address,
             createDate,
             updateDate,
-            countryName,
-            region,
             productDeployementId,
             sizeId,
             clientTypeId,
-            certifId,
             countryId,
+            certifId,
             distinct
         );
     }
@@ -584,7 +512,6 @@ public class ClientCriteria implements Serializable, Criteria {
     public String toString() {
         return "ClientCriteria{" +
             optionalId().map(f -> "id=" + f + ", ").orElse("") +
-            optionalClientLogo().map(f -> "clientLogo=" + f + ", ").orElse("") +
             optionalName().map(f -> "name=" + f + ", ").orElse("") +
             optionalCode().map(f -> "code=" + f + ", ").orElse("") +
             optionalMainContactName().map(f -> "mainContactName=" + f + ", ").orElse("") +
@@ -597,13 +524,11 @@ public class ClientCriteria implements Serializable, Criteria {
             optionalAddress().map(f -> "address=" + f + ", ").orElse("") +
             optionalCreateDate().map(f -> "createDate=" + f + ", ").orElse("") +
             optionalUpdateDate().map(f -> "updateDate=" + f + ", ").orElse("") +
-            optionalCountryName().map(f -> "countryName=" + f + ", ").orElse("") +
-            optionalRegion().map(f -> "region=" + f + ", ").orElse("") +
             optionalProductDeployementId().map(f -> "productDeployementId=" + f + ", ").orElse("") +
             optionalSizeId().map(f -> "sizeId=" + f + ", ").orElse("") +
             optionalClientTypeId().map(f -> "clientTypeId=" + f + ", ").orElse("") +
-            optionalCertifId().map(f -> "certifId=" + f + ", ").orElse("") +
             optionalCountryId().map(f -> "countryId=" + f + ", ").orElse("") +
+            optionalCertifId().map(f -> "certifId=" + f + ", ").orElse("") +
             optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
         "}";
     }

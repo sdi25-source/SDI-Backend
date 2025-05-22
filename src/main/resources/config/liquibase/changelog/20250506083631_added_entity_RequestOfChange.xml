@@ -35,6 +35,9 @@
             <column name="done" type="boolean">
                 <constraints nullable="true" />
             </column>
+            <column name="type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="product_version_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -86,6 +89,7 @@
             <column name="create_date" type="date"/>
             <column name="update_date" type="date"/>
             <column name="done" type="boolean"/>
+            <column name="type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

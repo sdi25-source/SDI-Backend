@@ -62,6 +62,7 @@ public class InfraComponentAsserts {
     public static void assertInfraComponentUpdatableRelationshipsEquals(InfraComponent expected, InfraComponent actual) {
         assertThat(actual)
             .as("Verify InfraComponent relationships")
-            .satisfies(a -> assertThat(a.getComponentType()).as("check componentType").isEqualTo(expected.getComponentType()));
+            .satisfies(a -> assertThat(a.getComponentType()).as("check componentType").isEqualTo(expected.getComponentType()))
+            .satisfies(a -> assertThat(a.getProductVersions()).as("check productVersions").isEqualTo(expected.getProductVersions()));
     }
 }

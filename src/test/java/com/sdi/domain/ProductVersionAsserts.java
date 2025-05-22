@@ -67,6 +67,7 @@ public class ProductVersionAsserts {
             .satisfies(a ->
                 assertThat(a.getInfraComponentVersions()).as("check infraComponentVersions").isEqualTo(expected.getInfraComponentVersions())
             )
+            .satisfies(a -> assertThat(a.getInfraComponents()).as("check infraComponents").isEqualTo(expected.getInfraComponents()))
             .satisfies(a -> assertThat(a.getRoot()).as("check root").isEqualTo(expected.getRoot()));
     }
 }

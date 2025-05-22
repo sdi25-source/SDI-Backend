@@ -37,6 +37,7 @@
     <include file="config/liquibase/changelog/20250506083629_added_entity_InfraComponent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083630_added_entity_InfraComponentVersion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083631_added_entity_RequestOfChange.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250506083626_added_entity_Country.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20250506083607_added_entity_constraints_ProductVersion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083608_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>

@@ -8,26 +8,6 @@
       "fieldName": "countryname",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "countryCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "countryFlag",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "notes",
-      "fieldType": "TextBlob"
-    },
-    {
-      "fieldName": "createDate",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "updateDate",
-      "fieldType": "LocalDate"
     }
   ],
   "name": "Country",
@@ -38,13 +18,6 @@
       "relationshipName": "client",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityField": "name",
-      "otherEntityName": "region",
-      "relationshipName": "region",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-one"
     }
   ],
   "searchEngine": "no"

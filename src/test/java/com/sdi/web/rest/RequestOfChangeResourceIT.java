@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sdi.IntegrationTest;
 import com.sdi.domain.RequestOfChange;
 import com.sdi.domain.enumeration.RequestStatus;
+import com.sdi.domain.enumeration.TypeRequest;
 import com.sdi.repository.RequestOfChangeRepository;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
@@ -64,6 +65,9 @@ class RequestOfChangeResourceIT {
     private static final Boolean DEFAULT_DONE = false;
     private static final Boolean UPDATED_DONE = true;
 
+    private static final TypeRequest DEFAULT_TYPE = TypeRequest.INTERNAL;
+    private static final TypeRequest UPDATED_TYPE = TypeRequest.EXTERNAL;
+
     private static final String ENTITY_API_URL = "/api/request-of-changes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -103,7 +107,8 @@ class RequestOfChangeResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .createDate(DEFAULT_CREATE_DATE)
             .updateDate(DEFAULT_UPDATE_DATE)
-            .done(DEFAULT_DONE);
+            .done(DEFAULT_DONE)
+            .type(DEFAULT_TYPE);
     }
 
     /**
@@ -120,7 +125,8 @@ class RequestOfChangeResourceIT {
             .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .done(UPDATED_DONE);
+            .done(UPDATED_DONE)
+            .type(UPDATED_TYPE);
     }
 
     @BeforeEach
@@ -225,7 +231,8 @@ class RequestOfChangeResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].done").value(hasItem(DEFAULT_DONE)));
+            .andExpect(jsonPath("$.[*].done").value(hasItem(DEFAULT_DONE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -263,7 +270,8 @@ class RequestOfChangeResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.createDate").value(DEFAULT_CREATE_DATE.toString()))
             .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
-            .andExpect(jsonPath("$.done").value(DEFAULT_DONE));
+            .andExpect(jsonPath("$.done").value(DEFAULT_DONE))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -292,7 +300,8 @@ class RequestOfChangeResourceIT {
             .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .done(UPDATED_DONE);
+            .done(UPDATED_DONE)
+            .type(UPDATED_TYPE);
 
         restRequestOfChangeMockMvc
             .perform(
@@ -373,8 +382,9 @@ class RequestOfChangeResourceIT {
         partialUpdatedRequestOfChange.setId(requestOfChange.getId());
 
         partialUpdatedRequestOfChange
-            .title(UPDATED_TITLE)
-            .description(UPDATED_DESCRIPTION)
+            .keywords(UPDATED_KEYWORDS)
+            .status(UPDATED_STATUS)
+            .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
             .done(UPDATED_DONE);
 
@@ -414,7 +424,8 @@ class RequestOfChangeResourceIT {
             .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .done(UPDATED_DONE);
+            .done(UPDATED_DONE)
+            .type(UPDATED_TYPE);
 
         restRequestOfChangeMockMvc
             .perform(

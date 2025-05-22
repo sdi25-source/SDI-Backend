@@ -59,13 +59,21 @@ public class ProductVersion implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "root")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
+        value = {
+            "productDeployementDetails",
+            "productVersions",
+            "product",
+            "moduleVersions",
+            "infraComponentVersions",
+            "infraComponents",
+            "root",
+        },
         allowSetters = true
     )
     private Set<ProductVersion> productVersions = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productLines", "certifications", "modules" }, allowSetters = true)
     private Product product;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -98,12 +106,30 @@ public class ProductVersion implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "infra_component_version_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "products", "productDeployementDetails" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "infraComponent", "productVersions", "productDeployementDetails" }, allowSetters = true)
     private Set<InfraComponentVersion> infraComponentVersions = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_product_version__infra_component",
+        joinColumns = @JoinColumn(name = "product_version_id"),
+        inverseJoinColumns = @JoinColumn(name = "infra_component_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "componentType", "productVersions" }, allowSetters = true)
+    private Set<InfraComponent> infraComponents = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
+        value = {
+            "productDeployementDetails",
+            "productVersions",
+            "product",
+            "moduleVersions",
+            "infraComponentVersions",
+            "infraComponents",
+            "root",
+        },
         allowSetters = true
     )
     private ProductVersion root;
@@ -293,6 +319,29 @@ public class ProductVersion implements Serializable {
 
     public ProductVersion removeInfraComponentVersion(InfraComponentVersion infraComponentVersion) {
         this.infraComponentVersions.remove(infraComponentVersion);
+        return this;
+    }
+
+    public Set<InfraComponent> getInfraComponents() {
+        return this.infraComponents;
+    }
+
+    public void setInfraComponents(Set<InfraComponent> infraComponents) {
+        this.infraComponents = infraComponents;
+    }
+
+    public ProductVersion infraComponents(Set<InfraComponent> infraComponents) {
+        this.setInfraComponents(infraComponents);
+        return this;
+    }
+
+    public ProductVersion addInfraComponent(InfraComponent infraComponent) {
+        this.infraComponents.add(infraComponent);
+        return this;
+    }
+
+    public ProductVersion removeInfraComponent(InfraComponent infraComponent) {
+        this.infraComponents.remove(infraComponent);
         return this;
     }
 

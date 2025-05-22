@@ -24,7 +24,7 @@ public class ProductVersionRepositoryWithBagRelationshipsImpl implements Product
 
     @Override
     public Optional<ProductVersion> fetchBagRelationships(Optional<ProductVersion> productVersion) {
-        return productVersion.map(this::fetchModuleVersions).map(this::fetchInfraComponentVersions);
+        return productVersion.map(this::fetchModuleVersions).map(this::fetchInfraComponentVersions).map(this::fetchInfraComponents);
     }
 
     @Override
@@ -41,6 +41,7 @@ public class ProductVersionRepositoryWithBagRelationshipsImpl implements Product
         return Optional.of(productVersions)
             .map(this::fetchModuleVersions)
             .map(this::fetchInfraComponentVersions)
+            .map(this::fetchInfraComponents)
             .orElse(Collections.emptyList());
     }
 
@@ -84,6 +85,30 @@ public class ProductVersionRepositoryWithBagRelationshipsImpl implements Product
         List<ProductVersion> result = entityManager
             .createQuery(
                 "select productVersion from ProductVersion productVersion left join fetch productVersion.infraComponentVersions where productVersion in :productVersions",
+                ProductVersion.class
+            )
+            .setParameter(PRODUCTVERSIONS_PARAMETER, productVersions)
+            .getResultList();
+        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
+        return result;
+    }
+
+    ProductVersion fetchInfraComponents(ProductVersion result) {
+        return entityManager
+            .createQuery(
+                "select productVersion from ProductVersion productVersion left join fetch productVersion.infraComponents where productVersion.id = :id",
+                ProductVersion.class
+            )
+            .setParameter(ID_PARAMETER, result.getId())
+            .getSingleResult();
+    }
+
+    List<ProductVersion> fetchInfraComponents(List<ProductVersion> productVersions) {
+        HashMap<Object, Integer> order = new HashMap<>();
+        IntStream.range(0, productVersions.size()).forEach(index -> order.put(productVersions.get(index).getId(), index));
+        List<ProductVersion> result = entityManager
+            .createQuery(
+                "select productVersion from ProductVersion productVersion left join fetch productVersion.infraComponents where productVersion in :productVersions",
                 ProductVersion.class
             )
             .setParameter(PRODUCTVERSIONS_PARAMETER, productVersions)

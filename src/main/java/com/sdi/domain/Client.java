@@ -27,6 +27,7 @@ public class Client implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Lob
     @Column(name = "client_logo")
     private String clientLogo;
 
@@ -72,15 +73,9 @@ public class Client implements Serializable {
     @Column(name = "notes")
     private String notes;
 
-    @Column(name = "country_name")
-    private String countryName;
-
-    @Column(name = "region")
-    private String region;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "client" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "product", "client" }, allowSetters = true)
     private Set<ProductDeployement> productDeployements = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -91,14 +86,14 @@ public class Client implements Serializable {
     @JsonIgnoreProperties(value = { "clients" }, allowSetters = true)
     private ClientType clientType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "clients", "region" }, allowSetters = true)
+    private Country country;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "client", "certif" }, allowSetters = true)
     private Set<ClientCertification> certifs = new HashSet<>();
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "clients", "region" }, allowSetters = true)
-    private Country country;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -297,32 +292,6 @@ public class Client implements Serializable {
         this.notes = notes;
     }
 
-    public String getCountryName() {
-        return this.countryName;
-    }
-
-    public Client countryName(String countryName) {
-        this.setCountryName(countryName);
-        return this;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
-    }
-
-    public String getRegion() {
-        return this.region;
-    }
-
-    public Client region(String region) {
-        this.setRegion(region);
-        return this;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
     public Set<ProductDeployement> getProductDeployements() {
         return this.productDeployements;
     }
@@ -380,6 +349,19 @@ public class Client implements Serializable {
         return this;
     }
 
+    public Country getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Client country(Country country) {
+        this.setCountry(country);
+        return this;
+    }
+
     public Set<ClientCertification> getCertifs() {
         return this.certifs;
     }
@@ -408,19 +390,6 @@ public class Client implements Serializable {
     public Client removeCertif(ClientCertification clientCertification) {
         this.certifs.remove(clientCertification);
         clientCertification.setClient(null);
-        return this;
-    }
-
-    public Country getCountry() {
-        return this.country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public Client country(Country country) {
-        this.setCountry(country);
         return this;
     }
 
@@ -462,8 +431,6 @@ public class Client implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", updateDate='" + getUpdateDate() + "'" +
             ", notes='" + getNotes() + "'" +
-            ", countryName='" + getCountryName() + "'" +
-            ", region='" + getRegion() + "'" +
             "}";
     }
 }

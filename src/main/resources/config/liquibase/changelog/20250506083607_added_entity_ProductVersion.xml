@@ -59,6 +59,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="product_version_id, infra_component_version_id" tableName="rel_product_version__infra_component_version"/>
+
+        <createTable tableName="rel_product_version__infra_component">
+            <column name="infra_component_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_version_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_version_id, infra_component_id" tableName="rel_product_version__infra_component"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

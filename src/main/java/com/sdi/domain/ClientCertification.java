@@ -43,11 +43,11 @@ public class ClientCertification implements Serializable {
     private String notes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "certifs", "country" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "country", "certifs" }, allowSetters = true)
     private Client client;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "clientCertifications" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "clientCertifications", "products" }, allowSetters = true)
     private Certification certif;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

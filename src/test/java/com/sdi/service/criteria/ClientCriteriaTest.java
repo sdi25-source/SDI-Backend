@@ -76,7 +76,6 @@ class ClientCriteriaTest {
 
     private static void setAllFilters(ClientCriteria clientCriteria) {
         clientCriteria.id();
-        clientCriteria.clientLogo();
         clientCriteria.name();
         clientCriteria.code();
         clientCriteria.mainContactName();
@@ -89,13 +88,11 @@ class ClientCriteriaTest {
         clientCriteria.address();
         clientCriteria.createDate();
         clientCriteria.updateDate();
-        clientCriteria.countryName();
-        clientCriteria.region();
         clientCriteria.productDeployementId();
         clientCriteria.sizeId();
         clientCriteria.clientTypeId();
-        clientCriteria.certifId();
         clientCriteria.countryId();
+        clientCriteria.certifId();
         clientCriteria.distinct();
     }
 
@@ -103,7 +100,6 @@ class ClientCriteriaTest {
         return new Condition<>(
             criteria ->
                 condition.apply(criteria.getId()) &&
-                condition.apply(criteria.getClientLogo()) &&
                 condition.apply(criteria.getName()) &&
                 condition.apply(criteria.getCode()) &&
                 condition.apply(criteria.getMainContactName()) &&
@@ -116,13 +112,11 @@ class ClientCriteriaTest {
                 condition.apply(criteria.getAddress()) &&
                 condition.apply(criteria.getCreateDate()) &&
                 condition.apply(criteria.getUpdateDate()) &&
-                condition.apply(criteria.getCountryName()) &&
-                condition.apply(criteria.getRegion()) &&
                 condition.apply(criteria.getProductDeployementId()) &&
                 condition.apply(criteria.getSizeId()) &&
                 condition.apply(criteria.getClientTypeId()) &&
-                condition.apply(criteria.getCertifId()) &&
                 condition.apply(criteria.getCountryId()) &&
+                condition.apply(criteria.getCertifId()) &&
                 condition.apply(criteria.getDistinct()),
             "every filter matches"
         );
@@ -132,7 +126,6 @@ class ClientCriteriaTest {
         return new Condition<>(
             criteria ->
                 condition.apply(criteria.getId(), copy.getId()) &&
-                condition.apply(criteria.getClientLogo(), copy.getClientLogo()) &&
                 condition.apply(criteria.getName(), copy.getName()) &&
                 condition.apply(criteria.getCode(), copy.getCode()) &&
                 condition.apply(criteria.getMainContactName(), copy.getMainContactName()) &&
@@ -145,13 +138,11 @@ class ClientCriteriaTest {
                 condition.apply(criteria.getAddress(), copy.getAddress()) &&
                 condition.apply(criteria.getCreateDate(), copy.getCreateDate()) &&
                 condition.apply(criteria.getUpdateDate(), copy.getUpdateDate()) &&
-                condition.apply(criteria.getCountryName(), copy.getCountryName()) &&
-                condition.apply(criteria.getRegion(), copy.getRegion()) &&
                 condition.apply(criteria.getProductDeployementId(), copy.getProductDeployementId()) &&
                 condition.apply(criteria.getSizeId(), copy.getSizeId()) &&
                 condition.apply(criteria.getClientTypeId(), copy.getClientTypeId()) &&
-                condition.apply(criteria.getCertifId(), copy.getCertifId()) &&
                 condition.apply(criteria.getCountryId(), copy.getCountryId()) &&
+                condition.apply(criteria.getCertifId(), copy.getCertifId()) &&
                 condition.apply(criteria.getDistinct(), copy.getDistinct()),
             "every filter matches"
         );

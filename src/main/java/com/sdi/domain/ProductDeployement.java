@@ -40,7 +40,7 @@ public class ProductDeployement implements Serializable {
     private String notes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productLines", "modules", "infraComponentVersions" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productLines", "certifications", "modules" }, allowSetters = true)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)

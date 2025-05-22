@@ -53,7 +53,8 @@ public class RequestOfChangeAsserts {
             .satisfies(a -> assertThat(a.getDescription()).as("check description").isEqualTo(expected.getDescription()))
             .satisfies(a -> assertThat(a.getCreateDate()).as("check createDate").isEqualTo(expected.getCreateDate()))
             .satisfies(a -> assertThat(a.getUpdateDate()).as("check updateDate").isEqualTo(expected.getUpdateDate()))
-            .satisfies(a -> assertThat(a.getDone()).as("check done").isEqualTo(expected.getDone()));
+            .satisfies(a -> assertThat(a.getDone()).as("check done").isEqualTo(expected.getDone()))
+            .satisfies(a -> assertThat(a.getType()).as("check type").isEqualTo(expected.getType()));
     }
 
     /**

@@ -101,12 +101,6 @@ public class ClientService {
                 if (client.getNotes() != null) {
                     existingClient.setNotes(client.getNotes());
                 }
-                if (client.getCountryName() != null) {
-                    existingClient.setCountryName(client.getCountryName());
-                }
-                if (client.getRegion() != null) {
-                    existingClient.setRegion(client.getRegion());
-                }
 
                 return existingClient;
             })

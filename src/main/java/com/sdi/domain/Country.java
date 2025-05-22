@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
@@ -31,25 +30,9 @@ public class Country implements Serializable {
     @Column(name = "countryname", nullable = false)
     private String countryname;
 
-    @Column(name = "country_code")
-    private String countryCode;
-
-    @Column(name = "country_flag")
-    private String countryFlag;
-
-    @Lob
-    @Column(name = "notes")
-    private String notes;
-
-    @Column(name = "create_date")
-    private LocalDate createDate;
-
-    @Column(name = "update_date")
-    private LocalDate updateDate;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productDeployements", "country", "size", "clientType", "certifs" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "country", "certifs" }, allowSetters = true)
     private Set<Client> clients = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -82,71 +65,6 @@ public class Country implements Serializable {
 
     public void setCountryname(String countryname) {
         this.countryname = countryname;
-    }
-
-    public String getCountryCode() {
-        return this.countryCode;
-    }
-
-    public Country countryCode(String countryCode) {
-        this.setCountryCode(countryCode);
-        return this;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public String getCountryFlag() {
-        return this.countryFlag;
-    }
-
-    public Country countryFlag(String countryFlag) {
-        this.setCountryFlag(countryFlag);
-        return this;
-    }
-
-    public void setCountryFlag(String countryFlag) {
-        this.countryFlag = countryFlag;
-    }
-
-    public String getNotes() {
-        return this.notes;
-    }
-
-    public Country notes(String notes) {
-        this.setNotes(notes);
-        return this;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public LocalDate getCreateDate() {
-        return this.createDate;
-    }
-
-    public Country createDate(LocalDate createDate) {
-        this.setCreateDate(createDate);
-        return this;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDate getUpdateDate() {
-        return this.updateDate;
-    }
-
-    public Country updateDate(LocalDate updateDate) {
-        this.setUpdateDate(updateDate);
-        return this;
-    }
-
-    public void setUpdateDate(LocalDate updateDate) {
-        this.updateDate = updateDate;
     }
 
     public Set<Client> getClients() {
@@ -218,11 +136,6 @@ public class Country implements Serializable {
         return "Country{" +
             "id=" + getId() +
             ", countryname='" + getCountryname() + "'" +
-            ", countryCode='" + getCountryCode() + "'" +
-            ", countryFlag='" + getCountryFlag() + "'" +
-            ", notes='" + getNotes() + "'" +
-            ", createDate='" + getCreateDate() + "'" +
-            ", updateDate='" + getUpdateDate() + "'" +
             "}";
     }
 }

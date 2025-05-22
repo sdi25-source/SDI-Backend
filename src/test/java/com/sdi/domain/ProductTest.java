@@ -1,6 +1,6 @@
 package com.sdi.domain;
 
-import static com.sdi.domain.InfraComponentVersionTestSamples.*;
+import static com.sdi.domain.CertificationTestSamples.*;
 import static com.sdi.domain.ModuleTestSamples.*;
 import static com.sdi.domain.ProductLineTestSamples.*;
 import static com.sdi.domain.ProductTestSamples.*;
@@ -46,6 +46,24 @@ class ProductTest {
     }
 
     @Test
+    void certificationTest() {
+        Product product = getProductRandomSampleGenerator();
+        Certification certificationBack = getCertificationRandomSampleGenerator();
+
+        product.addCertification(certificationBack);
+        assertThat(product.getCertifications()).containsOnly(certificationBack);
+
+        product.removeCertification(certificationBack);
+        assertThat(product.getCertifications()).doesNotContain(certificationBack);
+
+        product.certifications(new HashSet<>(Set.of(certificationBack)));
+        assertThat(product.getCertifications()).containsOnly(certificationBack);
+
+        product.setCertifications(new HashSet<>());
+        assertThat(product.getCertifications()).doesNotContain(certificationBack);
+    }
+
+    @Test
     void moduleTest() {
         Product product = getProductRandomSampleGenerator();
         Module moduleBack = getModuleRandomSampleGenerator();
@@ -61,23 +79,5 @@ class ProductTest {
 
         product.setModules(new HashSet<>());
         assertThat(product.getModules()).doesNotContain(moduleBack);
-    }
-
-    @Test
-    void infraComponentVersionTest() {
-        Product product = getProductRandomSampleGenerator();
-        InfraComponentVersion infraComponentVersionBack = getInfraComponentVersionRandomSampleGenerator();
-
-        product.addInfraComponentVersion(infraComponentVersionBack);
-        assertThat(product.getInfraComponentVersions()).containsOnly(infraComponentVersionBack);
-
-        product.removeInfraComponentVersion(infraComponentVersionBack);
-        assertThat(product.getInfraComponentVersions()).doesNotContain(infraComponentVersionBack);
-
-        product.infraComponentVersions(new HashSet<>(Set.of(infraComponentVersionBack)));
-        assertThat(product.getInfraComponentVersions()).containsOnly(infraComponentVersionBack);
-
-        product.setInfraComponentVersions(new HashSet<>());
-        assertThat(product.getInfraComponentVersions()).doesNotContain(infraComponentVersionBack);
     }
 }

@@ -58,6 +58,12 @@
       "relationshipType": "many-to-many"
     },
     {
+      "otherEntityName": "infraComponent",
+      "relationshipName": "infraComponent",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
       "otherEntityName": "productVersion",
       "relationshipName": "root",
       "relationshipSide": "right",

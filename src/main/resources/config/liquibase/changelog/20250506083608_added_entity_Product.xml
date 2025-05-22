@@ -17,7 +17,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="logo" type="varchar(255)">
+            <column name="logo" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="description" type="${clobType}">
@@ -46,6 +46,17 @@
 
         <addPrimaryKey columnNames="product_id, product_line_id" tableName="rel_product__product_line"/>
 
+        <createTable tableName="rel_product__certification">
+            <column name="certification_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, certification_id" tableName="rel_product__certification"/>
+
         <createTable tableName="rel_product__module">
             <column name="module_id" type="bigint">
                 <constraints nullable="false"/>
@@ -56,17 +67,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="product_id, module_id" tableName="rel_product__module"/>
-
-        <createTable tableName="rel_product__infra_component_version">
-            <column name="infra_component_version_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="product_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="product_id, infra_component_version_id" tableName="rel_product__infra_component_version"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -87,7 +87,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="logo" type="string"/>
+            <column name="logo" type="clob"/>
             <column name="description" type="clob"/>
             <column name="create_date" type="date"/>
             <column name="update_date" type="date"/>

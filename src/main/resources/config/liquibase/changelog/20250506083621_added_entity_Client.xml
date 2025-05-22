@@ -14,7 +14,7 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="client_logo" type="varchar(255)">
+            <column name="client_logo" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="name" type="varchar(255)">
@@ -56,12 +56,6 @@
             <column name="notes" type="${clobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="country_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="region" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="size_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -92,7 +86,7 @@
                   tableName="client"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="client_logo" type="string"/>
+            <column name="client_logo" type="clob"/>
             <column name="name" type="string"/>
             <column name="code" type="string"/>
             <column name="main_contact_name" type="string"/>
@@ -106,8 +100,6 @@
             <column name="create_date" type="date"/>
             <column name="update_date" type="date"/>
             <column name="notes" type="clob"/>
-            <column name="country_name" type="string"/>
-            <column name="region" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

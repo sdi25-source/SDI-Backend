@@ -1,11 +1,11 @@
-id;title;keywords;status;description;create_date;update_date;done
-1;overreact;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
-2;unbalance lest after;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;false
-3;frankly blindly;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-06;false
-4;amidst swanling;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05;false
-5;snoopy;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
-6;or;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;true
-7;nudge sedately;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;false
-8;sudden mortally;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
-9;er atop or;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true
-10;regarding wholly;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-06;false
+id;title;keywords;status;description;create_date;update_date;done;type
+1;overreact;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;true;EXTERNAL
+2;blah antelope overheard;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05;false;EXTERNAL
+3;mmm until festival;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05;true;INTERNAL
+4;crossly;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05;false;EXTERNAL
+5;deeply rudely segregate;../fake-data/blob/hipster.txt;REJECTED;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;false;EXTERNAL
+6;sedately leading;../fake-data/blob/hipster.txt;APPROVED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;false;EXTERNAL
+7;because battle softly;../fake-data/blob/hipster.txt;COMPLETED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;true;EXTERNAL
+8;what bewail costume;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-05;2025-05-06;true;EXTERNAL
+9;augment snuggle eek;../fake-data/blob/hipster.txt;APPROVED;../fake-data/blob/hipster.txt;2025-05-05;2025-05-05;true;EXTERNAL
+10;thoroughly;../fake-data/blob/hipster.txt;PENDING;../fake-data/blob/hipster.txt;2025-05-06;2025-05-05;false;INTERNAL

@@ -10,18 +10,14 @@ public class CountryTestSamples {
     private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static Country getCountrySample1() {
-        return new Country().id(1L).countryname("countryname1").countryCode("countryCode1").countryFlag("countryFlag1");
+        return new Country().id(1L).countryname("countryname1");
     }
 
     public static Country getCountrySample2() {
-        return new Country().id(2L).countryname("countryname2").countryCode("countryCode2").countryFlag("countryFlag2");
+        return new Country().id(2L).countryname("countryname2");
     }
 
     public static Country getCountryRandomSampleGenerator() {
-        return new Country()
-            .id(longCount.incrementAndGet())
-            .countryname(UUID.randomUUID().toString())
-            .countryCode(UUID.randomUUID().toString())
-            .countryFlag(UUID.randomUUID().toString());
+        return new Country().id(longCount.incrementAndGet()).countryname(UUID.randomUUID().toString());
     }
 }

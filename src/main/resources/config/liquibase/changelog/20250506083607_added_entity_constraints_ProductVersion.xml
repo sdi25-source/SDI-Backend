@@ -45,6 +45,20 @@
                                  referencedTableName="infra_component_version"
                                  />
 
+        <addForeignKeyConstraint baseColumnNames="product_version_id"
+                                 baseTableName="rel_product_version__infra_component"
+                                 constraintName="fk_rel_product_version__infra_component__product_version_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="infra_component_id"
+                                 baseTableName="rel_product_version__infra_component"
+                                 constraintName="fk_rel_product_version__infra_component__infra_component_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="infra_component"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="root_id"
                                  baseTableName="product_version"
                                  constraintName="fk_product_version__root_id"

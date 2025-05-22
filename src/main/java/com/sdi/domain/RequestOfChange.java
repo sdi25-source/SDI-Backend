@@ -2,6 +2,7 @@ package com.sdi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sdi.domain.enumeration.RequestStatus;
+import com.sdi.domain.enumeration.TypeRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -54,15 +55,27 @@ public class RequestOfChange implements Serializable {
     @Column(name = "done")
     private Boolean done;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private TypeRequest type;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "productDeployementDetails", "productVersions", "product", "moduleVersions", "infraComponentVersions", "root" },
+        value = {
+            "productDeployementDetails",
+            "productVersions",
+            "product",
+            "moduleVersions",
+            "infraComponentVersions",
+            "infraComponents",
+            "root",
+        },
         allowSetters = true
     )
     private ProductVersion productVersion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "certifs", "country" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "country", "certifs" }, allowSetters = true)
     private Client client;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -198,6 +211,19 @@ public class RequestOfChange implements Serializable {
         this.done = done;
     }
 
+    public TypeRequest getType() {
+        return this.type;
+    }
+
+    public RequestOfChange type(TypeRequest type) {
+        this.setType(type);
+        return this;
+    }
+
+    public void setType(TypeRequest type) {
+        this.type = type;
+    }
+
     public ProductVersion getProductVersion() {
         return this.productVersion;
     }
@@ -291,6 +317,7 @@ public class RequestOfChange implements Serializable {
             ", createDate='" + getCreateDate() + "'" +
             ", updateDate='" + getUpdateDate() + "'" +
             ", done='" + getDone() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }
