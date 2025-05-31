@@ -31,27 +31,16 @@ public class Certification implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "create_date")
     private LocalDate createDate;
 
-    @Column(name = "update_date")
-    private LocalDate updateDate;
-
-    @Column(name = "expire_date")
-    private LocalDate expireDate;
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "certif")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "client", "certif" }, allowSetters = true)
     private Set<ClientCertification> clientCertifications = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "certifications")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "productLines", "certifications", "modules" }, allowSetters = true)
-    private Set<Product> products = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -81,19 +70,6 @@ public class Certification implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public Certification description(String description) {
-        this.setDescription(description);
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDate getCreateDate() {
         return this.createDate;
     }
@@ -107,30 +83,17 @@ public class Certification implements Serializable {
         this.createDate = createDate;
     }
 
-    public LocalDate getUpdateDate() {
-        return this.updateDate;
+    public String getDescription() {
+        return this.description;
     }
 
-    public Certification updateDate(LocalDate updateDate) {
-        this.setUpdateDate(updateDate);
+    public Certification description(String description) {
+        this.setDescription(description);
         return this;
     }
 
-    public void setUpdateDate(LocalDate updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public LocalDate getExpireDate() {
-        return this.expireDate;
-    }
-
-    public Certification expireDate(LocalDate expireDate) {
-        this.setExpireDate(expireDate);
-        return this;
-    }
-
-    public void setExpireDate(LocalDate expireDate) {
-        this.expireDate = expireDate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<ClientCertification> getClientCertifications() {
@@ -164,37 +127,6 @@ public class Certification implements Serializable {
         return this;
     }
 
-    public Set<Product> getProducts() {
-        return this.products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.removeCertification(this));
-        }
-        if (products != null) {
-            products.forEach(i -> i.addCertification(this));
-        }
-        this.products = products;
-    }
-
-    public Certification products(Set<Product> products) {
-        this.setProducts(products);
-        return this;
-    }
-
-    public Certification addProduct(Product product) {
-        this.products.add(product);
-        product.getCertifications().add(this);
-        return this;
-    }
-
-    public Certification removeProduct(Product product) {
-        this.products.remove(product);
-        product.getCertifications().remove(this);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -220,10 +152,8 @@ public class Certification implements Serializable {
         return "Certification{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
             ", createDate='" + getCreateDate() + "'" +
-            ", updateDate='" + getUpdateDate() + "'" +
-            ", expireDate='" + getExpireDate() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

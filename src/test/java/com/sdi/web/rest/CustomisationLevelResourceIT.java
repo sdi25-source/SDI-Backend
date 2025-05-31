@@ -302,7 +302,7 @@ class CustomisationLevelResourceIT {
         CustomisationLevel partialUpdatedCustomisationLevel = new CustomisationLevel();
         partialUpdatedCustomisationLevel.setId(customisationLevel.getId());
 
-        partialUpdatedCustomisationLevel.level(UPDATED_LEVEL).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedCustomisationLevel.level(UPDATED_LEVEL).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
 
         restCustomisationLevelMockMvc
             .perform(

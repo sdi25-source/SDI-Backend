@@ -3,6 +3,8 @@ package com.sdi.repository;
 import com.sdi.domain.ClientEvent;
 import java.util.List;
 import java.util.Optional;
+
+import com.sdi.service.dto.ClientEventDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -39,4 +41,11 @@ public interface ClientEventRepository extends JpaRepository<ClientEvent, Long> 
         "select clientEvent from ClientEvent clientEvent left join fetch clientEvent.client left join fetch clientEvent.clientEventType where clientEvent.id =:id"
     )
     Optional<ClientEvent> findOneWithToOneRelationships(@Param("id") Long id);
+
+
+    @Query("SELECT new com.sdi.service.dto.ClientEventDTO(" +
+        "ce.event, ce.eventDate, ce.description) " +
+        "FROM ClientEvent ce " +
+        "WHERE ce.client.id = :clientId")
+    List<ClientEventDTO> findEventsByClientId(@Param("clientId") Long clientId);
 }

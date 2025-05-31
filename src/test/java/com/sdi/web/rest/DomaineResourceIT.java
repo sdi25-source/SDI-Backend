@@ -287,7 +287,7 @@ class DomaineResourceIT {
         Domaine partialUpdatedDomaine = new Domaine();
         partialUpdatedDomaine.setId(domaine.getId());
 
-        partialUpdatedDomaine.name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
+        partialUpdatedDomaine.name(UPDATED_NAME).notes(UPDATED_NOTES);
 
         restDomaineMockMvc
             .perform(

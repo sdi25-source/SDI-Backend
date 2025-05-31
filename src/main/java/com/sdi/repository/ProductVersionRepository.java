@@ -40,4 +40,6 @@ public interface ProductVersionRepository extends ProductVersionRepositoryWithBa
 
     @Query("select productVersion from ProductVersion productVersion left join fetch productVersion.product where productVersion.id =:id")
     Optional<ProductVersion> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Long countByProductId(Long productId);
 }

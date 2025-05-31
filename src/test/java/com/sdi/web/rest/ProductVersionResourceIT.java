@@ -327,7 +327,7 @@ class ProductVersionResourceIT {
         ProductVersion partialUpdatedProductVersion = new ProductVersion();
         partialUpdatedProductVersion.setId(productVersion.getId());
 
-        partialUpdatedProductVersion.version(UPDATED_VERSION).updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedProductVersion.version(UPDATED_VERSION).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE);
 
         restProductVersionMockMvc
             .perform(

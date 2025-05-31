@@ -317,6 +317,8 @@ class ClientSizeResourceIT {
         ClientSize partialUpdatedClientSize = new ClientSize();
         partialUpdatedClientSize.setId(clientSize.getId());
 
+        partialUpdatedClientSize.sizeName(UPDATED_SIZE_NAME).sizeCode(UPDATED_SIZE_CODE);
+
         restClientSizeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedClientSize.getId())

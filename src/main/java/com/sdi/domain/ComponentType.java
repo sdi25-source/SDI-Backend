@@ -32,7 +32,7 @@ public class ComponentType implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "componentType")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "componentType" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "componentType", "productVersions" }, allowSetters = true)
     private Set<InfraComponent> infraComponents = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

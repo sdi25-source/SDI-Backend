@@ -35,7 +35,7 @@
                                  baseTableName="rel_product__certification"
                                  constraintName="fk_rel_product__certification__certification_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="certification"
+                                 referencedTableName="certification_version"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="product_id"

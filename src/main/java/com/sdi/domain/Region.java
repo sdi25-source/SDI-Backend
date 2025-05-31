@@ -31,8 +31,11 @@ public class Region implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "create_date")
-    private LocalDate createDate;
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "crea_date")
+    private LocalDate creaDate;
 
     @Column(name = "update_date")
     private LocalDate updateDate;
@@ -41,7 +44,7 @@ public class Region implements Serializable {
     @Column(name = "notes")
     private String notes;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "region")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "clients", "region" }, allowSetters = true)
     private Set<Country> countries = new HashSet<>();
@@ -74,17 +77,30 @@ public class Region implements Serializable {
         this.name = name;
     }
 
-    public LocalDate getCreateDate() {
-        return this.createDate;
+    public String getCode() {
+        return this.code;
     }
 
-    public Region createDate(LocalDate createDate) {
-        this.setCreateDate(createDate);
+    public Region code(String code) {
+        this.setCode(code);
         return this;
     }
 
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public LocalDate getCreaDate() {
+        return this.creaDate;
+    }
+
+    public Region creaDate(LocalDate creaDate) {
+        this.setCreaDate(creaDate);
+        return this;
+    }
+
+    public void setCreaDate(LocalDate creaDate) {
+        this.creaDate = creaDate;
     }
 
     public LocalDate getUpdateDate() {
@@ -169,7 +185,8 @@ public class Region implements Serializable {
         return "Region{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", createDate='" + getCreateDate() + "'" +
+            ", code='" + getCode() + "'" +
+            ", creaDate='" + getCreaDate() + "'" +
             ", updateDate='" + getUpdateDate() + "'" +
             ", notes='" + getNotes() + "'" +
             "}";

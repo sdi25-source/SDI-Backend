@@ -1,6 +1,6 @@
 package com.sdi.domain;
 
-import static com.sdi.domain.CertificationTestSamples.*;
+import static com.sdi.domain.CertificationVersionTestSamples.*;
 import static com.sdi.domain.ModuleTestSamples.*;
 import static com.sdi.domain.ProductLineTestSamples.*;
 import static com.sdi.domain.ProductTestSamples.*;
@@ -48,19 +48,19 @@ class ProductTest {
     @Test
     void certificationTest() {
         Product product = getProductRandomSampleGenerator();
-        Certification certificationBack = getCertificationRandomSampleGenerator();
+        CertificationVersion certificationVersionBack = getCertificationVersionRandomSampleGenerator();
 
-        product.addCertification(certificationBack);
-        assertThat(product.getCertifications()).containsOnly(certificationBack);
+        product.addCertification(certificationVersionBack);
+        assertThat(product.getCertifications()).containsOnly(certificationVersionBack);
 
-        product.removeCertification(certificationBack);
-        assertThat(product.getCertifications()).doesNotContain(certificationBack);
+        product.removeCertification(certificationVersionBack);
+        assertThat(product.getCertifications()).doesNotContain(certificationVersionBack);
 
-        product.certifications(new HashSet<>(Set.of(certificationBack)));
-        assertThat(product.getCertifications()).containsOnly(certificationBack);
+        product.certifications(new HashSet<>(Set.of(certificationVersionBack)));
+        assertThat(product.getCertifications()).containsOnly(certificationVersionBack);
 
         product.setCertifications(new HashSet<>());
-        assertThat(product.getCertifications()).doesNotContain(certificationBack);
+        assertThat(product.getCertifications()).doesNotContain(certificationVersionBack);
     }
 
     @Test

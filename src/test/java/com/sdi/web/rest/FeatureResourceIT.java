@@ -307,12 +307,7 @@ class FeatureResourceIT {
         Feature partialUpdatedFeature = new Feature();
         partialUpdatedFeature.setId(feature.getId());
 
-        partialUpdatedFeature
-            .name(UPDATED_NAME)
-            .apiVersion(UPDATED_API_VERSION)
-            .description(UPDATED_DESCRIPTION)
-            .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedFeature.name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE);
 
         restFeatureMockMvc
             .perform(

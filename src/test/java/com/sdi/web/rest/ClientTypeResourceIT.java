@@ -289,7 +289,7 @@ class ClientTypeResourceIT {
         ClientType partialUpdatedClientType = new ClientType();
         partialUpdatedClientType.setId(clientType.getId());
 
-        partialUpdatedClientType.type(UPDATED_TYPE).updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedClientType.createDate(UPDATED_CREATE_DATE);
 
         restClientTypeMockMvc
             .perform(

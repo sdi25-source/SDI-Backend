@@ -330,7 +330,7 @@ class FeatureDeployementResourceIT {
         FeatureDeployement partialUpdatedFeatureDeployement = new FeatureDeployement();
         partialUpdatedFeatureDeployement.setId(featureDeployement.getId());
 
-        partialUpdatedFeatureDeployement.code(UPDATED_CODE).updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedFeatureDeployement.code(UPDATED_CODE);
 
         restFeatureDeployementMockMvc
             .perform(

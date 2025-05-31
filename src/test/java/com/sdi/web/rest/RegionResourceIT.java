@@ -37,8 +37,11 @@ class RegionResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATE_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATE_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_CREA_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREA_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final LocalDate DEFAULT_UPDATE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_UPDATE_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -75,7 +78,12 @@ class RegionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Region createEntity() {
-        return new Region().name(DEFAULT_NAME).createDate(DEFAULT_CREATE_DATE).updateDate(DEFAULT_UPDATE_DATE).notes(DEFAULT_NOTES);
+        return new Region()
+            .name(DEFAULT_NAME)
+            .code(DEFAULT_CODE)
+            .creaDate(DEFAULT_CREA_DATE)
+            .updateDate(DEFAULT_UPDATE_DATE)
+            .notes(DEFAULT_NOTES);
     }
 
     /**
@@ -85,7 +93,12 @@ class RegionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Region createUpdatedEntity() {
-        return new Region().name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
+        return new Region()
+            .name(UPDATED_NAME)
+            .code(UPDATED_CODE)
+            .creaDate(UPDATED_CREA_DATE)
+            .updateDate(UPDATED_UPDATE_DATE)
+            .notes(UPDATED_NOTES);
     }
 
     @BeforeEach
@@ -169,7 +182,8 @@ class RegionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(region.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].creaDate").value(hasItem(DEFAULT_CREA_DATE.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
     }
@@ -187,7 +201,8 @@ class RegionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(region.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.createDate").value(DEFAULT_CREATE_DATE.toString()))
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.creaDate").value(DEFAULT_CREA_DATE.toString()))
             .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
             .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
     }
@@ -211,7 +226,12 @@ class RegionResourceIT {
         Region updatedRegion = regionRepository.findById(region.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedRegion are not directly saved in db
         em.detach(updatedRegion);
-        updatedRegion.name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
+        updatedRegion
+            .name(UPDATED_NAME)
+            .code(UPDATED_CODE)
+            .creaDate(UPDATED_CREA_DATE)
+            .updateDate(UPDATED_UPDATE_DATE)
+            .notes(UPDATED_NOTES);
 
         restRegionMockMvc
             .perform(
@@ -287,7 +307,7 @@ class RegionResourceIT {
         Region partialUpdatedRegion = new Region();
         partialUpdatedRegion.setId(region.getId());
 
-        partialUpdatedRegion.name(UPDATED_NAME);
+        partialUpdatedRegion.name(UPDATED_NAME).creaDate(UPDATED_CREA_DATE).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
 
         restRegionMockMvc
             .perform(
@@ -315,7 +335,12 @@ class RegionResourceIT {
         Region partialUpdatedRegion = new Region();
         partialUpdatedRegion.setId(region.getId());
 
-        partialUpdatedRegion.name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
+        partialUpdatedRegion
+            .name(UPDATED_NAME)
+            .code(UPDATED_CODE)
+            .creaDate(UPDATED_CREA_DATE)
+            .updateDate(UPDATED_UPDATE_DATE)
+            .notes(UPDATED_NOTES);
 
         restRegionMockMvc
             .perform(

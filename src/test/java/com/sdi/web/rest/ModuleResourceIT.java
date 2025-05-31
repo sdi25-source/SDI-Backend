@@ -295,7 +295,7 @@ class ModuleResourceIT {
         Module partialUpdatedModule = new Module();
         partialUpdatedModule.setId(module.getId());
 
-        partialUpdatedModule.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).createDate(UPDATED_CREATE_DATE);
+        partialUpdatedModule.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).updateDate(UPDATED_UPDATE_DATE);
 
         restModuleMockMvc
             .perform(

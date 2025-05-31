@@ -1,0 +1,356 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="clientReport" language="java" columnCount="1" pageWidth="719" pageHeight="890" columnWidth="679" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c8f3b369-cb71-4379-982f-f5690c40431d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#E4E7EB">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CBCED1">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle backcolor="#FBFDFF">
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle backcolor="#FBFDFF">
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#CCCCCC">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#C4CACF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle backcolor="#FBFDFF">
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="TABLE_DATASET" uuid="0e36b3d7-c7bf-4b7f-80df-7a276c152a43">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BEAN_DATA_ADAPTER"/>
+		<query language="sql"><![CDATA[]]></query>
+		<field name="refContract" class="java.lang.String"/>
+		<field name="product" class="java.lang.String"/>
+		<field name="version" class="java.lang.String"/>
+		<field name="deployementType" class="java.lang.String"/>
+		<field name="startDeployementDate" class="java.time.LocalDate"/>
+	</dataset>
+	<dataset name="TABLE_DATASET_REQUESTS" uuid="b353ed39-3562-4ee7-a957-11ae9866f14a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BEAN_DATA_ADAPTOR_REQUESTS"/>
+		<query language="sql"><![CDATA[]]></query>
+		<field name="title" class="java.lang.String"/>
+		<field name="createDate" class="java.time.LocalTime"/>
+		<field name="product" class="java.lang.String"/>
+		<field name="version" class="java.lang.String"/>
+		<field name="customisationLevel" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+	</dataset>
+	<dataset name="TABLE_DATA_SOURCE_EVENTS" uuid="5175b85e-bf52-49b5-8f92-10ab7813791c">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BEAN_DATA_ADAPTOR_EVENTS"/>
+		<query language="sql"><![CDATA[]]></query>
+		<field name="event" class="java.lang.String"/>
+		<field name="eventDate" class="java.time.LocalDate"/>
+		<field name="description" class="java.lang.String"/>
+	</dataset>
+	<parameter name="TABLE_DATA_SOURCE" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="TABLE_DATA_SOURCE_REQUESTS" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="TABLE_DATA_SOURCE_EVENTS" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="name" class="java.lang.String"/>
+	<field name="mainContactName" class="java.lang.String"/>
+	<field name="mainContactEmail" class="java.lang.String"/>
+	<field name="mainContactPhoneNumber" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="countryname" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="sizeName" class="java.lang.String"/>
+	<field name="currentCustomersNumber" class="java.lang.Integer"/>
+	<field name="currentCardHolderNumber" class="java.lang.Integer"/>
+	<field name="currentBruncheNumber" class="java.lang.Integer"/>
+	<field name="createDate" class="java.time.LocalDate"/>
+	<group name="Detail 2"/>
+	<detail>
+		<band height="470" splitType="Immediate">
+			<element kind="textField" uuid="26abf1a9-a303-4d21-8786-5ca2639b0f7f" x="4" y="0" width="270" height="40" forecolor="#04091A" markup="styled" fontName="Times New Roman" fontSize="33.0" italic="true">
+				<expression><![CDATA["Customer Report"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			</element>
+			<element kind="textField" uuid="1039fad3-2ec2-4840-81ef-f33d7fa87b87" x="585" y="70" width="91" height="20" fontName="Times New Roman" fontSize="11.0">
+				<expression><![CDATA["contact@s2m.ma"
+
+]]></expression>
+			</element>
+			<element kind="textField" uuid="6c78d8a8-ecb5-44f9-b10a-78ca9861939c" x="520" y="40" width="177" height="20" fontName="Times New Roman" fontSize="11.0">
+				<expression><![CDATA["Societe maghrebine de monetique"
+]]></expression>
+			</element>
+			<element kind="textField" uuid="87604716-780c-4849-87f9-2aeeb1970bad" x="560" y="55" width="110" height="15" fontName="Times New Roman" fontSize="11.0">
+				<expression><![CDATA["+212 (0) 522 87 83 33"
+]]></expression>
+			</element>
+			<element kind="image" uuid="c19f5d45-bc65-45b5-961a-21a29e4d91a6" x="575" y="0" width="101" height="37">
+				<expression><![CDATA["https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2152473594/settings_images/ee76415-e8e7-047c-43e0-ee34ee314214_7_logo_S2M_Transaprent.png"]]></expression>
+			</element>
+			<element kind="line" uuid="a8674cfd-4ca0-4df6-a59b-58d8ea065bff" x="-2" y="85" width="681" height="1"/>
+			<element kind="textField" uuid="12624f29-2a60-4a77-9a32-9e79bfab96d5" x="0" y="100" width="180" height="30" forecolor="#182494" fontName="Times New Roman" fontSize="15.0" underline="false" bold="true" italic="true">
+				<expression><![CDATA["Client informations"]]></expression>
+			</element>
+			<element kind="line" uuid="e429006b-c21b-4b2d-9ad2-3f471248056d" x="2" y="129" width="679" height="1" forecolor="#A8A8A8"/>
+			<element kind="textField" uuid="e059c0b8-d42c-436a-84d0-b8b48b6efc08" x="100" y="140" width="100" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{name}]]></expression>
+			</element>
+			<element kind="staticText" uuid="da5d772d-f34c-428a-8e13-2641ecefc112" x="20" y="140" width="100" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Name :]]></text>
+			</element>
+			<element kind="textField" uuid="a46da042-e21b-4d06-8b96-d0c4b082f27f" x="430" y="140" width="130" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{mainContactName}]]></expression>
+			</element>
+			<element kind="staticText" uuid="3c8218db-b524-4965-b7ee-42bf95e509f1" x="290" y="140" width="120" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Main Contact Name :]]></text>
+			</element>
+			<element kind="textField" uuid="f8417ded-e1c9-411c-8cf2-0c92813114e6" x="70" y="180" width="138" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{mainContactEmail}]]></expression>
+			</element>
+			<element kind="staticText" uuid="4a9bca7c-88b4-4b5c-b9c9-61d5aefabcdd" x="20" y="180" width="100" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Email :]]></text>
+			</element>
+			<element kind="textField" uuid="fcbc98f0-432a-4574-9c02-184a83c55b9b" x="400" y="180" width="202" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{mainContactPhoneNumber}]]></expression>
+			</element>
+			<element kind="staticText" uuid="a69301be-1e2c-4936-bdd0-35a4ea4af592" x="290" y="180" width="154" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Phone Number :]]></text>
+			</element>
+			<element kind="textField" uuid="6248a435-e748-40d2-a5b8-f416f0bd69c1" x="370" y="220" width="300" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{address}]]></expression>
+			</element>
+			<element kind="staticText" uuid="7b1bb3b8-3651-4bf7-abbd-a10958af0cd0" x="288" y="220" width="100" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Address :]]></text>
+			</element>
+			<element kind="textField" uuid="7ccd54f5-e4f2-4b5b-9015-833ffada70be" x="89" y="220" width="171" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{countryname}]]></expression>
+			</element>
+			<element kind="staticText" uuid="83b05ce9-fcba-467c-8494-78054cb8a3fa" x="20" y="220" width="100" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Country :]]></text>
+			</element>
+			<element kind="textField" uuid="517fdcd1-d859-4288-b128-96b69411ca40" x="70" y="260" width="100" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{type}]]></expression>
+			</element>
+			<element kind="staticText" uuid="89779149-3fe0-46eb-aa60-27a22c1e3101" x="20" y="260" width="100" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Type :]]></text>
+			</element>
+			<element kind="textField" uuid="1ecf47a7-178d-4424-bbe8-d66467f361ad" x="210" y="260" width="100" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{sizeName}]]></expression>
+			</element>
+			<element kind="staticText" uuid="e75e7d64-8856-4d88-9260-360cf0914a9c" x="170" y="260" width="100" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Size :]]></text>
+			</element>
+			<element kind="textField" uuid="8c43297c-8cfa-430d-b433-aa5eeebd57ca" x="480" y="260" width="190" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{currentCustomersNumber}]]></expression>
+			</element>
+			<element kind="staticText" uuid="138c46d0-7012-4aa8-b2cd-a1a44ab1834c" x="325" y="260" width="156" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Current Customer Number :]]></text>
+			</element>
+			<element kind="line" uuid="b45b2716-4ce1-41ac-87d6-7e35a65c196d" x="1" y="330" width="680" height="1" forecolor="#A8A8A8"/>
+			<element kind="textField" uuid="e0443e60-e04e-4823-ae03-032a9126a52e" x="0" y="350" width="180" height="30" forecolor="#182494" fontName="Times New Roman" fontSize="15.0" underline="false" bold="true" italic="true">
+				<expression><![CDATA["Client Deployments"]]></expression>
+			</element>
+			<element kind="line" uuid="0345b9d1-ea03-4bbe-9dc9-3b1d70017086" x="0" y="380" width="681" height="1" forecolor="#A8A8A8"/>
+			<element kind="component" uuid="aeb07dd6-0cc2-418c-9735-a640b8d986c4" x="0" y="390" width="677" height="80">
+				<component kind="table">
+					<datasetRun uuid="d16f6b6d-6af8-4ebe-bf80-fb87d0ed4ccb" subDataset="TABLE_DATASET">
+						<dataSourceExpression><![CDATA[$P{TABLE_DATA_SOURCE}]]></dataSourceExpression>
+					</datasetRun>
+					<column kind="single" uuid="fe92a03f-0c23-446d-9fa0-5567337bfda3" width="110">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="textField" uuid="8b57025a-2835-4682-868e-33b120176d69" x="0" y="0" width="110" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Ref Contrat"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="a693cc04-b7f6-4c79-895f-87d74dd4b4c7" x="0" y="0" width="110" height="30" fontName="Times New Roman" fontSize="12.0" bold="false" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{refContract}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="5a8a9fd5-5832-44bc-ac56-c2ed20a10641" width="130">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="textField" uuid="788aed88-72bd-4b54-8d45-72d325846993" x="0" y="0" width="130" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Product"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="b7a805c5-8056-4449-a89f-a055d748721f" x="0" y="0" width="130" height="30" fontName="Times New Roman" fontSize="12.0" bold="false" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{product}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="e51e6b1b-a476-4ee2-8ed1-67250efa4567" width="140">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="textField" uuid="24448e5f-4f99-41d3-9718-0bf5a8a3f27e" x="0" y="0" width="140" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Version"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="517d1dce-84ab-409b-86db-e25e55f8fdc6" x="0" y="0" width="140" height="30" fontName="Times New Roman" fontSize="12.0" bold="false" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{version}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+					<column kind="single" uuid="b0af5482-6155-484d-9ad7-cdfb6e0fb90b" width="150">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="textField" uuid="c0f13df3-6ef7-454a-8b39-44d7053baacd" x="0" y="0" width="150" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Deployment Type"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="15235b2a-be7d-48e0-8288-0732fd726034" x="0" y="0" width="150" height="30" fontName="Times New Roman" fontSize="12.0" bold="false" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{deployementType}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					</column>
+					<column kind="single" uuid="3cc77108-7c6c-4319-86e3-46b58276706b" width="151">
+						<columnHeader height="30" rowSpan="1" style="Table_CH">
+							<element kind="textField" uuid="ebf405a6-1ba9-4bd5-a877-d81414978d4a" x="0" y="0" width="151" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Deployment Date"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table_TD">
+							<element kind="textField" uuid="01990f4b-0d7c-4513-b9c9-f6f66360adcf" x="0" y="0" width="151" height="30" fontName="Times New Roman" fontSize="12.0" bold="false" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{startDeployementDate}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+			</element>
+			<element kind="textField" uuid="c84c9887-2ef9-42af-8604-cdc5c86f2795" x="150" y="300" width="182" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{currentCardHolderNumber}]]></expression>
+			</element>
+			<element kind="staticText" uuid="4ac0b4dd-f86a-45ae-a002-dbe66f4f9f1e" x="20" y="300" width="135" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Card Holder Number :]]></text>
+			</element>
+			<element kind="textField" uuid="2aa5758d-4d71-487a-8928-6a3b6c64c9a1" x="460" y="300" width="182" height="30" fontName="Times New Roman" fontSize="12.0">
+				<expression><![CDATA[$F{currentBruncheNumber}]]></expression>
+			</element>
+			<element kind="staticText" uuid="3eb40a8f-e362-4045-a5e1-622b918fc2b8" x="340" y="300" width="166" height="30" fontName="Times New Roman" fontSize="12.0" bold="true">
+				<text><![CDATA[Brunche Number :]]></text>
+			</element>
+			<element kind="textField" uuid="47d93977-ee1a-43de-97b7-046008a4992c" x="20" y="50" width="100" height="30" fontName="Times New Roman" fontSize="16.0" bold="true">
+				<expression><![CDATA[$F{name}]]></expression>
+			</element>
+			<element kind="textField" uuid="7b292364-2688-4f9c-95fd-9b89dd924e82" x="288" y="70" width="100" height="30" pattern="MMMMM dd, yyyy">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</band>
+		<band height="160">
+			<element kind="textField" uuid="5d7ed1f0-7810-4eb3-81e5-b18ab1bf028e" x="0" y="20" width="180" height="30" forecolor="#182494" fontName="Times New Roman" fontSize="15.0" underline="false" bold="true" italic="true">
+				<expression><![CDATA["Client Events"]]></expression>
+			</element>
+			<element kind="line" uuid="8b66bcb8-7661-48d9-8053-024f9c422519" x="-2" y="50" width="683" height="1" forecolor="#A8A8A8"/>
+			<element kind="component" uuid="fddbd9a2-c41f-4396-a3aa-953f111f0873" x="-2" y="60" width="681" height="90">
+				<component kind="table">
+					<datasetRun uuid="e862adcb-db91-4f0c-af67-8334b1bef477" subDataset="TABLE_DATA_SOURCE_EVENTS">
+						<dataSourceExpression><![CDATA[$P{TABLE_DATA_SOURCE_EVENTS}]]></dataSourceExpression>
+					</datasetRun>
+					<column kind="single" uuid="093bd8c5-3a27-4de9-adad-0d27b7988579" width="190">
+						<columnHeader height="30" rowSpan="1" style="Table 2_CH">
+							<element kind="textField" uuid="acc31ca9-0a3e-4afd-ad62-066de88b4924" x="0" y="0" width="190" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Event Title"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 2_TD">
+							<element kind="textField" uuid="d1fbb250-9d50-462a-a7c3-4d121d8d9e58" x="0" y="0" width="190" height="30" fontName="Times New Roman" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{event}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="fe9653aa-7536-44aa-819b-04df12bb7eb5" width="110">
+						<columnHeader height="30" rowSpan="1" style="Table 2_CH">
+							<element kind="textField" uuid="b829683f-ec03-468b-ad34-6bab5393c14e" x="0" y="0" width="110" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Event Date"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 2_TD">
+							<element kind="textField" uuid="2c3e91ff-14df-4952-b3a4-e7487f66c3dc" x="0" y="0" width="110" height="30" fontName="Times New Roman" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{eventDate}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="e041f7aa-3658-46cd-9d5e-31c92ccdf16e" width="381">
+						<columnHeader height="30" rowSpan="1" style="Table 2_CH">
+							<element kind="textField" uuid="97d7d09b-b5a6-462f-8b99-4cc8cae0e030" x="0" y="0" width="381" height="30" fontName="Times New Roman" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA["Description"]]></expression>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 2_TD">
+							<element kind="textField" uuid="f4c1e6eb-7547-41fb-8b15-36eb2533f3f1" x="0" y="0" width="381" height="30" fontName="Times New Roman" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{description}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="30">
+		<element kind="textField" uuid="6aa59bd9-a17f-49f6-b4d1-52f3901062d3" x="232" y="0" width="100" height="30" hTextAlign="Right">
+			<expression><![CDATA["Page " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="f140d69d-c0b4-46e2-bc0e-6691aed90c1b" x="332" y="0" width="100" height="30" evaluationTime="Report" hTextAlign="Left">
+			<expression><![CDATA[" of " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+	</columnFooter>
+</jasperReport>

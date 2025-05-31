@@ -3,6 +3,8 @@ package com.sdi.repository;
 import com.sdi.domain.ProductDeployement;
 import java.util.List;
 import java.util.Optional;
+
+import com.sdi.service.dto.ProductDeployementSummaryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -41,4 +43,20 @@ public interface ProductDeployementRepository extends JpaRepository<ProductDeplo
         "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client where productDeployement.id =:id"
     )
     Optional<ProductDeployement> findOneWithToOneRelationships(@Param("id") Long id);
+
+
+    @Query("SELECT new com.sdi.service.dto.ProductDeployementSummaryDTO(" +
+        "pd.refContract, pd.product.name, pdd.productVersion.version, pdd.deployementType.type, pdd.startDeployementDate) " +
+        "FROM ProductDeployementDetail pdd " +
+        "JOIN pdd.productDeployement pd " +
+        "JOIN pd.product " +
+        "LEFT JOIN pdd.productVersion " +
+        "LEFT JOIN pdd.deployementType " +
+        "WHERE pd.client.id = :clientId")
+    List<ProductDeployementSummaryDTO> findDeployementSummariesByClientId(@Param("clientId") Long clientId);
+
+
+    Long countByProductId(Long productId);
+    Long countByClientId(Long clientId);
+    List<ProductDeployement> findByClientId(Long clientId);
 }

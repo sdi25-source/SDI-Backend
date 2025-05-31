@@ -119,6 +119,11 @@ public class CacheConfiguration {
             createCache(cm, com.sdi.domain.Product.class.getName() + ".certifications");
             createCache(cm, com.sdi.domain.Certification.class.getName() + ".products");
             createCache(cm, com.sdi.domain.InfraComponent.class.getName() + ".productVersions");
+            createCache(cm, com.sdi.domain.Product.class.getName() + ".certificationVersions");
+            createCache(cm, com.sdi.domain.CertificationVersion.class.getName());
+            createCache(cm, com.sdi.domain.CertificationVersion.class.getName() + ".products");
+            createCache(cm, com.sdi.domain.Certification.class.getName() + ".certificationVersions");
+            createCache(cm, com.sdi.domain.CertificationVersion.class.getName() + ".certifications");
             // jhipster-needle-ehcache-add-entry
         };
     }

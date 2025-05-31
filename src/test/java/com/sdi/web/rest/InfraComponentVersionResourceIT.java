@@ -336,7 +336,7 @@ class InfraComponentVersionResourceIT {
         InfraComponentVersion partialUpdatedInfraComponentVersion = new InfraComponentVersion();
         partialUpdatedInfraComponentVersion.setId(infraComponentVersion.getId());
 
-        partialUpdatedInfraComponentVersion.version(UPDATED_VERSION).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedInfraComponentVersion.createDate(UPDATED_CREATE_DATE);
 
         restInfraComponentVersionMockMvc
             .perform(

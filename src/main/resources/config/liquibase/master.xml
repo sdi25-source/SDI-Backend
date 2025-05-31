@@ -38,6 +38,8 @@
     <include file="config/liquibase/changelog/20250506083630_added_entity_InfraComponentVersion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083631_added_entity_RequestOfChange.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083626_added_entity_Country.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250523110434_added_entity_CertificationVersion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250506083618_added_entity_Region.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20250506083607_added_entity_constraints_ProductVersion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083608_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
@@ -53,6 +55,8 @@
     <include file="config/liquibase/changelog/20250506083629_added_entity_constraints_InfraComponent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083630_added_entity_constraints_InfraComponentVersion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250506083631_added_entity_constraints_RequestOfChange.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250506083623_added_entity_constraints_Certification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250523110434_added_entity_constraints_CertificationVersion.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

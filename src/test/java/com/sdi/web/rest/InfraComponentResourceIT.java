@@ -319,7 +319,7 @@ class InfraComponentResourceIT {
         InfraComponent partialUpdatedInfraComponent = new InfraComponent();
         partialUpdatedInfraComponent.setId(infraComponent.getId());
 
-        partialUpdatedInfraComponent.name(UPDATED_NAME).notes(UPDATED_NOTES).createDate(UPDATED_CREATE_DATE);
+        partialUpdatedInfraComponent.name(UPDATED_NAME).vendor(UPDATED_VENDOR).notes(UPDATED_NOTES);
 
         restInfraComponentMockMvc
             .perform(

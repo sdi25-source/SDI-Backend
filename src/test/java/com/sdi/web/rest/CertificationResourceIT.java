@@ -37,17 +37,11 @@ class CertificationResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_CREATE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATE_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_UPDATE_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_UPDATE_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_EXPIRE_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_EXPIRE_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/certifications";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -78,12 +72,7 @@ class CertificationResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Certification createEntity() {
-        return new Certification()
-            .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION)
-            .createDate(DEFAULT_CREATE_DATE)
-            .updateDate(DEFAULT_UPDATE_DATE)
-            .expireDate(DEFAULT_EXPIRE_DATE);
+        return new Certification().name(DEFAULT_NAME).createDate(DEFAULT_CREATE_DATE).description(DEFAULT_DESCRIPTION);
     }
 
     /**
@@ -93,12 +82,7 @@ class CertificationResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Certification createUpdatedEntity() {
-        return new Certification()
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE)
-            .expireDate(UPDATED_EXPIRE_DATE);
+        return new Certification().name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).description(UPDATED_DESCRIPTION);
     }
 
     @BeforeEach
@@ -182,10 +166,8 @@ class CertificationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(certification.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].expireDate").value(hasItem(DEFAULT_EXPIRE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
 
     @Test
@@ -201,10 +183,8 @@ class CertificationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(certification.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.createDate").value(DEFAULT_CREATE_DATE.toString()))
-            .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
-            .andExpect(jsonPath("$.expireDate").value(DEFAULT_EXPIRE_DATE.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
 
     @Test
@@ -226,12 +206,7 @@ class CertificationResourceIT {
         Certification updatedCertification = certificationRepository.findById(certification.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedCertification are not directly saved in db
         em.detach(updatedCertification);
-        updatedCertification
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE)
-            .expireDate(UPDATED_EXPIRE_DATE);
+        updatedCertification.name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).description(UPDATED_DESCRIPTION);
 
         restCertificationMockMvc
             .perform(
@@ -311,7 +286,7 @@ class CertificationResourceIT {
         Certification partialUpdatedCertification = new Certification();
         partialUpdatedCertification.setId(certification.getId());
 
-        partialUpdatedCertification.name(UPDATED_NAME).updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedCertification.createDate(UPDATED_CREATE_DATE);
 
         restCertificationMockMvc
             .perform(
@@ -342,12 +317,7 @@ class CertificationResourceIT {
         Certification partialUpdatedCertification = new Certification();
         partialUpdatedCertification.setId(certification.getId());
 
-        partialUpdatedCertification
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
-            .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE)
-            .expireDate(UPDATED_EXPIRE_DATE);
+        partialUpdatedCertification.name(UPDATED_NAME).createDate(UPDATED_CREATE_DATE).description(UPDATED_DESCRIPTION);
 
         restCertificationMockMvc
             .perform(

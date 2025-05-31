@@ -62,8 +62,8 @@ public class Product implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "certification_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "clientCertifications", "products" }, allowSetters = true)
-    private Set<Certification> certifications = new HashSet<>();
+    @JsonIgnoreProperties(value = { "certification", "products" }, allowSetters = true)
+    private Set<CertificationVersion> certifications = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -178,26 +178,26 @@ public class Product implements Serializable {
         return this;
     }
 
-    public Set<Certification> getCertifications() {
+    public Set<CertificationVersion> getCertifications() {
         return this.certifications;
     }
 
-    public void setCertifications(Set<Certification> certifications) {
-        this.certifications = certifications;
+    public void setCertifications(Set<CertificationVersion> certificationVersions) {
+        this.certifications = certificationVersions;
     }
 
-    public Product certifications(Set<Certification> certifications) {
-        this.setCertifications(certifications);
+    public Product certifications(Set<CertificationVersion> certificationVersions) {
+        this.setCertifications(certificationVersions);
         return this;
     }
 
-    public Product addCertification(Certification certification) {
-        this.certifications.add(certification);
+    public Product addCertification(CertificationVersion certificationVersion) {
+        this.certifications.add(certificationVersion);
         return this;
     }
 
-    public Product removeCertification(Certification certification) {
-        this.certifications.remove(certification);
+    public Product removeCertification(CertificationVersion certificationVersion) {
+        this.certifications.remove(certificationVersion);
         return this;
     }
 

@@ -126,8 +126,11 @@ public class RegionResource {
                 if (region.getName() != null) {
                     existingRegion.setName(region.getName());
                 }
-                if (region.getCreateDate() != null) {
-                    existingRegion.setCreateDate(region.getCreateDate());
+                if (region.getCode() != null) {
+                    existingRegion.setCode(region.getCode());
+                }
+                if (region.getCreaDate() != null) {
+                    existingRegion.setCreaDate(region.getCreaDate());
                 }
                 if (region.getUpdateDate() != null) {
                     existingRegion.setUpdateDate(region.getUpdateDate());

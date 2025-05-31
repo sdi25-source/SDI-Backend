@@ -382,11 +382,13 @@ class RequestOfChangeResourceIT {
         partialUpdatedRequestOfChange.setId(requestOfChange.getId());
 
         partialUpdatedRequestOfChange
+            .title(UPDATED_TITLE)
             .keywords(UPDATED_KEYWORDS)
-            .status(UPDATED_STATUS)
+            .description(UPDATED_DESCRIPTION)
             .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
-            .done(UPDATED_DONE);
+            .done(UPDATED_DONE)
+            .type(UPDATED_TYPE);
 
         restRequestOfChangeMockMvc
             .perform(

@@ -4,6 +4,7 @@ import static com.sdi.domain.CountryAsserts.*;
 import static com.sdi.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -12,13 +13,21 @@ import com.sdi.IntegrationTest;
 import com.sdi.domain.Country;
 import com.sdi.repository.CountryRepository;
 import jakarta.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,12 +37,31 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link CountryResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class CountryResourceIT {
 
     private static final String DEFAULT_COUNTRYNAME = "AAAAAAAAAA";
     private static final String UPDATED_COUNTRYNAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRYCODE = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRYCODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY_FLAGCODE = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY_FLAGCODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COUNTRY_FLAG = "AAAAAAAAAA";
+    private static final String UPDATED_COUNTRY_FLAG = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NOTES = "AAAAAAAAAA";
+    private static final String UPDATED_NOTES = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_CREA_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREA_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_UPDATE_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_UPDATE_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/countries";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -46,6 +74,9 @@ class CountryResourceIT {
 
     @Autowired
     private CountryRepository countryRepository;
+
+    @Mock
+    private CountryRepository countryRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -64,7 +95,14 @@ class CountryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Country createEntity() {
-        return new Country().countryname(DEFAULT_COUNTRYNAME);
+        return new Country()
+            .countryname(DEFAULT_COUNTRYNAME)
+            .countrycode(DEFAULT_COUNTRYCODE)
+            .countryFlagcode(DEFAULT_COUNTRY_FLAGCODE)
+            .countryFlag(DEFAULT_COUNTRY_FLAG)
+            .notes(DEFAULT_NOTES)
+            .creaDate(DEFAULT_CREA_DATE)
+            .updateDate(DEFAULT_UPDATE_DATE);
     }
 
     /**
@@ -74,7 +112,14 @@ class CountryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Country createUpdatedEntity() {
-        return new Country().countryname(UPDATED_COUNTRYNAME);
+        return new Country()
+            .countryname(UPDATED_COUNTRYNAME)
+            .countrycode(UPDATED_COUNTRYCODE)
+            .countryFlagcode(UPDATED_COUNTRY_FLAGCODE)
+            .countryFlag(UPDATED_COUNTRY_FLAG)
+            .notes(UPDATED_NOTES)
+            .creaDate(UPDATED_CREA_DATE)
+            .updateDate(UPDATED_UPDATE_DATE);
     }
 
     @BeforeEach
@@ -147,6 +192,22 @@ class CountryResourceIT {
 
     @Test
     @Transactional
+    void checkCountrycodeIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        country.setCountrycode(null);
+
+        // Create the Country, which fails.
+
+        restCountryMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(country)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCountries() throws Exception {
         // Initialize the database
         insertedCountry = countryRepository.saveAndFlush(country);
@@ -157,7 +218,30 @@ class CountryResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(country.getId().intValue())))
-            .andExpect(jsonPath("$.[*].countryname").value(hasItem(DEFAULT_COUNTRYNAME)));
+            .andExpect(jsonPath("$.[*].countryname").value(hasItem(DEFAULT_COUNTRYNAME)))
+            .andExpect(jsonPath("$.[*].countrycode").value(hasItem(DEFAULT_COUNTRYCODE)))
+            .andExpect(jsonPath("$.[*].countryFlagcode").value(hasItem(DEFAULT_COUNTRY_FLAGCODE)))
+            .andExpect(jsonPath("$.[*].countryFlag").value(hasItem(DEFAULT_COUNTRY_FLAG)))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)))
+            .andExpect(jsonPath("$.[*].creaDate").value(hasItem(DEFAULT_CREA_DATE.toString())))
+            .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllCountriesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(countryRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restCountryMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(countryRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllCountriesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(countryRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restCountryMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(countryRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -172,7 +256,13 @@ class CountryResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(country.getId().intValue()))
-            .andExpect(jsonPath("$.countryname").value(DEFAULT_COUNTRYNAME));
+            .andExpect(jsonPath("$.countryname").value(DEFAULT_COUNTRYNAME))
+            .andExpect(jsonPath("$.countrycode").value(DEFAULT_COUNTRYCODE))
+            .andExpect(jsonPath("$.countryFlagcode").value(DEFAULT_COUNTRY_FLAGCODE))
+            .andExpect(jsonPath("$.countryFlag").value(DEFAULT_COUNTRY_FLAG))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES))
+            .andExpect(jsonPath("$.creaDate").value(DEFAULT_CREA_DATE.toString()))
+            .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()));
     }
 
     @Test
@@ -194,7 +284,14 @@ class CountryResourceIT {
         Country updatedCountry = countryRepository.findById(country.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedCountry are not directly saved in db
         em.detach(updatedCountry);
-        updatedCountry.countryname(UPDATED_COUNTRYNAME);
+        updatedCountry
+            .countryname(UPDATED_COUNTRYNAME)
+            .countrycode(UPDATED_COUNTRYCODE)
+            .countryFlagcode(UPDATED_COUNTRY_FLAGCODE)
+            .countryFlag(UPDATED_COUNTRY_FLAG)
+            .notes(UPDATED_NOTES)
+            .creaDate(UPDATED_CREA_DATE)
+            .updateDate(UPDATED_UPDATE_DATE);
 
         restCountryMockMvc
             .perform(
@@ -270,6 +367,8 @@ class CountryResourceIT {
         Country partialUpdatedCountry = new Country();
         partialUpdatedCountry.setId(country.getId());
 
+        partialUpdatedCountry.countryFlagcode(UPDATED_COUNTRY_FLAGCODE).notes(UPDATED_NOTES);
+
         restCountryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedCountry.getId())
@@ -296,7 +395,14 @@ class CountryResourceIT {
         Country partialUpdatedCountry = new Country();
         partialUpdatedCountry.setId(country.getId());
 
-        partialUpdatedCountry.countryname(UPDATED_COUNTRYNAME);
+        partialUpdatedCountry
+            .countryname(UPDATED_COUNTRYNAME)
+            .countrycode(UPDATED_COUNTRYCODE)
+            .countryFlagcode(UPDATED_COUNTRY_FLAGCODE)
+            .countryFlag(UPDATED_COUNTRY_FLAG)
+            .notes(UPDATED_NOTES)
+            .creaDate(UPDATED_CREA_DATE)
+            .updateDate(UPDATED_UPDATE_DATE);
 
         restCountryMockMvc
             .perform(

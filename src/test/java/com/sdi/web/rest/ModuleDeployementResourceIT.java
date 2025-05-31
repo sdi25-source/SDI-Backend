@@ -327,7 +327,7 @@ class ModuleDeployementResourceIT {
         ModuleDeployement partialUpdatedModuleDeployement = new ModuleDeployement();
         partialUpdatedModuleDeployement.setId(moduleDeployement.getId());
 
-        partialUpdatedModuleDeployement.code(UPDATED_CODE);
+        partialUpdatedModuleDeployement.createDate(UPDATED_CREATE_DATE);
 
         restModuleDeployementMockMvc
             .perform(

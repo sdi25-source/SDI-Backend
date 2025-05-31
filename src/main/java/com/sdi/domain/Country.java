@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
@@ -29,6 +30,26 @@ public class Country implements Serializable {
     @NotNull
     @Column(name = "countryname", nullable = false)
     private String countryname;
+
+    @NotNull
+    @Column(name = "countrycode", nullable = false)
+    private String countrycode;
+
+    @Column(name = "country_flagcode")
+    private String countryFlagcode;
+
+    @Column(name = "country_flag")
+    private String countryFlag;
+
+    @Lob
+    @Column(name = "notes")
+    private String notes;
+
+    @Column(name = "crea_date")
+    private LocalDate creaDate;
+
+    @Column(name = "update_date")
+    private LocalDate updateDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -65,6 +86,84 @@ public class Country implements Serializable {
 
     public void setCountryname(String countryname) {
         this.countryname = countryname;
+    }
+
+    public String getCountrycode() {
+        return this.countrycode;
+    }
+
+    public Country countrycode(String countrycode) {
+        this.setCountrycode(countrycode);
+        return this;
+    }
+
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode;
+    }
+
+    public String getCountryFlagcode() {
+        return this.countryFlagcode;
+    }
+
+    public Country countryFlagcode(String countryFlagcode) {
+        this.setCountryFlagcode(countryFlagcode);
+        return this;
+    }
+
+    public void setCountryFlagcode(String countryFlagcode) {
+        this.countryFlagcode = countryFlagcode;
+    }
+
+    public String getCountryFlag() {
+        return this.countryFlag;
+    }
+
+    public Country countryFlag(String countryFlag) {
+        this.setCountryFlag(countryFlag);
+        return this;
+    }
+
+    public void setCountryFlag(String countryFlag) {
+        this.countryFlag = countryFlag;
+    }
+
+    public String getNotes() {
+        return this.notes;
+    }
+
+    public Country notes(String notes) {
+        this.setNotes(notes);
+        return this;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public LocalDate getCreaDate() {
+        return this.creaDate;
+    }
+
+    public Country creaDate(LocalDate creaDate) {
+        this.setCreaDate(creaDate);
+        return this;
+    }
+
+    public void setCreaDate(LocalDate creaDate) {
+        this.creaDate = creaDate;
+    }
+
+    public LocalDate getUpdateDate() {
+        return this.updateDate;
+    }
+
+    public Country updateDate(LocalDate updateDate) {
+        this.setUpdateDate(updateDate);
+        return this;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Set<Client> getClients() {
@@ -136,6 +235,12 @@ public class Country implements Serializable {
         return "Country{" +
             "id=" + getId() +
             ", countryname='" + getCountryname() + "'" +
+            ", countrycode='" + getCountrycode() + "'" +
+            ", countryFlagcode='" + getCountryFlagcode() + "'" +
+            ", countryFlag='" + getCountryFlag() + "'" +
+            ", notes='" + getNotes() + "'" +
+            ", creaDate='" + getCreaDate() + "'" +
+            ", updateDate='" + getUpdateDate() + "'" +
             "}";
     }
 }

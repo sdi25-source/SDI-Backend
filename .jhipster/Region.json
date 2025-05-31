@@ -10,7 +10,11 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "createDate",
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creaDate",
       "fieldType": "LocalDate"
     },
     {

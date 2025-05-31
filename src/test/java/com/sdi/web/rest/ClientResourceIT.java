@@ -58,8 +58,8 @@ class ClientResourceIT {
     private static final String DEFAULT_MAIN_CONTACT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_MAIN_CONTACT_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_MAIN_CONTACT_EMAIL = "C*o@Z3D3a.wS";
-    private static final String UPDATED_MAIN_CONTACT_EMAIL = "OwB@|.b3";
+    private static final String DEFAULT_MAIN_CONTACT_EMAIL = "S3s=#e@QiZ.9O.\"";
+    private static final String UPDATED_MAIN_CONTACT_EMAIL = "}'-;G)@hFpF.JR";
 
     private static final Integer DEFAULT_CURRENT_CARD_HOLDER_NUMBER = 1;
     private static final Integer UPDATED_CURRENT_CARD_HOLDER_NUMBER = 2;
@@ -1353,13 +1353,8 @@ class ClientResourceIT {
         partialUpdatedClient.setId(client.getId());
 
         partialUpdatedClient
-            .name(UPDATED_NAME)
-            .code(UPDATED_CODE)
-            .mainContactName(UPDATED_MAIN_CONTACT_NAME)
             .mainContactEmail(UPDATED_MAIN_CONTACT_EMAIL)
             .currentCardHolderNumber(UPDATED_CURRENT_CARD_HOLDER_NUMBER)
-            .url(UPDATED_URL)
-            .createDate(UPDATED_CREATE_DATE)
             .updateDate(UPDATED_UPDATE_DATE);
 
         restClientMockMvc

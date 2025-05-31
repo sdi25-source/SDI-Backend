@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250523110434"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "version",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "expireDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CertificationVersion",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "certification",
+      "relationshipName": "certification",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

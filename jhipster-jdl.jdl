@@ -109,7 +109,7 @@ entity ClientCertification{
 }
 
 entity ClientSize{
-  sizeName String required
+  sizeName String required unique
   sizeCode String
   sizeDescription String
   createDate LocalDate
@@ -145,11 +145,20 @@ entity ClientType {
 
 entity Certification{
   name String required
-  description String
   createDate LocalDate
-  updateDate LocalDate
-  expireDate LocalDate
+  description String
 }
+
+
+entity CertificationVersion{
+  version String required
+  createDate LocalDate
+  expireDate LocalDate
+  description String
+}
+
+
+
 
 entity ClientEvent{
   event String required
@@ -216,29 +225,44 @@ enum RequestStatus {
   PENDING, APPROVED, REJECTED, COMPLETED
 }
 
+
+entity Region{
+  name String required
+  code String
+  creaDate LocalDate
+  updateDate LocalDate
+  notes TextBlob
+}
+
 entity Country
 {
   countryname String required
+  countrycode String required
+  countryFlagcode String
+  countryFlag String
+  notes TextBlob
+  creaDate LocalDate
+  updateDate LocalDate
 }
 
 relationship ManyToOne {
   ClientCertification {client(code)} to Client{Certif(certification)}
   ClientEvent{client(code)} to Client
-
   ProductVersion{product(name)} to Product
   ModuleVersion{module(name)} to Module
+  CertificationVersion{certification(name)} to Certification
   InfraComponentVersion{infraComponent(name)}  to InfraComponent
   ProductDeployementDetail{productDeployement(refContract)} to ProductDeployement
   RequestOfChange{productVersion(version)} to ProductVersion
+  RequestOfChange{productVersionResult(version)} to ProductVersion
   RequestOfChange{client(code)} to Client
   ProductDeployement{product(name)} to Product
-
 }
 
 
 relationship ManyToMany {
   Product {productLine} to ProductLine
-  Product {certification} to Certification
+  Product {certification} to CertificationVersion
   ProductVersion{moduleVersion} to ModuleVersion
   Product{module} to Module
   ModuleVersion{feature} to Feature
@@ -251,7 +275,7 @@ relationship ManyToMany {
 
 
 relationship OneToMany{
-
+  Region to Country{region(name)}
   Domaine to ModuleVersion{domaine(name)}
   Certification to ClientCertification{certif(name)}
 

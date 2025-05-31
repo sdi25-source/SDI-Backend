@@ -17,16 +17,10 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="create_date" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="update_date" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="expire_date" type="date">
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -51,10 +45,8 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="description" type="string"/>
             <column name="create_date" type="date"/>
-            <column name="update_date" type="date"/>
-            <column name="expire_date" type="date"/>
+            <column name="description" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

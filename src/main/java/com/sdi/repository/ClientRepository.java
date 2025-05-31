@@ -39,4 +39,15 @@ public interface ClientRepository extends JpaRepository<Client, Long>, JpaSpecif
         "select client from Client client left join fetch client.size left join fetch client.clientType left join fetch client.country where client.id =:id"
     )
     Optional<Client> findOneWithToOneRelationships(@Param("id") Long id);
+
+
+    @Query("SELECT c FROM Client c " +
+        "LEFT JOIN FETCH c.country " +
+        "LEFT JOIN FETCH c.clientType " +
+        "LEFT JOIN FETCH c.size " +
+        "WHERE c.id = :id")
+    Optional<Client> findByIdWithRelations(@Param("id") Long id);
+
+    @Query("SELECT c FROM Client c LEFT JOIN FETCH c.clientType")
+    List<Client> findAllWithClientType();
 }

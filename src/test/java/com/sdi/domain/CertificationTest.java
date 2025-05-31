@@ -2,7 +2,6 @@ package com.sdi.domain;
 
 import static com.sdi.domain.CertificationTestSamples.*;
 import static com.sdi.domain.ClientCertificationTestSamples.*;
-import static com.sdi.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sdi.web.rest.TestUtil;
@@ -46,27 +45,5 @@ class CertificationTest {
         certification.setClientCertifications(new HashSet<>());
         assertThat(certification.getClientCertifications()).doesNotContain(clientCertificationBack);
         assertThat(clientCertificationBack.getCertif()).isNull();
-    }
-
-    @Test
-    void productTest() {
-        Certification certification = getCertificationRandomSampleGenerator();
-        Product productBack = getProductRandomSampleGenerator();
-
-        certification.addProduct(productBack);
-        assertThat(certification.getProducts()).containsOnly(productBack);
-        assertThat(productBack.getCertifications()).containsOnly(certification);
-
-        certification.removeProduct(productBack);
-        assertThat(certification.getProducts()).doesNotContain(productBack);
-        assertThat(productBack.getCertifications()).doesNotContain(certification);
-
-        certification.products(new HashSet<>(Set.of(productBack)));
-        assertThat(certification.getProducts()).containsOnly(productBack);
-        assertThat(productBack.getCertifications()).containsOnly(certification);
-
-        certification.setProducts(new HashSet<>());
-        assertThat(certification.getProducts()).doesNotContain(productBack);
-        assertThat(productBack.getCertifications()).doesNotContain(certification);
     }
 }

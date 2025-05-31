@@ -75,6 +75,21 @@ public class RequestOfChange implements Serializable {
     private ProductVersion productVersion;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "productDeployementDetails",
+            "productVersions",
+            "product",
+            "moduleVersions",
+            "infraComponentVersions",
+            "infraComponents",
+            "root",
+        },
+        allowSetters = true
+    )
+    private ProductVersion productVersionResult;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "country", "certifs" }, allowSetters = true)
     private Client client;
 
@@ -234,6 +249,19 @@ public class RequestOfChange implements Serializable {
 
     public RequestOfChange productVersion(ProductVersion productVersion) {
         this.setProductVersion(productVersion);
+        return this;
+    }
+
+    public ProductVersion getProductVersionResult() {
+        return this.productVersionResult;
+    }
+
+    public void setProductVersionResult(ProductVersion productVersionResult) {
+        this.productVersionResult = productVersionResult;
+    }
+
+    public RequestOfChange productVersionResult(ProductVersion productVersionResult) {
+        this.setProductVersionResult(productVersionResult);
         return this;
     }
 

@@ -303,11 +303,7 @@ class ClientEventTypeResourceIT {
         ClientEventType partialUpdatedClientEventType = new ClientEventType();
         partialUpdatedClientEventType.setId(clientEventType.getId());
 
-        partialUpdatedClientEventType
-            .type(UPDATED_TYPE)
-            .description(UPDATED_DESCRIPTION)
-            .createDate(UPDATED_CREATE_DATE)
-            .updateDate(UPDATED_UPDATE_DATE);
+        partialUpdatedClientEventType.description(UPDATED_DESCRIPTION).createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE);
 
         restClientEventTypeMockMvc
             .perform(

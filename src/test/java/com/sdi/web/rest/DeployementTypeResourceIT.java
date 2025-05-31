@@ -283,7 +283,7 @@ class DeployementTypeResourceIT {
         DeployementType partialUpdatedDeployementType = new DeployementType();
         partialUpdatedDeployementType.setId(deployementType.getId());
 
-        partialUpdatedDeployementType.updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
+        partialUpdatedDeployementType.createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE).notes(UPDATED_NOTES);
 
         restDeployementTypeMockMvc
             .perform(

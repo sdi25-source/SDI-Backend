@@ -17,6 +17,24 @@
             <column name="countryname" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="countrycode" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="country_flagcode" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="country_flag" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="notes" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="crea_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="update_date" type="date">
+                <constraints nullable="true" />
+            </column>
             <column name="region_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -42,6 +60,12 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="countryname" type="string"/>
+            <column name="countrycode" type="string"/>
+            <column name="country_flagcode" type="string"/>
+            <column name="country_flag" type="string"/>
+            <column name="notes" type="clob"/>
+            <column name="crea_date" type="date"/>
+            <column name="update_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

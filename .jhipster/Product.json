@@ -35,7 +35,7 @@
       "relationshipType": "many-to-many"
     },
     {
-      "otherEntityName": "certification",
+      "otherEntityName": "certificationVersion",
       "relationshipName": "certification",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"

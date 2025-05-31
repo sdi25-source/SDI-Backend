@@ -342,10 +342,7 @@ class ClientCertificationResourceIT {
         ClientCertification partialUpdatedClientCertification = new ClientCertification();
         partialUpdatedClientCertification.setId(clientCertification.getId());
 
-        partialUpdatedClientCertification
-            .certificationDate(UPDATED_CERTIFICATION_DATE)
-            .createDate(UPDATED_CREATE_DATE)
-            .notes(UPDATED_NOTES);
+        partialUpdatedClientCertification.certification(UPDATED_CERTIFICATION).createDate(UPDATED_CREATE_DATE);
 
         restClientCertificationMockMvc
             .perform(

@@ -1,18 +1,26 @@
 package com.sdi.web.rest;
 
 import com.sdi.domain.Client;
+import com.sdi.repository.ClientEventRepository;
 import com.sdi.repository.ClientRepository;
+import com.sdi.repository.ProductDeployementRepository;
+import com.sdi.repository.RequestOfChangeRepository;
+import com.sdi.service.ClientOverviewService;
 import com.sdi.service.ClientQueryService;
 import com.sdi.service.ClientService;
 import com.sdi.service.criteria.ClientCriteria;
+import com.sdi.service.dto.*;
+import com.sdi.service.mapper.ClientMapper;
 import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.io.File;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +28,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
+import com.sdi.utils.ReportUtil;
+import org.springframework.http.HttpHeaders;
 
 /**
  * REST controller for managing {@link com.sdi.domain.Client}.
@@ -39,14 +49,101 @@ public class ClientResource {
 
     private final ClientRepository clientRepository;
 
+    private final ProductDeployementRepository productDeployementRepository;
+
+    private final RequestOfChangeRepository requestOfChangeRepository;
+
+    private final ClientEventRepository clientEventRepository;
+
+
     private final ClientQueryService clientQueryService;
 
-    public ClientResource(ClientService clientService, ClientRepository clientRepository, ClientQueryService clientQueryService) {
+    private final ClientMapper clientMapper;
+
+
+    private final ClientOverviewService clientOverviewService;
+
+    public ClientResource(ClientService clientService, ClientRepository clientRepository,
+                          ClientQueryService clientQueryService,ProductDeployementRepository productDeployementRepository, ClientMapper clientMapper,
+                          RequestOfChangeRepository requestOfChangeRepository, ClientEventRepository clientEventRepository, ClientOverviewService clientOverviewService
+    ) {
         this.clientService = clientService;
         this.clientRepository = clientRepository;
         this.clientQueryService = clientQueryService;
+        this.productDeployementRepository = productDeployementRepository;
+        this.clientMapper = clientMapper;
+        this.requestOfChangeRepository = requestOfChangeRepository;
+        this.clientEventRepository = clientEventRepository;
+        this.clientOverviewService = clientOverviewService;
     }
 
+    @GetMapping("/client-overviews")
+    public List<ClientOverview> getClientOverviews() {
+        return clientOverviewService.getClientsOverview();
+    }
+
+    @GetMapping("/report/{idClient}")
+    public ResponseEntity<byte[]> generateClientReport(@PathVariable(name = "idClient") Long idClient) throws IOException {
+        try {
+            // Validate idClient
+            if (idClient == null) {
+                throw new BadRequestAlertException("Invalid client ID", ENTITY_NAME, "idnull");
+            }
+
+            // Fetch client with given id client
+            Client client = clientService.getClientById(idClient);
+            if (client == null) {
+                throw new BadRequestAlertException("Client not found", ENTITY_NAME, "idnotfound");
+            }
+            List<Client> clients = List.of(client);
+
+            // Convert List<Client> to List<ClientDTO>
+            List<ClientDTO> clientDTOs = clientMapper.toDtoList(clients);
+
+            // Ensure integer fields are not null
+            for (ClientDTO clientDTO : clientDTOs) {
+                if (clientDTO.getCurrentCustomersNumber() == null) {
+                    clientDTO.setCurrentCustomersNumber(0);
+                }
+                if (clientDTO.getCurrentCardHolderNumber() == null) {
+                    clientDTO.setCurrentCardHolderNumber(0);
+                }
+                if (clientDTO.getCurrentBruncheNumber() == null) {
+                    clientDTO.setCurrentBruncheNumber(0);
+                }
+            }
+
+            // Path to the compiled .jasper file
+            String jasperPath = new File("src/main/resources/jasper-templates/clientReport.jasper").getAbsolutePath();
+
+            // Parameters for the report
+            HashMap<String, Object> parameters = new HashMap<>();
+            List<ProductDeployementSummaryDTO> productDeployementSummaryDTO = productDeployementRepository.findDeployementSummariesByClientId(idClient);
+            JRBeanCollectionDataSource dataSource1 = new JRBeanCollectionDataSource(productDeployementSummaryDTO);
+            parameters.put("TABLE_DATA_SOURCE", dataSource1);
+
+//        List<RequestOfChangesDTO> requestOfChangesDTO = requestOfChangeRepository.findRequestOfChangesByClientId(idClient);
+//        JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(requestOfChangesDTO);
+//        parameters.put("TABLE_DATA_SOURCE_REQUESTS", dataSource2);
+
+            List<ClientEventDTO> clientEventDTO = clientEventRepository.findEventsByClientId(idClient);
+            JRBeanCollectionDataSource dataSource3 = new JRBeanCollectionDataSource(clientEventDTO);
+            parameters.put("TABLE_DATA_SOURCE_EVENTS", dataSource3);
+
+            // Generate the PDF report
+            byte[] pdfData = ReportUtil.generateReport(clientDTOs, jasperPath, parameters);
+
+            // Return the PDF as a response
+            return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=client_report.pdf") // Changed to inline for preview
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
+                .body(pdfData);
+
+        } catch (JRException e) {
+            LOG.error("Error generating report: {}", e.getMessage(), e);
+            throw new RuntimeException("Error generating report", e);
+        }
+    }
     /**
      * {@code POST  /clients} : Create a new client.
      *

@@ -128,6 +128,15 @@ public class ClientService {
         return clientRepository.findOneWithEagerRelationships(id);
     }
 
+
+    public Client getClientById(Long idClient) {
+        return clientRepository.findByIdWithRelations(idClient)
+            .orElseThrow(() -> new RuntimeException("Client not found with ID: " + idClient));
+    }
+
+
+
+
     /**
      * Delete the client by id.
      *

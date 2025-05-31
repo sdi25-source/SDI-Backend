@@ -327,6 +327,8 @@ class ModuleVersionResourceIT {
         ModuleVersion partialUpdatedModuleVersion = new ModuleVersion();
         partialUpdatedModuleVersion.setId(moduleVersion.getId());
 
+        partialUpdatedModuleVersion.createDate(UPDATED_CREATE_DATE).updateDate(UPDATED_UPDATE_DATE);
+
         restModuleVersionMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedModuleVersion.getId())

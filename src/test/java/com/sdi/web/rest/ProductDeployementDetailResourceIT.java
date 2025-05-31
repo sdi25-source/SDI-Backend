@@ -314,8 +314,6 @@ class ProductDeployementDetailResourceIT {
         ProductDeployementDetail partialUpdatedProductDeployementDetail = new ProductDeployementDetail();
         partialUpdatedProductDeployementDetail.setId(productDeployementDetail.getId());
 
-        partialUpdatedProductDeployementDetail.endDeployementDate(UPDATED_END_DEPLOYEMENT_DATE).notes(UPDATED_NOTES);
-
         restProductDeployementDetailMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProductDeployementDetail.getId())

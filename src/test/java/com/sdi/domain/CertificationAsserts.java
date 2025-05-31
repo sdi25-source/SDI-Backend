@@ -48,10 +48,8 @@ public class CertificationAsserts {
         assertThat(actual)
             .as("Verify Certification relevant properties")
             .satisfies(a -> assertThat(a.getName()).as("check name").isEqualTo(expected.getName()))
-            .satisfies(a -> assertThat(a.getDescription()).as("check description").isEqualTo(expected.getDescription()))
             .satisfies(a -> assertThat(a.getCreateDate()).as("check createDate").isEqualTo(expected.getCreateDate()))
-            .satisfies(a -> assertThat(a.getUpdateDate()).as("check updateDate").isEqualTo(expected.getUpdateDate()))
-            .satisfies(a -> assertThat(a.getExpireDate()).as("check expireDate").isEqualTo(expected.getExpireDate()));
+            .satisfies(a -> assertThat(a.getDescription()).as("check description").isEqualTo(expected.getDescription()));
     }
 
     /**
@@ -61,8 +59,6 @@ public class CertificationAsserts {
      * @param actual the actual entity
      */
     public static void assertCertificationUpdatableRelationshipsEquals(Certification expected, Certification actual) {
-        assertThat(actual)
-            .as("Verify Certification relationships")
-            .satisfies(a -> assertThat(a.getProducts()).as("check products").isEqualTo(expected.getProducts()));
+        // empty method
     }
 }

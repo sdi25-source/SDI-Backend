@@ -28,7 +28,7 @@ public class ClientSize implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "size_name", nullable = false)
+    @Column(name = "size_name", nullable = false, unique = true)
     private String sizeName;
 
     @Column(name = "size_code")

@@ -126,17 +126,11 @@ public class CertificationResource {
                 if (certification.getName() != null) {
                     existingCertification.setName(certification.getName());
                 }
-                if (certification.getDescription() != null) {
-                    existingCertification.setDescription(certification.getDescription());
-                }
                 if (certification.getCreateDate() != null) {
                     existingCertification.setCreateDate(certification.getCreateDate());
                 }
-                if (certification.getUpdateDate() != null) {
-                    existingCertification.setUpdateDate(certification.getUpdateDate());
-                }
-                if (certification.getExpireDate() != null) {
-                    existingCertification.setExpireDate(certification.getExpireDate());
+                if (certification.getDescription() != null) {
+                    existingCertification.setDescription(certification.getDescription());
                 }
 
                 return existingCertification;
