@@ -46,10 +46,10 @@ public class ProductOverviewService {
             Long moduleCount = (long) product.getModules().size();
 
             // Count deployments for the product
-            Long deploymentCount = productDeployementRepository.countByProductId(product.getId());
+            Long clients = productDeployementRepository.countByProductId(product.getId());
 
             // Determine badgeClass based on deployment count
-            String badgeClass = determineBadgeClass(deploymentCount);
+            String badgeClass = determineBadgeClass(clients);
 
             // Determine icon based on product name
             String icon = determineIcon(product.getName());
@@ -61,7 +61,7 @@ public class ProductOverviewService {
                 icon,
                 versionCount.intValue(),
                 moduleCount.intValue(),
-                deploymentCount.intValue()
+                clients.intValue()
             );
         }).collect(Collectors.toList());
     }

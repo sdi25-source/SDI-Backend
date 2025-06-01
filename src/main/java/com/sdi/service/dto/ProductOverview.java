@@ -7,7 +7,7 @@ public class ProductOverview {
     private String icon;
     private Integer versions;
     private Integer modules;
-    private Integer deploiements;
+    private Integer clients;
 
     // Constructeur par défaut
     public ProductOverview() {
@@ -15,13 +15,13 @@ public class ProductOverview {
 
     // Constructeur avec tous les paramètres
     public ProductOverview(String name, String badgeClass, String icon,
-                           Integer versions, Integer modules, Integer deploiements) {
+                           Integer versions, Integer modules, Integer clients) {
         this.name = name;
         this.badgeClass = badgeClass;
         this.icon = icon;
         this.versions = versions;
         this.modules = modules;
-        this.deploiements = deploiements;
+        this.clients = clients;
     }
 
     // Getters
@@ -46,8 +46,8 @@ public class ProductOverview {
         return modules;
     }
 
-    public Integer getDeploiements() {
-        return deploiements;
+    public Integer getClients() {
+        return clients;
     }
 
     // Setters
@@ -72,7 +72,7 @@ public class ProductOverview {
         this.modules = modules;
     }
 
-    public void setDeploiements(Integer deploiements) {
-        this.deploiements = deploiements;
+    public void setClients(Integer deploiements) {
+        this.clients = clients;
     }
 }

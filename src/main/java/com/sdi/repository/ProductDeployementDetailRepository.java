@@ -45,4 +45,8 @@ public interface ProductDeployementDetailRepository
         "select productDeployementDetail from ProductDeployementDetail productDeployementDetail left join fetch productDeployementDetail.productDeployement left join fetch productDeployementDetail.productVersion left join fetch productDeployementDetail.deployementType where productDeployementDetail.id =:id"
     )
     Optional<ProductDeployementDetail> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("SELECT pdd FROM ProductDeployementDetail pdd WHERE pdd.productVersion.id = :id")
+    List<ProductDeployementDetail> findProductDeployementDetailByProductVersionId(Long id);
+
 }
