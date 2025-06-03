@@ -124,6 +124,8 @@ public class CacheConfiguration {
             createCache(cm, com.sdi.domain.CertificationVersion.class.getName() + ".products");
             createCache(cm, com.sdi.domain.Certification.class.getName() + ".certificationVersions");
             createCache(cm, com.sdi.domain.CertificationVersion.class.getName() + ".certifications");
+            createCache(cm, com.sdi.domain.ProductDeployement.class.getName() + ".certifications");
+            createCache(cm, com.sdi.domain.CertificationVersion.class.getName() + ".productDeployements");
             // jhipster-needle-ehcache-add-entry
         };
     }

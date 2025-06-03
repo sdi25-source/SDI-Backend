@@ -49,6 +49,11 @@ public class CertificationVersion implements Serializable {
     @JsonIgnoreProperties(value = { "productLines", "certifications", "modules" }, allowSetters = true)
     private Set<Product> products = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "certifications")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "product", "certifications", "client" }, allowSetters = true)
+    private Set<ProductDeployement> productDeployements = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -157,6 +162,37 @@ public class CertificationVersion implements Serializable {
     public CertificationVersion removeProduct(Product product) {
         this.products.remove(product);
         product.getCertifications().remove(this);
+        return this;
+    }
+
+    public Set<ProductDeployement> getProductDeployements() {
+        return this.productDeployements;
+    }
+
+    public void setProductDeployements(Set<ProductDeployement> productDeployements) {
+        if (this.productDeployements != null) {
+            this.productDeployements.forEach(i -> i.removeCertification(this));
+        }
+        if (productDeployements != null) {
+            productDeployements.forEach(i -> i.addCertification(this));
+        }
+        this.productDeployements = productDeployements;
+    }
+
+    public CertificationVersion productDeployements(Set<ProductDeployement> productDeployements) {
+        this.setProductDeployements(productDeployements);
+        return this;
+    }
+
+    public CertificationVersion addProductDeployement(ProductDeployement productDeployement) {
+        this.productDeployements.add(productDeployement);
+        productDeployement.getCertifications().add(this);
+        return this;
+    }
+
+    public CertificationVersion removeProductDeployement(ProductDeployement productDeployement) {
+        this.productDeployements.remove(productDeployement);
+        productDeployement.getCertifications().remove(this);
         return this;
     }
 

@@ -63,6 +63,9 @@ public class CertificationVersionAsserts {
         assertThat(actual)
             .as("Verify CertificationVersion relationships")
             .satisfies(a -> assertThat(a.getCertification()).as("check certification").isEqualTo(expected.getCertification()))
-            .satisfies(a -> assertThat(a.getProducts()).as("check products").isEqualTo(expected.getProducts()));
+            .satisfies(a -> assertThat(a.getProducts()).as("check products").isEqualTo(expected.getProducts()))
+            .satisfies(a ->
+                assertThat(a.getProductDeployements()).as("check productDeployements").isEqualTo(expected.getProductDeployements())
+            );
     }
 }

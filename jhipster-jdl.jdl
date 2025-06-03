@@ -263,6 +263,7 @@ relationship ManyToOne {
 relationship ManyToMany {
   Product {productLine} to ProductLine
   Product {certification} to CertificationVersion
+  ProductDeployement {certification} to CertificationVersion
   ProductVersion{moduleVersion} to ModuleVersion
   Product{module} to Module
   ModuleVersion{feature} to Feature

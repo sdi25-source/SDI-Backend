@@ -161,14 +161,6 @@ public class ProductDeployementDetailResource {
         }
     }
 
-    @GetMapping("/productVersion/{idPV}")
-    public List<ProductDeployementDetail> getAllProductDeployementDetails(@PathVariable("idPV") Long idPV,
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
-        LOG.debug("REST request to get all ProductDeployementDetails by product version");
-        return productDeployementDetailRepository.findProductDeployementDetailByProductVersionId(idPV);
-    }
-
     /**
      * {@code GET  /product-deployement-details/:id} : get the "id" productDeployementDetail.
      *

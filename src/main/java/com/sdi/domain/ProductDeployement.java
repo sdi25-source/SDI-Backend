@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -42,6 +44,16 @@ public class ProductDeployement implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productLines", "certifications", "modules" }, allowSetters = true)
     private Product product;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_product_deployement__certification",
+        joinColumns = @JoinColumn(name = "product_deployement_id"),
+        inverseJoinColumns = @JoinColumn(name = "certification_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "certification", "products", "productDeployements" }, allowSetters = true)
+    private Set<CertificationVersion> certifications = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productDeployements", "size", "clientType", "country", "certifs" }, allowSetters = true)
@@ -124,6 +136,29 @@ public class ProductDeployement implements Serializable {
 
     public ProductDeployement product(Product product) {
         this.setProduct(product);
+        return this;
+    }
+
+    public Set<CertificationVersion> getCertifications() {
+        return this.certifications;
+    }
+
+    public void setCertifications(Set<CertificationVersion> certificationVersions) {
+        this.certifications = certificationVersions;
+    }
+
+    public ProductDeployement certifications(Set<CertificationVersion> certificationVersions) {
+        this.setCertifications(certificationVersions);
+        return this;
+    }
+
+    public ProductDeployement addCertification(CertificationVersion certificationVersion) {
+        this.certifications.add(certificationVersion);
+        return this;
+    }
+
+    public ProductDeployement removeCertification(CertificationVersion certificationVersion) {
+        this.certifications.remove(certificationVersion);
         return this;
     }
 

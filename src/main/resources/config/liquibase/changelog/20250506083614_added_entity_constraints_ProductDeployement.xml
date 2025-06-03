@@ -17,6 +17,20 @@
                                  referencedTableName="product"
                                  />
 
+        <addForeignKeyConstraint baseColumnNames="product_deployement_id"
+                                 baseTableName="rel_product_deployement__certification"
+                                 constraintName="fk_rel_product_deployement__cer__product_deployement_de_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_deployement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="certification_id"
+                                 baseTableName="rel_product_deployement__certification"
+                                 constraintName="fk_rel_product_deployement__certification__certification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="certification_version"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="client_id"
                                  baseTableName="product_deployement"
                                  constraintName="fk_product_deployement__client_id"

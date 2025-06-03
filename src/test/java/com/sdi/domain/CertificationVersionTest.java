@@ -2,6 +2,7 @@ package com.sdi.domain;
 
 import static com.sdi.domain.CertificationTestSamples.*;
 import static com.sdi.domain.CertificationVersionTestSamples.*;
+import static com.sdi.domain.ProductDeployementTestSamples.*;
 import static com.sdi.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,5 +59,27 @@ class CertificationVersionTest {
         certificationVersion.setProducts(new HashSet<>());
         assertThat(certificationVersion.getProducts()).doesNotContain(productBack);
         assertThat(productBack.getCertifications()).doesNotContain(certificationVersion);
+    }
+
+    @Test
+    void productDeployementTest() {
+        CertificationVersion certificationVersion = getCertificationVersionRandomSampleGenerator();
+        ProductDeployement productDeployementBack = getProductDeployementRandomSampleGenerator();
+
+        certificationVersion.addProductDeployement(productDeployementBack);
+        assertThat(certificationVersion.getProductDeployements()).containsOnly(productDeployementBack);
+        assertThat(productDeployementBack.getCertifications()).containsOnly(certificationVersion);
+
+        certificationVersion.removeProductDeployement(productDeployementBack);
+        assertThat(certificationVersion.getProductDeployements()).doesNotContain(productDeployementBack);
+        assertThat(productDeployementBack.getCertifications()).doesNotContain(certificationVersion);
+
+        certificationVersion.productDeployements(new HashSet<>(Set.of(productDeployementBack)));
+        assertThat(certificationVersion.getProductDeployements()).containsOnly(productDeployementBack);
+        assertThat(productDeployementBack.getCertifications()).containsOnly(certificationVersion);
+
+        certificationVersion.setProductDeployements(new HashSet<>());
+        assertThat(certificationVersion.getProductDeployements()).doesNotContain(productDeployementBack);
+        assertThat(productDeployementBack.getCertifications()).doesNotContain(certificationVersion);
     }
 }

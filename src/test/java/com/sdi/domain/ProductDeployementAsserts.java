@@ -63,6 +63,7 @@ public class ProductDeployementAsserts {
         assertThat(actual)
             .as("Verify ProductDeployement relationships")
             .satisfies(a -> assertThat(a.getProduct()).as("check product").isEqualTo(expected.getProduct()))
+            .satisfies(a -> assertThat(a.getCertifications()).as("check certifications").isEqualTo(expected.getCertifications()))
             .satisfies(a -> assertThat(a.getClient()).as("check client").isEqualTo(expected.getClient()));
     }
 }

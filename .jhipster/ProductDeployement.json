@@ -32,6 +32,12 @@
       "relationshipType": "many-to-one"
     },
     {
+      "otherEntityName": "certificationVersion",
+      "relationshipName": "certification",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
       "otherEntityField": "code",
       "otherEntityName": "client",
       "relationshipName": "client",

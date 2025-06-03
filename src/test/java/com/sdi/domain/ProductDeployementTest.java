@@ -1,11 +1,14 @@
 package com.sdi.domain;
 
+import static com.sdi.domain.CertificationVersionTestSamples.*;
 import static com.sdi.domain.ClientTestSamples.*;
 import static com.sdi.domain.ProductDeployementTestSamples.*;
 import static com.sdi.domain.ProductTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sdi.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ProductDeployementTest {
@@ -34,6 +37,24 @@ class ProductDeployementTest {
 
         productDeployement.product(null);
         assertThat(productDeployement.getProduct()).isNull();
+    }
+
+    @Test
+    void certificationTest() {
+        ProductDeployement productDeployement = getProductDeployementRandomSampleGenerator();
+        CertificationVersion certificationVersionBack = getCertificationVersionRandomSampleGenerator();
+
+        productDeployement.addCertification(certificationVersionBack);
+        assertThat(productDeployement.getCertifications()).containsOnly(certificationVersionBack);
+
+        productDeployement.removeCertification(certificationVersionBack);
+        assertThat(productDeployement.getCertifications()).doesNotContain(certificationVersionBack);
+
+        productDeployement.certifications(new HashSet<>(Set.of(certificationVersionBack)));
+        assertThat(productDeployement.getCertifications()).containsOnly(certificationVersionBack);
+
+        productDeployement.setCertifications(new HashSet<>());
+        assertThat(productDeployement.getCertifications()).doesNotContain(certificationVersionBack);
     }
 
     @Test

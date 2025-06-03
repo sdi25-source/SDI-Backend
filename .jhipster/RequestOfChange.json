@@ -51,6 +51,13 @@
       "relationshipType": "many-to-one"
     },
     {
+      "otherEntityField": "version",
+      "otherEntityName": "productVersion",
+      "relationshipName": "productVersionResult",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityField": "code",
       "otherEntityName": "client",
       "relationshipName": "client",
