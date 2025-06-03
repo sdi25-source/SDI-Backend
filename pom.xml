@@ -399,10 +399,12 @@
               <failOnNoGitDirectory>false</failOnNoGitDirectory>
               <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
               <generateGitPropertiesFile>true</generateGitPropertiesFile>
+              <useGitDescribe>true</useGitDescribe>  <!-- Ajoute cette ligne -->
               <includeOnlyProperties>
                 <includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
                 <includeOnlyProperty>^git.commit.id.describe$</includeOnlyProperty>
                 <includeOnlyProperty>^git.branch$</includeOnlyProperty>
+
               </includeOnlyProperties>
             </configuration>
           </plugin>
