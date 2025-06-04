@@ -716,6 +716,7 @@
                             <includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
                             <includeOnlyProperty>^git.commit.id.describe$</includeOnlyProperty>
                             <includeOnlyProperty>^git.branch$</includeOnlyProperty>
+                           <includeOnlyProperty>^git.closest.tag.name$</includeOnlyProperty> <!-- ajoute ceci -->
                         </includeOnlyProperties>
                     </configuration>
                 </plugin>

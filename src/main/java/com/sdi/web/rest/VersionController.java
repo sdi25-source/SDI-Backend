@@ -19,8 +19,9 @@ public class VersionController {
         if (gitDescribe == null || gitDescribe.isEmpty()) {
             return ResponseEntity.ok("unknown");
         }
-        // Optionnel : extraire la partie tag avant le premier tiret
+        // extraire le tag, la partie avant le premier '-'
         String tag = gitDescribe.split("-")[0];
         return ResponseEntity.ok(tag);
     }
+
 }
