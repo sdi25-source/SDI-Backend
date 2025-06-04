@@ -7,8 +7,8 @@
 </head>
 <body>
 <p th:text="#{email.activation.greeting(${user.login})}">Dear [User's Name]</p>
-<p th:text="#{email.activation.text1(${#strings.substringAfter(user.authorities[0].name, 'ROLE_')})}">
-  We are excited to inform you that your SDI account ([Role]) has been created! Below are your login details:
+<p>
+  We are excited to inform you that your SDI account has been created! Below are your login details:
 </p>
 <p>
   <strong>Username:</strong> <span th:text="${user.login}">[Your username]</span><br />
