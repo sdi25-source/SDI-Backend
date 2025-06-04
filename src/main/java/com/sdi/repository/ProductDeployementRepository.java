@@ -35,7 +35,7 @@ public interface ProductDeployementRepository extends JpaRepository<ProductDeplo
     Page<ProductDeployement> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client"
+        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client left join fetch productDeployement.certifications"
     )
     List<ProductDeployement> findAllWithToOneRelationships();
 
