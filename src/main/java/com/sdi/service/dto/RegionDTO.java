@@ -21,10 +21,11 @@ public class RegionDTO implements Serializable {
 
     private String notes;
 
-    // Constructor for mapping from Region entity
+    // Default constructor
     public RegionDTO() {
     }
 
+    // Constructor for mapping from Region entity
     public RegionDTO(Long id, String name, String code, LocalDate creaDate, LocalDate updateDate, String notes) {
         this.id = id;
         this.name = name;
