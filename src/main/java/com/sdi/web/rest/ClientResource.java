@@ -1,16 +1,19 @@
 package com.sdi.web.rest;
 
 import com.sdi.domain.Client;
+import com.sdi.domain.ClientEvent;
 import com.sdi.repository.ClientEventRepository;
 import com.sdi.repository.ClientRepository;
 import com.sdi.repository.ProductDeployementRepository;
 import com.sdi.repository.RequestOfChangeRepository;
+import com.sdi.repository.projection.ProductDeployementSummaryProjection;
 import com.sdi.service.ClientOverviewService;
 import com.sdi.service.ClientQueryService;
 import com.sdi.service.ClientService;
 import com.sdi.service.criteria.ClientCriteria;
 import com.sdi.service.dto.*;
 import com.sdi.service.mapper.ClientMapper;
+import com.sdi.service.mapper.ProductDeployementMapper;
 import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -50,7 +53,7 @@ public class ClientResource {
     private final ClientRepository clientRepository;
 
     private final ProductDeployementRepository productDeployementRepository;
-
+    private final ProductDeployementMapper productDeployementMapper;
     private final RequestOfChangeRepository requestOfChangeRepository;
 
     private final ClientEventRepository clientEventRepository;
@@ -65,7 +68,7 @@ public class ClientResource {
 
     public ClientResource(ClientService clientService, ClientRepository clientRepository,
                           ClientQueryService clientQueryService,ProductDeployementRepository productDeployementRepository, ClientMapper clientMapper,
-                          RequestOfChangeRepository requestOfChangeRepository, ClientEventRepository clientEventRepository, ClientOverviewService clientOverviewService
+                          RequestOfChangeRepository requestOfChangeRepository, ClientEventRepository clientEventRepository, ClientOverviewService clientOverviewService, ProductDeployementMapper productDeployementMapper
     ) {
         this.clientService = clientService;
         this.clientRepository = clientRepository;
@@ -75,6 +78,7 @@ public class ClientResource {
         this.requestOfChangeRepository = requestOfChangeRepository;
         this.clientEventRepository = clientEventRepository;
         this.clientOverviewService = clientOverviewService;
+        this.productDeployementMapper = productDeployementMapper;
     }
 
     @GetMapping("/client-overviews")
@@ -114,20 +118,32 @@ public class ClientResource {
             }
 
             // Path to the compiled .jasper file
-            String jasperPath = new File("src/main/resources/jasper-templates/clientReport.jasper").getAbsolutePath();
+            String jasperPath = Objects.requireNonNull(getClass().getClassLoader()
+                .getResource("jasper-templates/clientReport.jasper")).getPath();
 
             // Parameters for the report
             HashMap<String, Object> parameters = new HashMap<>();
-            List<ProductDeployementSummaryDTO> productDeployementSummaryDTO = productDeployementRepository.findDeployementSummariesByClientId(idClient);
-            JRBeanCollectionDataSource dataSource1 = new JRBeanCollectionDataSource(productDeployementSummaryDTO);
+            List<ProductDeployementSummaryProjection> projections = productDeployementRepository.findDeployementSummariesByClientId(idClient);
+            JRBeanCollectionDataSource dataSource1 = new JRBeanCollectionDataSource(projections);
             parameters.put("TABLE_DATA_SOURCE", dataSource1);
 
 //        List<RequestOfChangesDTO> requestOfChangesDTO = requestOfChangeRepository.findRequestOfChangesByClientId(idClient);
 //        JRBeanCollectionDataSource dataSource2 = new JRBeanCollectionDataSource(requestOfChangesDTO);
 //        parameters.put("TABLE_DATA_SOURCE_REQUESTS", dataSource2);
 
-            List<ClientEventDTO> clientEventDTO = clientEventRepository.findEventsByClientId(idClient);
-            JRBeanCollectionDataSource dataSource3 = new JRBeanCollectionDataSource(clientEventDTO);
+            List<ClientEvent> clientEvents = clientEventRepository.findEventsByClientId(idClient);
+            List<ClientEventDTO> clientEventDTOs = new ArrayList<>();
+
+            // Map ClientEvent to ClientEventDTO
+            for (ClientEvent clientEvent : clientEvents) {
+                ClientEventDTO clientEventDTO = new ClientEventDTO();
+                clientEventDTO.setEvent(clientEvent.getEvent());
+                clientEventDTO.setEventDate(clientEvent.getEventDate());
+                clientEventDTO.setDescription(clientEvent.getDescription());
+                clientEventDTOs.add(clientEventDTO);
+            }
+
+            JRBeanCollectionDataSource dataSource3 = new JRBeanCollectionDataSource(clientEventDTOs);
             parameters.put("TABLE_DATA_SOURCE_EVENTS", dataSource3);
 
             // Generate the PDF report

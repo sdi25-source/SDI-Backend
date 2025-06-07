@@ -6,7 +6,6 @@ import static com.sdi.domain.ModuleVersionTestSamples.*;
 import static com.sdi.domain.ProductDeployementDetailTestSamples.*;
 import static com.sdi.domain.ProductTestSamples.*;
 import static com.sdi.domain.ProductVersionTestSamples.*;
-import static com.sdi.domain.ProductVersionTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sdi.web.rest.TestUtil;

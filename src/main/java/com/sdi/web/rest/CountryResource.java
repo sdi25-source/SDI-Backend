@@ -1,15 +1,20 @@
 package com.sdi.web.rest;
 
 import com.sdi.domain.Country;
+import com.sdi.domain.Region;
 import com.sdi.repository.CountryRepository;
+import com.sdi.service.dto.CountryDTO;
 import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -162,15 +167,34 @@ public class CountryResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of countries in body.
      */
     @GetMapping("")
+    @Transactional(readOnly = true)
     public List<Country> getAllCountries(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         LOG.debug("REST request to get all Countries");
-        if (eagerload) {
-            return countryRepository.findAllWithEagerRelationships();
-        } else {
-            return countryRepository.findAll();
-        }
-    }
+        List<Object[]> results = countryRepository.findAllWithEagerRelationships();
+        return results.stream()
+            .map(row -> {
+                Country country = new Country();
+                country.setId(((Number) row[0]).longValue()); // c.id
+                country.setCountryname((String) row[1]); // c.countryname
+                country.setCountrycode((String) row[2]); // c.countrycode
+                country.setCountryFlag((String) row[3]); // c.country_flagcode
+                country.setCountryFlag((String) row[4]); // c.country_flag
+                country.setNotes((String) row[5]); // c.notes
+                country.setCreaDate(row[6] != null ? ((Date) row[6]).toLocalDate() : null); // c.crea_date
+                country.setUpdateDate(row[7] != null ? ((Date) row[7]).toLocalDate() : null); // c.update_date
 
+                // Populate Region object
+                if (row[9] != null) { // r.id
+                    Region region = new Region();
+                    region.setId(((Number) row[9]).longValue());
+                    region.setName((String) row[10]); // r.name
+                    country.setRegion(region);
+                }
+
+                return country;
+            })
+            .collect(Collectors.toList());
+    }
     /**
      * {@code GET  /countries/:id} : get the "id" country.
      *

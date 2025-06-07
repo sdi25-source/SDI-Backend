@@ -5,7 +5,6 @@ import static com.sdi.domain.FeatureTestSamples.*;
 import static com.sdi.domain.ModuleDeployementTestSamples.*;
 import static com.sdi.domain.ModuleTestSamples.*;
 import static com.sdi.domain.ModuleVersionTestSamples.*;
-import static com.sdi.domain.ModuleVersionTestSamples.*;
 import static com.sdi.domain.ProductDeployementDetailTestSamples.*;
 import static com.sdi.domain.ProductVersionTestSamples.*;
 import static com.sdi.domain.RequestOfChangeTestSamples.*;

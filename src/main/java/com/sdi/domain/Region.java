@@ -40,8 +40,7 @@ public class Region implements Serializable {
     @Column(name = "update_date")
     private LocalDate updateDate;
 
-    @Lob
-    @Column(name = "notes")
+    @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")

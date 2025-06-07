@@ -14,13 +14,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
-    default Optional<Country> findOneWithEagerRelationships(Long id) {
-        return this.findOneWithToOneRelationships(id);
-    }
-
-    default List<Country> findAllWithEagerRelationships() {
-        return this.findAllWithToOneRelationships();
-    }
+  //  default Optional<Country> findOneWithEagerRelationships(Long id) {
+    //    return this.findOneWithToOneRelationships(id);
+  //  }
 
     default Page<Country> findAllWithEagerRelationships(Pageable pageable) {
         return this.findAllWithToOneRelationships(pageable);
@@ -37,4 +33,18 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 
     @Query("select country from Country country left join fetch country.region where country.id =:id")
     Optional<Country> findOneWithToOneRelationships(@Param("id") Long id);
+
+
+
+
+    @Query(value = "SELECT c.id, c.countryname, c.countrycode, c.country_flagcode, c.country_flag, c.notes, c.crea_date, c.update_date, c.region_id, " +
+        "r.id as region_id, r.name as region_name " +
+        "FROM country c LEFT JOIN region r ON c.region_id = r.id", nativeQuery = true)
+    List<Object[]> findAllWithEagerRelationships();
+
+    @Query("SELECT c FROM Country c LEFT JOIN FETCH c.region LEFT JOIN FETCH c.clients")
+    List<Country> findAllWithEagerRelationshipsAndRegion();
+
+    @Query("SELECT c FROM Country c LEFT JOIN FETCH c.region LEFT JOIN FETCH c.clients WHERE c.id = ?1")
+    Optional<Country> findOneWithEagerRelationships(Long id);
 }
