@@ -27,3 +27,7 @@ services:
     extends:
       file: ./postgresql.yml
       service: postgresql
+  sonar:
+    extends:
+      file: ./sonar.yml
+      service: sonar

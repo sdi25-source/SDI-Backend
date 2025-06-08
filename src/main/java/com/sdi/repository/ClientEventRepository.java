@@ -43,9 +43,10 @@ public interface ClientEventRepository extends JpaRepository<ClientEvent, Long> 
     Optional<ClientEvent> findOneWithToOneRelationships(@Param("id") Long id);
 
 
-    @Query("SELECT new com.sdi.service.dto.ClientEventDTO(" +
-        "ce.event, ce.eventDate, ce.description) " +
-        "FROM ClientEvent ce " +
-        "WHERE ce.client.id = :clientId")
-    List<ClientEventDTO> findEventsByClientId(@Param("clientId") Long clientId);
+//    @Query("SELECT new com.sdi.service.dto.ClientEventDTO(" +
+//        "ce.event, ce.eventDate, ce.description) " +
+//        "FROM ClientEvent ce " +
+//        "WHERE ce.client.id = :clientId")
+//    List<ClientEventDTO> findEventsByClientId(@Param("clientId") Long clientId);
+      List<ClientEvent> findEventsByClientId(@Param("clientId") Long clientId);
 }

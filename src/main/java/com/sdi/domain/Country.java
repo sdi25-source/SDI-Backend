@@ -31,7 +31,6 @@ public class Country implements Serializable {
     @Column(name = "countryname", nullable = false)
     private String countryname;
 
-    @NotNull
     @Column(name = "countrycode", nullable = false)
     private String countrycode;
 

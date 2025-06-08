@@ -2,6 +2,7 @@ package com.sdi.web.rest;
 
 import com.sdi.domain.Region;
 import com.sdi.repository.RegionRepository;
+import com.sdi.service.dto.RegionDTO;
 import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -155,11 +158,21 @@ public class RegionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of regions in body.
      */
     @GetMapping("")
-    public List<Region> getAllRegions() {
+    @Transactional(readOnly = true)
+    public List<RegionDTO> getAllRegions() {
         LOG.debug("REST request to get all Regions");
-        return regionRepository.findAll();
+        List<Region> regions = regionRepository.findAllWithEagerNotes();
+        return regions.stream()
+            .map(region -> new RegionDTO(
+                region.getId(),
+                region.getName(),
+                region.getCode(),
+                region.getCreaDate(),
+                region.getUpdateDate(),
+                region.getNotes()
+            ))
+            .collect(Collectors.toList());
     }
-
     /**
      * {@code GET  /regions/:id} : get the "id" region.
      *

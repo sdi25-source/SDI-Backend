@@ -4,6 +4,7 @@ import com.sdi.domain.ProductDeployement;
 import java.util.List;
 import java.util.Optional;
 
+import com.sdi.repository.projection.ProductDeployementSummaryProjection;
 import com.sdi.service.dto.ProductDeployementSummaryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public interface ProductDeployementRepository extends JpaRepository<ProductDeplo
     Page<ProductDeployement> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client"
+        "select productDeployement from ProductDeployement productDeployement left join fetch productDeployement.product left join fetch productDeployement.client left join fetch productDeployement.certifications"
     )
     List<ProductDeployement> findAllWithToOneRelationships();
 
@@ -45,16 +46,28 @@ public interface ProductDeployementRepository extends JpaRepository<ProductDeplo
     Optional<ProductDeployement> findOneWithToOneRelationships(@Param("id") Long id);
 
 
-    @Query("SELECT new com.sdi.service.dto.ProductDeployementSummaryDTO(" +
-        "pd.refContract, pd.product.name, pdd.productVersion.version, pdd.deployementType.type, pdd.startDeployementDate) " +
+//    @Query("SELECT new com.sdi.service.dto.ProductDeployementSummaryDTO(" +
+//        "pd.refContract, pd.product.name, pdd.productVersion.version, pdd.deployementType.type, pdd.startDeployementDate) " +
+//        "FROM ProductDeployementDetail pdd " +
+//        "JOIN pdd.productDeployement pd " +
+//        "JOIN pd.product " +
+//        "LEFT JOIN pdd.productVersion " +
+//        "LEFT JOIN pdd.deployementType " +
+//        "WHERE pd.client.id = :clientId")
+//    List<ProductDeployementSummaryDTO> findDeployementSummariesByClientId(@Param("clientId") Long clientId);
+
+    @Query("SELECT pd.refContract AS refContract, " +
+        "pd.product.name AS product, " +
+        "pdd.productVersion.version AS version, " +
+        "pdd.deployementType.type AS deployementType, " +
+        "pdd.startDeployementDate AS startDeployementDate " +
         "FROM ProductDeployementDetail pdd " +
         "JOIN pdd.productDeployement pd " +
         "JOIN pd.product " +
         "LEFT JOIN pdd.productVersion " +
         "LEFT JOIN pdd.deployementType " +
         "WHERE pd.client.id = :clientId")
-    List<ProductDeployementSummaryDTO> findDeployementSummariesByClientId(@Param("clientId") Long clientId);
-
+    List<ProductDeployementSummaryProjection> findDeployementSummariesByClientId(@Param("clientId") Long clientId);
 
     Long countByProductId(Long productId);
     Long countByClientId(Long clientId);
