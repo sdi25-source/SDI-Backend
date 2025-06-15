@@ -15,16 +15,20 @@
   <strong>Password:</strong> <span th:text="${user.login + '123'}">[Your password]</span>
 </p>
 
-<p>
-  <strong>Change your password:</strong><br />
-  <span>Access your account:</span><br />
-  <a th:with="url=(@{|${baseUrl}/account/reset/finish?key=${user.resetKey}|})" th:href="${url}" th:text="${url}">Click here to log in</a>
-  If you'd like to change your password, you can do so using the link above. No current password is required to update it.
-</p>
+<!--<p>-->
+<!--  <strong>Change your password:</strong><br />-->
+<!--  <span>Access your account:</span><br />-->
+<!--  <a th:with="url=(@{|${baseUrl}/account/reset/finish?key=${user.resetKey}|})" th:href="${url}" th:text="${url}">Click here to log in</a>-->
+<!--  If you'd like to change your password, you can do so using the link above. No current password is required to update it.-->
+<!--</p>-->
 <p>
   <span th:text="#{email.activation.text2}">Regards, </span>
   <br />
   <em th:text="#{email.signature}">sdi Team</em>
 </p>
+
+<div style="text-align: left; margin-top: 30px;">
+  <img src="https://cbmholding.com/wp-content/uploads/2024/11/s2m-seeklogo.com-no-vertical-margin.png" alt="SDI Logo" style="max-width: 150px;" />
+</div>
 </body>
 </html>

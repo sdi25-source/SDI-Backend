@@ -58,8 +58,8 @@ spring:
   mail:
     host: smtp.gmail.com # Utilisation de Gmail comme serveur SMTP
     port: 587 # Port pour TLS
-    username: lailatimasli1@gmail.com
-    password: wlmruoujirpbigdo
+    username: sdi.service.platform@gmail.com
+    password: brqwwyyijanpovjo
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
