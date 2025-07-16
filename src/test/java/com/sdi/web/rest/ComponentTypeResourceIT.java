@@ -78,12 +78,12 @@ class ComponentTypeResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         componentType = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedComponentType != null) {
             componentTypeRepository.delete(insertedComponentType);
             insertedComponentType = null;

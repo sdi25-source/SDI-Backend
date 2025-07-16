@@ -86,12 +86,12 @@ class CertificationResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         certification = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedCertification != null) {
             certificationRepository.delete(insertedCertification);
             insertedCertification = null;

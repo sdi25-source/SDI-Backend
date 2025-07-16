@@ -89,12 +89,12 @@ class ClientTypeResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         clientType = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedClientType != null) {
             clientTypeRepository.delete(insertedClientType);
             insertedClientType = null;

@@ -97,12 +97,12 @@ class ClientEventTypeResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         clientEventType = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedClientEventType != null) {
             clientEventTypeRepository.delete(insertedClientEventType);
             insertedClientEventType = null;

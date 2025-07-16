@@ -107,12 +107,12 @@ class ClientSizeResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         clientSize = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedClientSize != null) {
             clientSizeRepository.delete(insertedClientSize);
             insertedClientSize = null;

@@ -7,7 +7,7 @@
     {
       "fieldName": "level",
       "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required", "unique"]
     },
     {
       "fieldName": "createDate",

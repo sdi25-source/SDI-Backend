@@ -6,7 +6,8 @@
   "fields": [
     {
       "fieldName": "type",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
     },
     {
       "fieldName": "createDate",

@@ -28,7 +28,7 @@ public class ClientType implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "type", nullable = false)
+    @Column(name = "type", nullable = false, unique = true)
     private String type;
 
     @Column(name = "create_date")

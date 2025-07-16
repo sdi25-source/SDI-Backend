@@ -89,12 +89,12 @@ class ProductLineResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         productLine = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedProductLine != null) {
             productLineRepository.delete(insertedProductLine);
             insertedProductLine = null;

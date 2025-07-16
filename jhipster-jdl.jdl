@@ -4,14 +4,14 @@
 // ---------------------------------------
 
 entity DeployementType{
-  type String
+  type String required unique
   createDate LocalDate
   updateDate LocalDate
   notes TextBlob
 }
 
 entity CustomisationLevel{
-  level String required
+  level String required unique
   createDate LocalDate
   updateDate LocalDate
   notes TextBlob
@@ -34,7 +34,7 @@ entity Product {
 }
 
 entity ProductLine{
-  name String required
+  name String required unique
   createDate LocalDate
   updateDate LocalDate
   notes TextBlob
@@ -55,7 +55,7 @@ entity Module {
 }
 
 entity Domaine {
-  name String required
+  name String required unique
   createDate LocalDate
   updateDate LocalDate
   notes TextBlob
@@ -121,7 +121,7 @@ entity ClientSize{
 entity Client
 {
   ClientLogo TextBlob
-  name String required
+  name String required unique
   code String
   mainContactName String
   mainContactEmail String pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
@@ -137,14 +137,14 @@ entity Client
 }
 
 entity ClientType {
-  type String required
+  type String required unique
   createDate LocalDate
   updateDate LocalDate
   notes TextBlob
 }
 
 entity Certification{
-  name String required
+  name String required unique
   createDate LocalDate
   description String
 }
@@ -170,7 +170,7 @@ entity ClientEvent{
 
 
 entity ClientEventType{
-  type String required
+  type String required unique
   description String
   createDate LocalDate
   updateDate LocalDate
@@ -188,7 +188,7 @@ entity HA
 
 
 entity ComponentType {
-  type String required // ApplicationServer, OS, DB, HSM, HOST
+  type String required unique// ApplicationServer, OS, DB, HSM, HOST
 }
 
 entity InfraComponent {
@@ -236,8 +236,8 @@ entity Region{
 
 entity Country
 {
-  countryname String required
-  countrycode String required
+  countryname String required unique
+  countrycode String required unique
   countryFlagcode String
   countryFlag String
   notes TextBlob

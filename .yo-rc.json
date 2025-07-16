@@ -41,7 +41,7 @@
       "CertificationVersion"
     ],
     "feignClient": null,
-    "jhipsterVersion": "8.9.0",
+    "jhipsterVersion": "8.11.0",
     "jwtSecretKey": "MzA3YmQ5MTk4ODVhMGE0ZGM4ZjNmYTZlZDc1NzY3Y2Q3NTIzNzhkM2FjNzkxMWYwZGFkZWRhNjJlM2M1NzMwZDg2MWNlZWQxZmQzZGQ1NzdiYmUzMzdhNzk4YmI2MTY2YjZmMmY1M2M0NmZmOTQ2NWM1MDRhOWU1NThlYmU1OWM=",
     "languages": ["en", "fr"],
     "lastLiquibaseTimestamp": 1747998274000,

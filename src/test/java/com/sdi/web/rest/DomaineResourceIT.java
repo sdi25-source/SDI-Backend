@@ -89,12 +89,12 @@ class DomaineResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         domaine = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedDomaine != null) {
             domaineRepository.delete(insertedDomaine);
             insertedDomaine = null;

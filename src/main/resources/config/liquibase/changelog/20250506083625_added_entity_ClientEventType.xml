@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="type" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_client_event_type__type" />
             </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
