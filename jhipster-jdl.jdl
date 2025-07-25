@@ -26,7 +26,7 @@ entity ProductVersion
 }
 
 entity Product {
-  name String required
+  name String required unique
   logo TextBlob
   description TextBlob
   createDate LocalDate
@@ -258,6 +258,7 @@ relationship ManyToOne {
   RequestOfChange{client(code)} to Client
   ProductDeployement{product(name)} to Product
 }
+
 
 
 relationship ManyToMany {

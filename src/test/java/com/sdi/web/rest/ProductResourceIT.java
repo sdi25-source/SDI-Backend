@@ -113,12 +113,12 @@ class ProductResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         product = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedProduct != null) {
             productRepository.delete(insertedProduct);
             insertedProduct = null;

@@ -14,7 +14,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * A ProductVersion.
  */
 @Entity
-@Table(name = "product_version")
+@Table(name = "product_version", uniqueConstraints = { @UniqueConstraint(columnNames = { "product_id", "version" }) })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class ProductVersion implements Serializable {

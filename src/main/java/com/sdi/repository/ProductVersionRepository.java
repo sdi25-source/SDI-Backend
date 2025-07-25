@@ -1,5 +1,6 @@
 package com.sdi.repository;
 
+import com.sdi.domain.Product;
 import com.sdi.domain.ProductVersion;
 import java.util.List;
 import java.util.Optional;
@@ -42,4 +43,8 @@ public interface ProductVersionRepository extends ProductVersionRepositoryWithBa
     Optional<ProductVersion> findOneWithToOneRelationships(@Param("id") Long id);
 
     Long countByProductId(Long productId);
+
+    boolean existsByProductAndVersion(Product product, String version);
+
+    boolean existsByProductIdAndVersion(Long productId, String version);
 }

@@ -17,15 +17,61 @@ public class ClientDTO implements Serializable {
     private Integer currentCardHolderNumber;
     private Integer currentBruncheNumber;
     private LocalDate createDate;
+    // Dans ClientDTO.java
+    private CountryDTO country;
 
-    public ClientDTO() {
+    public CountryDTO getCountry() {
+        return country;
     }
 
-    public ClientDTO(String name, String mainContactName, String mainContactEmail,
-                     String mainContactPhoneNumber, String address, String countryname,
-                     String type, String sizeName, Integer currentCustomersNumber,
-                     Integer currentCardHolderNumber, Integer currentBruncheNumber,
-                     LocalDate createDate) {
+    public void setCountry(CountryDTO country) {
+        this.country = country;
+    }
+
+    public ClientDTO(
+        String name,
+        String mainContactName,
+        String mainContactEmail,
+        String mainContactPhoneNumber,
+        String address,
+        CountryDTO country,
+        String type,
+        String sizeName,
+        Integer currentCustomersNumber,
+        Integer currentCardHolderNumber,
+        Integer currentBruncheNumber,
+        LocalDate createDate
+    ) {
+        this.name = name;
+        this.mainContactName = mainContactName;
+        this.mainContactEmail = mainContactEmail;
+        this.mainContactPhoneNumber = mainContactPhoneNumber;
+        this.address = address;
+        this.country = country;
+        this.type = type;
+        this.sizeName = sizeName;
+        this.currentCustomersNumber = currentCustomersNumber;
+        this.currentCardHolderNumber = currentCardHolderNumber;
+        this.currentBruncheNumber = currentBruncheNumber;
+        this.createDate = createDate;
+    }
+
+    public ClientDTO() {}
+
+    public ClientDTO(
+        String name,
+        String mainContactName,
+        String mainContactEmail,
+        String mainContactPhoneNumber,
+        String address,
+        String countryname,
+        String type,
+        String sizeName,
+        Integer currentCustomersNumber,
+        Integer currentCardHolderNumber,
+        Integer currentBruncheNumber,
+        LocalDate createDate
+    ) {
         this.name = name;
         this.mainContactName = mainContactName;
         this.mainContactEmail = mainContactEmail;

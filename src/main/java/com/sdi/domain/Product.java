@@ -28,7 +28,7 @@ public class Product implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Lob
@@ -62,7 +62,7 @@ public class Product implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "certification_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "certification", "products" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "certification", "products", "productDeployements" }, allowSetters = true)
     private Set<CertificationVersion> certifications = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)

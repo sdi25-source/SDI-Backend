@@ -7,9 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,7 +61,7 @@ public class ProductVersionResource {
     /**
      * {@code PUT  /product-versions/:id} : Updates an existing productVersion.
      *
-     * @param id the id of the productVersion to save.
+     * @param id             the id of the productVersion to save.
      * @param productVersion the productVersion to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productVersion,
      * or with status {@code 400 (Bad Request)} if the productVersion is not valid,
@@ -96,7 +94,7 @@ public class ProductVersionResource {
     /**
      * {@code PATCH  /product-versions/:id} : Partial updates given fields of an existing productVersion, field will ignore if it is null
      *
-     * @param id the id of the productVersion to save.
+     * @param id             the id of the productVersion to save.
      * @param productVersion the productVersion to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productVersion,
      * or with status {@code 400 (Bad Request)} if the productVersion is not valid,
@@ -191,5 +189,12 @@ public class ProductVersionResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/product-versions/check-exists")
+    public ResponseEntity<Map<String, Boolean>> checkExists(@RequestParam Long productId, @RequestParam String version) {
+        boolean exists = productVersionRepository.existsByProductIdAndVersion(productId, version);
+        Map<String, Boolean> result = Collections.singletonMap("exists", exists);
+        return ResponseEntity.ok(result);
     }
 }
