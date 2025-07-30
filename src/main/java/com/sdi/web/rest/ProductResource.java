@@ -2,6 +2,8 @@ package com.sdi.web.rest;
 
 import com.sdi.domain.Product;
 import com.sdi.repository.ProductRepository;
+import com.sdi.service.ProductOverviewService;
+import com.sdi.service.dto.ProductOverview;
 import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -36,8 +38,19 @@ public class ProductResource {
 
     private final ProductRepository productRepository;
 
-    public ProductResource(ProductRepository productRepository) {
+    private final ProductOverviewService productOverviewService;
+
+
+    public ProductResource(ProductRepository productRepository, ProductOverviewService productOverviewService) {
         this.productRepository = productRepository;
+        this.productOverviewService = productOverviewService;
+    }
+
+
+
+    @GetMapping("/product-overviews")
+    public List<ProductOverview> getProductOverviews() {
+        return productOverviewService.getProductsOverview();
     }
 
     /**
