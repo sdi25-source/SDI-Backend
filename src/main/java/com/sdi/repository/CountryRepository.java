@@ -3,6 +3,8 @@ package com.sdi.repository;
 import com.sdi.domain.Country;
 import java.util.List;
 import java.util.Optional;
+
+import com.sdi.repository.projection.CountryProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -47,4 +49,11 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 
     @Query("SELECT c FROM Country c LEFT JOIN FETCH c.region LEFT JOIN FETCH c.clients WHERE c.id = ?1")
     Optional<Country> findOneWithEagerRelationships(Long id);
+
+
+    @Query(value = "SELECT c.id as id, c.countryname, c.countrycode, c.country_flagcode, c.country_flag, " +
+        "r.id as regionId, r.name as regionName " +
+        "FROM country c LEFT JOIN region r ON c.region_id = r.id WHERE c.id = ?1", nativeQuery = true)
+    Optional<CountryProjection> findCountry(Long id);
+
 }

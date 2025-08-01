@@ -3,6 +3,7 @@ package com.sdi.web.rest;
 import com.sdi.domain.Country;
 import com.sdi.domain.Region;
 import com.sdi.repository.CountryRepository;
+import com.sdi.repository.projection.CountryProjection;
 import com.sdi.service.dto.CountryDTO;
 import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
@@ -204,8 +205,13 @@ public class CountryResource {
     @GetMapping("/{id}")
     public ResponseEntity<Country> getCountry(@PathVariable("id") Long id) {
         LOG.debug("REST request to get Country : {}", id);
-        Optional<Country> country = countryRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(country);
+        Optional<CountryProjection> countryProjection = countryRepository.findCountry(id);
+        Country country = new Country();
+        country.setId(countryProjection.get().getId());
+        country.setCountryname(countryProjection.get().getCountryname());
+        country.setCountrycode(countryProjection.get().getCountrycode());
+        country.setCountryFlag(countryProjection.get().getCountryFlag());
+        return ResponseUtil.wrapOrNotFound(Optional.of(country));
     }
 
     /**

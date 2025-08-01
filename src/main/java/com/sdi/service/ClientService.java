@@ -125,7 +125,7 @@ public class ClientService {
     @Transactional(readOnly = true)
     public Optional<Client> findOne(Long id) {
         LOG.debug("Request to get Client : {}", id);
-        return clientRepository.findOneWithEagerRelationships(id);
+        return clientRepository.findById(id);
     }
 
 
