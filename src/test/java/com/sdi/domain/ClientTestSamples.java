@@ -18,7 +18,7 @@ public class ClientTestSamples {
             .code("code1")
             .mainContactName("mainContactName1")
             .mainContactEmail("mainContactEmail1")
-            .currentCardHolderNumber(1)
+            .currentCardHolderNumber(1L)
             .currentBruncheNumber(1)
             .currentCustomersNumber(1)
             .mainContactPhoneNumber("mainContactPhoneNumber1")

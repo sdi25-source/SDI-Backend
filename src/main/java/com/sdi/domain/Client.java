@@ -46,7 +46,7 @@ public class Client implements Serializable {
     private String mainContactEmail;
 
     @Column(name = "current_card_holder_number")
-    private Integer currentCardHolderNumber;
+    private Integer currentCardHolderNumber; // BigInteger
 
     @Column(name = "current_brunche_number")
     private Integer currentBruncheNumber;
