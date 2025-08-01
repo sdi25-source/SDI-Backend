@@ -86,6 +86,47 @@ public class ClientResource {
         return clientOverviewService.getClientsOverview();
     }
 
+
+    @GetMapping("/clientData/{idClient}")
+    public ResponseEntity<Map<String, Object>> getClientData(@PathVariable(name = "idClient") Long idClient) throws IOException {
+        // Validate idClient
+        if (idClient == null) {
+            throw new BadRequestAlertException("Invalid client ID", ENTITY_NAME, "idnull");
+        }
+
+        // Fetch client with given id
+        Client client = clientService.getClientById(idClient);
+        if (client == null) {
+            throw new BadRequestAlertException("Client not found", ENTITY_NAME, "idnotfound");
+        }
+
+        // Fetch client events
+        List<ClientEvent> clientEvents = clientEventRepository.findEventsByClientId(idClient);
+        List<ClientEventDTO> clientEventDTOs = new ArrayList<>();
+        for (ClientEvent clientEvent : clientEvents) {
+            ClientEventDTO clientEventDTO = new ClientEventDTO();
+            clientEventDTO.setEvent(clientEvent.getEvent());
+            clientEventDTO.setEventDate(clientEvent.getEventDate());
+            clientEventDTO.setDescription(clientEvent.getDescription());
+            clientEventDTOs.add(clientEventDTO);
+        }
+
+        // Fetch product deployment summaries
+        List<ProductDeployementSummaryProjection> productDeployementSummary = productDeployementRepository.findDeployementSummariesByClientId(idClient);
+
+        // Fetch requests of changes
+        List<RequestOfChangesDTO> requestOfChangesDTO = requestOfChangeRepository.findRequestOfChangesByClientId(idClient);
+
+        // Build response map
+        Map<String, Object> response = new HashMap<>();
+        response.put("client", client);
+        response.put("clientEvents", clientEventDTOs);
+        response.put("productDeployementSummaries", productDeployementSummary);
+        response.put("requestOfChanges", requestOfChangesDTO);
+
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/report/{idClient}")
     public ResponseEntity<byte[]> generateClientReport(@PathVariable(name = "idClient") Long idClient) throws IOException {
         try {

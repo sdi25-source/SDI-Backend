@@ -52,15 +52,15 @@ public interface RequestOfChangeRepository extends RequestOfChangeRepositoryWith
     Optional<RequestOfChange> findOneWithToOneRelationships(@Param("id") Long id);
 
 
-//
-//    @Query("SELECT new com.sdi.service.dto.RequestOfChangesDTO(" +
-//        "roc.title ,roc.createDate, p.name, pv.version, cl.level , roc.description) " +
-//        "FROM RequestOfChange roc " +
-//        "LEFT JOIN roc.productVersion pv " +
-//        "LEFT JOIN pv.product p " +
-//        "LEFT JOIN roc.customisationLevel cl " +
-//        "WHERE roc.client.id = :clientId")
-//    List<RequestOfChangesDTO> findRequestOfChangesByClientId(@Param("clientId") Long clientId);
+
+    @Query("SELECT new com.sdi.service.dto.RequestOfChangesDTO(" +
+        "roc.title ,roc.createDate, p.name, pv.version, cl.level , roc.description) " +
+        "FROM RequestOfChange roc " +
+        "LEFT JOIN roc.productVersion pv " +
+        "LEFT JOIN pv.product p " +
+        "LEFT JOIN roc.customisationLevel cl " +
+        "WHERE roc.client.id = :clientId")
+    List<RequestOfChangesDTO> findRequestOfChangesByClientId(@Param("clientId") Long clientId);
 
 
     Long countByClientId(Long clientId);

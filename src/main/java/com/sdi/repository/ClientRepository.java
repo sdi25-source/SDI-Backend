@@ -42,7 +42,6 @@ public interface ClientRepository extends JpaRepository<Client, Long>, JpaSpecif
 
 
     @Query("SELECT c FROM Client c " +
-        "LEFT JOIN FETCH c.country " +
         "LEFT JOIN FETCH c.clientType " +
         "LEFT JOIN FETCH c.size " +
         "WHERE c.id = :id")
