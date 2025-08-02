@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.Length;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -46,7 +49,7 @@ public class Client implements Serializable {
     private String mainContactEmail;
 
     @Column(name = "current_card_holder_number")
-    private Integer currentCardHolderNumber; // BigInteger
+    private BigInteger currentCardHolderNumber; // BigInteger
 
     @Column(name = "current_brunche_number")
     private Integer currentBruncheNumber;
@@ -175,16 +178,16 @@ public class Client implements Serializable {
         this.mainContactEmail = mainContactEmail;
     }
 
-    public Integer getCurrentCardHolderNumber() {
+    public BigInteger getCurrentCardHolderNumber() {
         return this.currentCardHolderNumber;
     }
 
-    public Client currentCardHolderNumber(Integer currentCardHolderNumber) {
+    public Client currentCardHolderNumber(BigInteger currentCardHolderNumber) {
         this.setCurrentCardHolderNumber(currentCardHolderNumber);
         return this;
     }
 
-    public void setCurrentCardHolderNumber(Integer currentCardHolderNumber) {
+    public void setCurrentCardHolderNumber(BigInteger currentCardHolderNumber) {
         this.currentCardHolderNumber = currentCardHolderNumber;
     }
 

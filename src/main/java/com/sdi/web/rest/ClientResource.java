@@ -18,6 +18,7 @@ import com.sdi.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -151,7 +152,7 @@ public class ClientResource {
                     clientDTO.setCurrentCustomersNumber(0);
                 }
                 if (clientDTO.getCurrentCardHolderNumber() == null) {
-                    clientDTO.setCurrentCardHolderNumber(0);
+                    clientDTO.setCurrentCardHolderNumber(BigInteger.valueOf(0));
                 }
                 if (clientDTO.getCurrentBruncheNumber() == null) {
                     clientDTO.setCurrentBruncheNumber(0);

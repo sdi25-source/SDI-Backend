@@ -1,6 +1,7 @@
 package com.sdi.service.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 public class ClientDTO implements Serializable {
@@ -14,7 +15,7 @@ public class ClientDTO implements Serializable {
     private String type;
     private String sizeName;
     private Integer currentCustomersNumber;
-    private Integer currentCardHolderNumber;
+    private BigInteger currentCardHolderNumber;
     private Integer currentBruncheNumber;
     private LocalDate createDate;
     // Dans ClientDTO.java
@@ -38,7 +39,7 @@ public class ClientDTO implements Serializable {
         String type,
         String sizeName,
         Integer currentCustomersNumber,
-        Integer currentCardHolderNumber,
+        BigInteger currentCardHolderNumber,
         Integer currentBruncheNumber,
         LocalDate createDate
     ) {
@@ -68,7 +69,7 @@ public class ClientDTO implements Serializable {
         String type,
         String sizeName,
         Integer currentCustomersNumber,
-        Integer currentCardHolderNumber,
+        BigInteger currentCardHolderNumber,
         Integer currentBruncheNumber,
         LocalDate createDate
     ) {
@@ -159,11 +160,11 @@ public class ClientDTO implements Serializable {
         this.currentCustomersNumber = currentCustomersNumber;
     }
 
-    public Integer getCurrentCardHolderNumber() {
+    public BigInteger getCurrentCardHolderNumber() {
         return currentCardHolderNumber;
     }
 
-    public void setCurrentCardHolderNumber(Integer currentCardHolderNumber) {
+    public void setCurrentCardHolderNumber(BigInteger currentCardHolderNumber) {
         this.currentCardHolderNumber = currentCardHolderNumber;
     }
 

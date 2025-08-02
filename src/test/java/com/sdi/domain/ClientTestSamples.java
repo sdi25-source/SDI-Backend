@@ -1,5 +1,6 @@
 package com.sdi.domain;
 
+import java.math.BigInteger;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,7 +19,7 @@ public class ClientTestSamples {
             .code("code1")
             .mainContactName("mainContactName1")
             .mainContactEmail("mainContactEmail1")
-            .currentCardHolderNumber(1)
+            .currentCardHolderNumber(BigInteger.valueOf(1))
             .currentBruncheNumber(1)
             .currentCustomersNumber(1)
             .mainContactPhoneNumber("mainContactPhoneNumber1")
@@ -33,7 +34,7 @@ public class ClientTestSamples {
             .code("code2")
             .mainContactName("mainContactName2")
             .mainContactEmail("mainContactEmail2")
-            .currentCardHolderNumber(2)
+            .currentCardHolderNumber(BigInteger.valueOf(2))
             .currentBruncheNumber(2)
             .currentCustomersNumber(2)
             .mainContactPhoneNumber("mainContactPhoneNumber2")
@@ -48,7 +49,7 @@ public class ClientTestSamples {
             .code(UUID.randomUUID().toString())
             .mainContactName(UUID.randomUUID().toString())
             .mainContactEmail(UUID.randomUUID().toString())
-            .currentCardHolderNumber(intCount.incrementAndGet())
+            .currentCardHolderNumber(BigInteger.valueOf(intCount.incrementAndGet()))
             .currentBruncheNumber(intCount.incrementAndGet())
             .currentCustomersNumber(intCount.incrementAndGet())
             .mainContactPhoneNumber(UUID.randomUUID().toString())

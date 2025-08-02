@@ -17,6 +17,8 @@ import com.sdi.domain.Country;
 import com.sdi.repository.ClientRepository;
 import com.sdi.service.ClientService;
 import jakarta.persistence.EntityManager;
+
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -61,8 +63,8 @@ class ClientResourceIT {
     private static final String DEFAULT_MAIN_CONTACT_EMAIL = "S3s=#e@QiZ.9O.\"";
     private static final String UPDATED_MAIN_CONTACT_EMAIL = "}'-;G)@hFpF.JR";
 
-    private static final Integer DEFAULT_CURRENT_CARD_HOLDER_NUMBER = 1;
-    private static final Integer UPDATED_CURRENT_CARD_HOLDER_NUMBER = 2;
+    private static final BigInteger DEFAULT_CURRENT_CARD_HOLDER_NUMBER = BigInteger.valueOf(1);
+    private static final BigInteger UPDATED_CURRENT_CARD_HOLDER_NUMBER = BigInteger.valueOf(2);
     private static final Integer SMALLER_CURRENT_CARD_HOLDER_NUMBER = 1 - 1;
 
     private static final Integer DEFAULT_CURRENT_BRUNCHE_NUMBER = 1;

@@ -87,6 +87,7 @@ public class ClientQueryService extends QueryService<Client> {
                     buildRangeSpecification(criteria.getCurrentCardHolderNumber(), Client_.currentCardHolderNumber)
                 );
             }
+
             if (criteria.getCurrentBruncheNumber() != null) {
                 specification = specification.and(
                     buildRangeSpecification(criteria.getCurrentBruncheNumber(), Client_.currentBruncheNumber)

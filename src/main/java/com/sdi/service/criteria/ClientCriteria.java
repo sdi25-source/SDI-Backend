@@ -11,10 +11,6 @@ import tech.jhipster.service.filter.*;
  * Criteria class for the {@link com.sdi.domain.Client} entity. This class is used
  * in {@link com.sdi.web.rest.ClientResource} to receive all the possible filtering options from
  * the Http GET request parameters.
- * For example the following could be a valid request:
- * {@code /clients?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
- * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
- * fix type specific filters.
  */
 @ParameterObject
 @SuppressWarnings("common-java:DuplicatedBlocks")
@@ -32,7 +28,7 @@ public class ClientCriteria implements Serializable, Criteria {
 
     private StringFilter mainContactEmail;
 
-    private IntegerFilter currentCardHolderNumber;
+    private BigIntegerFilter currentCardHolderNumber; // ✅ corrigé
 
     private IntegerFilter currentBruncheNumber;
 
@@ -68,7 +64,7 @@ public class ClientCriteria implements Serializable, Criteria {
         this.code = other.optionalCode().map(StringFilter::copy).orElse(null);
         this.mainContactName = other.optionalMainContactName().map(StringFilter::copy).orElse(null);
         this.mainContactEmail = other.optionalMainContactEmail().map(StringFilter::copy).orElse(null);
-        this.currentCardHolderNumber = other.optionalCurrentCardHolderNumber().map(IntegerFilter::copy).orElse(null);
+        this.currentCardHolderNumber = other.optionalCurrentCardHolderNumber().map(BigIntegerFilter::copy).orElse(null); // ✅
         this.currentBruncheNumber = other.optionalCurrentBruncheNumber().map(IntegerFilter::copy).orElse(null);
         this.currentCustomersNumber = other.optionalCurrentCustomersNumber().map(IntegerFilter::copy).orElse(null);
         this.mainContactPhoneNumber = other.optionalMainContactPhoneNumber().map(StringFilter::copy).orElse(null);
@@ -184,22 +180,23 @@ public class ClientCriteria implements Serializable, Criteria {
         this.mainContactEmail = mainContactEmail;
     }
 
-    public IntegerFilter getCurrentCardHolderNumber() {
+    // ✅ Partie corrigée pour BigIntegerFilter
+    public BigIntegerFilter getCurrentCardHolderNumber() {
         return currentCardHolderNumber;
     }
 
-    public Optional<IntegerFilter> optionalCurrentCardHolderNumber() {
+    public Optional<BigIntegerFilter> optionalCurrentCardHolderNumber() {
         return Optional.ofNullable(currentCardHolderNumber);
     }
 
-    public IntegerFilter currentCardHolderNumber() {
+    public BigIntegerFilter currentCardHolderNumber() {
         if (currentCardHolderNumber == null) {
-            setCurrentCardHolderNumber(new IntegerFilter());
+            setCurrentCardHolderNumber(new BigIntegerFilter());
         }
         return currentCardHolderNumber;
     }
 
-    public void setCurrentCardHolderNumber(IntegerFilter currentCardHolderNumber) {
+    public void setCurrentCardHolderNumber(BigIntegerFilter currentCardHolderNumber) {
         this.currentCardHolderNumber = currentCardHolderNumber;
     }
 
@@ -452,62 +449,40 @@ public class ClientCriteria implements Serializable, Criteria {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         final ClientCriteria that = (ClientCriteria) o;
-        return (
-            Objects.equals(id, that.id) &&
-            Objects.equals(name, that.name) &&
-            Objects.equals(code, that.code) &&
-            Objects.equals(mainContactName, that.mainContactName) &&
-            Objects.equals(mainContactEmail, that.mainContactEmail) &&
-            Objects.equals(currentCardHolderNumber, that.currentCardHolderNumber) &&
-            Objects.equals(currentBruncheNumber, that.currentBruncheNumber) &&
-            Objects.equals(currentCustomersNumber, that.currentCustomersNumber) &&
-            Objects.equals(mainContactPhoneNumber, that.mainContactPhoneNumber) &&
-            Objects.equals(url, that.url) &&
-            Objects.equals(address, that.address) &&
-            Objects.equals(createDate, that.createDate) &&
-            Objects.equals(updateDate, that.updateDate) &&
-            Objects.equals(productDeployementId, that.productDeployementId) &&
-            Objects.equals(sizeId, that.sizeId) &&
-            Objects.equals(clientTypeId, that.clientTypeId) &&
-            Objects.equals(countryId, that.countryId) &&
-            Objects.equals(certifId, that.certifId) &&
-            Objects.equals(distinct, that.distinct)
-        );
+        return Objects.equals(id, that.id)
+            && Objects.equals(name, that.name)
+            && Objects.equals(code, that.code)
+            && Objects.equals(mainContactName, that.mainContactName)
+            && Objects.equals(mainContactEmail, that.mainContactEmail)
+            && Objects.equals(currentCardHolderNumber, that.currentCardHolderNumber)
+            && Objects.equals(currentBruncheNumber, that.currentBruncheNumber)
+            && Objects.equals(currentCustomersNumber, that.currentCustomersNumber)
+            && Objects.equals(mainContactPhoneNumber, that.mainContactPhoneNumber)
+            && Objects.equals(url, that.url)
+            && Objects.equals(address, that.address)
+            && Objects.equals(createDate, that.createDate)
+            && Objects.equals(updateDate, that.updateDate)
+            && Objects.equals(productDeployementId, that.productDeployementId)
+            && Objects.equals(sizeId, that.sizeId)
+            && Objects.equals(clientTypeId, that.clientTypeId)
+            && Objects.equals(countryId, that.countryId)
+            && Objects.equals(certifId, that.certifId)
+            && Objects.equals(distinct, that.distinct);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-            id,
-            name,
-            code,
-            mainContactName,
-            mainContactEmail,
-            currentCardHolderNumber,
-            currentBruncheNumber,
-            currentCustomersNumber,
-            mainContactPhoneNumber,
-            url,
-            address,
-            createDate,
-            updateDate,
-            productDeployementId,
-            sizeId,
-            clientTypeId,
-            countryId,
-            certifId,
-            distinct
+            id, name, code, mainContactName, mainContactEmail,
+            currentCardHolderNumber, currentBruncheNumber, currentCustomersNumber,
+            mainContactPhoneNumber, url, address, createDate, updateDate,
+            productDeployementId, sizeId, clientTypeId, countryId, certifId, distinct
         );
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "ClientCriteria{" +
@@ -530,6 +505,6 @@ public class ClientCriteria implements Serializable, Criteria {
             optionalCountryId().map(f -> "countryId=" + f + ", ").orElse("") +
             optionalCertifId().map(f -> "certifId=" + f + ", ").orElse("") +
             optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
-        "}";
+            "}";
     }
 }
